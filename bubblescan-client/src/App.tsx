@@ -36,9 +36,10 @@ function App() {
 
   return (
     <div>
-      <h3>What is your First and Last Name?</h3>
+      <h1>Welcome To Bubble Scan</h1>
+      <h2>What is your First and Last Name?</h2>
       <InputComponent />
-      <h3>You can upload your files below</h3>
+      <h2>You can upload your files below</h2>
       <FileUploadComponent />
       <p>Response from Flask: {data}</p>
       <div>
