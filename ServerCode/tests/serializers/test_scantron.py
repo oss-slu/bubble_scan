@@ -27,6 +27,8 @@ scantron = Scantron(
         code = uuid.uuid4(),
         first = "John",
         last = "Charlie",
+        idNumber = 34563,
+        last = "Charlie",
         id_number = 34563,
     )
 
