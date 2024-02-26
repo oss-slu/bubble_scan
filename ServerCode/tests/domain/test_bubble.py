@@ -36,6 +36,8 @@ def test_scantron_model_from_dict():
     assert scantron.id_number == 34563
 
 def test_scantron_model_to_dict():
+	"""Test converting a Scantron model to a dictionary."""
+	init_dict = {"code": uuid.uuid4(), "first": "John", "last": "Charlie", "idNumber": 34563 }
     """
     Test converting Scantron model to dictionary.
     """
@@ -47,6 +49,8 @@ def test_scantron_model_to_dict():
     assert scantron.to_dict() == init_dict
 
 def test_scantron_model_comparison():
+	"""Test comparing two Scantron models."""
+	init_dict = {"code": uuid.uuid4(), "first": "John", "last": "Charlie", "idNumber": 34563 }
     """
     Test equality comparison of Scantron models.
     """
@@ -56,4 +60,5 @@ def test_scantron_model_comparison():
     scantron1 = Scantron.from_dict(init_dict)
     scantron2 = Scantron.from_dict(init_dict)
 
+	assert scantron1 == scantron2
     assert scantron1 == scantron2
