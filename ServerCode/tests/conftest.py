@@ -2,10 +2,6 @@ import pytest
 
 from application.app import create_app
 
-"""
-Module Docstring: Describe purpose here
-"""
-
 @pytest.fixture
 def app():
 
