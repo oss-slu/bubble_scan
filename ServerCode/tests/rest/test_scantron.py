@@ -4,15 +4,14 @@ from unittest import mock
 import pytest
 
 from bubbleScan.domain.scantron import Scantron
-from bubbleScan.responses import (
-    ResponseFailure,
-    ResponseSuccess,
-    ResponseTypes,
-)
+from bubbleScan.responses import ResponseFailure, ResponseSuccess, ResponseTypes
 
+"""
+Test module for scantron-related functionality
+This module contains test cases for the scantron-related functionality, including the scantron_list_use_case.
+"""
 
 scantron_dict = {
-    
 	"code": "3251a5bd-86be-428d-8ae9-6e51a8048c33",
     "first": "John",
     "last": "Charlie",
