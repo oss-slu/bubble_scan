@@ -7,9 +7,14 @@ import pytest
 
 from bubbleScan.domain.scantron import Scantron
 from bubbleScan.use_cases.scantron_list import scantron_list_use_case
-from bubbleScan.requests import build_room_list_request
+from bubbleScan.requests import build_room_list_request, build_scantron_list_request
 from bubbleScan.requests.scantron_list import build_scantron_list_request
 from bubbleScan.responses import ResponseTypes
+
+"""
+Module: test_scantron_list_use_case
+Unit tests for the scantron_list_use_case function.
+"""
 
 @pytest.fixture
 def domain_scantrons():
@@ -58,6 +63,7 @@ def test_scantron_list_with_filters(domain_scantrons):
     """
     Test scantron list use case with filters.
     """
+    """Test scantron_list_use_case with filters."""
     repo = mock.Mock()
     repo.list.return_value = domain_scantrons
 
@@ -93,6 +99,7 @@ def test_scantron_list_handles_bad_request():
     """
     Test scantron list use case handling bad request.
     """
+    """Test scantron_list_use_case handling bad request."""
     repo = mock.Mock()
 
     request = build_scantron_list_request(filters=5)
