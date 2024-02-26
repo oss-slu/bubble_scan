@@ -8,10 +8,16 @@ import pytest
 
 from bubbleScan.requests.scantron_list import build_scantron_list_request
 
+"""
+Module: test_scantron_list
+Unit tests for the build_scantron_list_request function
+"""
+
 def test_build_scantron_list_request_without_parameters():
     """
     Test the 'build_scantron_list_request' function without parameters.
     """
+    """Test build_scantron_list_request without parameters."""
     request = build_scantron_list_request()
 
     assert request.filters is None
@@ -21,6 +27,7 @@ def test_build_scantron_list_request_from_empty_dict():
     """
     Test the 'build_scantron_list_request' function with an empty dictionary.
     """
+    """Test build_scantron_list_request from an empty dictionary."""
     request = build_scantron_list_request({})
 
     assert request.filters == {}
@@ -46,6 +53,7 @@ def test_build_scantron_list_request_rejected_filters(key):
     """
     Test the 'build_scantron_list_request' function with rejected filters.
     """
+    """Test_build_scantron_list_request with rejected filters."""
     filters = {key: 1}
 
     request = build_scantron_list_request(filters=filters)
