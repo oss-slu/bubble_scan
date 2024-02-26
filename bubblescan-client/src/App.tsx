@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ListGroup from "./components/ListGroup";
 import InputComponent from "./components/InputComponent";
 import FileUploadComponent from "./components/FileUploadComponent";
+import "./App.css";
 
 function App() {
   const [data, setData] = useState<string>('');
