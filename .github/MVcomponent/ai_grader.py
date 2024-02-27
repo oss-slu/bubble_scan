@@ -85,7 +85,7 @@ class AIGrader:
 if __name__ == "__main__":
     mock_grader = AIGrader()
 
-    input_file_path = "path/to/your/input_file.pdf"
+    INPUT_FILE_PATH = "path/to/your/input_file.pdf"
     student_id, mock_response = mock_grader.process_input_file(input_file_path)
 
     print(f"Mock Student ID: {student_id}")
