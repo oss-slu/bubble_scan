@@ -2,13 +2,25 @@ import pytest
 
 from bubbleScan.requests.scantron_list import build_scantron_list_request
 
+"""
+Module: test_scantron list
+
+This module contains unit tests for the 'build_scantron_list_request' function.
+"""
+
 def test_build_scantron_list_request_without_parameters():
+    """
+    Test the 'build_scantron_list_request' function without parameters.
+    """
     request = build_scantron_list_request()
     
     assert request.filters in None
     assert bool(request) is True
     
 def test_build_scantron_list_request_from_empty_dict():
+    """
+    Test the 'build_scantron_list_request' function with an empty dictionary.
+    """
     request = build_scantron_list_request({})
     
     assert request.filters == {}
@@ -18,6 +30,9 @@ def test_build_scantron_list_request_from_empty_dict():
     "key", ["code__eq", "first__eq", "last__lt", "idNumber__gt"]
 )
 def test_build_scantron_list_request_accepted_filters(key):
+    """
+    Test the 'build_scantron_list_request' function with accepted filters.
+    """
     filters = {key: 1}
 
     request = build_scantron_list_request(filters=filters)
@@ -28,6 +43,9 @@ def test_build_scantron_list_request_accepted_filters(key):
 
 @pytest.mark.parametrize("key", ["code__lt", "code__gt"])
 def test_build_scantron_list_request_rejected_filters(key):
+    """
+    Test the 'build_scantron_list_request' function with rejected filters.
+    """
     filters = {key: 1}
 
     request = build_scantron_list_request(filters=filters)
