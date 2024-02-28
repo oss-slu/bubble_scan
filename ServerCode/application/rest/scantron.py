@@ -1,7 +1,9 @@
+"""
+Flask Blueprint for handling scantron-related API endpoints
+"""
+
 import json
-
 from flask import Blueprint, request, Response
-
 from bubbleScan.repository.memrepo import MemRepo
 from bubbleScan.use_cases.scantron_list import scantron_list_use_case
 from bubbleScan.serializers.scantron import ScantronJsonEncoder
@@ -40,6 +42,12 @@ scantrons = [
 
 @blueprint.route("/scantrons", methods=["GET"])
 def scantron_list():
+    """
+    Endpoint to retrieve a list of scantrons based on query parameters.
+
+    :return: JSON response containing a list of scantrons.
+    """
+
     qrystr_params = {
         "filters": {},
     }

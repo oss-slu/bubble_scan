@@ -1,11 +1,5 @@
-#high level component that interacts with the server to process the data
-# - defines an interface for sending input file (pdf or image format)
-# - provides a mock student id and mock answers for each input file as a response
-# in the form of a list of answers for each question
-# - mock response is defined as a file
-
-import requests
 import random
+import requests
 
 """
 Module to represent MockAI features as a placeholder for future expansion using 
@@ -31,7 +25,7 @@ class AIGrader:
         with open(response_file, 'r') as file:
             lines = file.readlines()
             return [line.strip().split(',') for line in lines]
- 
+
     def generate_response(self, student_id):
         """
         Generate a mock response for a given student ID
@@ -41,7 +35,7 @@ class AIGrader:
         """
         num_questions = len(self.mock_responses[0])
         return [self.create_response() for _ in range (num_questions)]
-  
+
     def create_response(self):
         """
         Create a mock response for a single question.
@@ -62,8 +56,8 @@ class AIGrader:
         mock_response = self.send_file_to_server(file_path)
 
         return student_id, mock_response
- 
-    def get_studentID(self, file_path):
+
+    def get_student_ID(self, file_path):
         """
         Generate a mock student ID for a given input file.
 
@@ -86,8 +80,8 @@ if __name__ == "__main__":
     mock_grader = AIGrader()
 
     INPUT_FILE_PATH = "path/to/your/input_file.pdf"
-    student_id, mock_response = mock_grader.process_input_file(input_file_path)
+    stud_id, mock_resp = mock_grader.process_input(INPUT_FILE_PATH)
 
-    print(f"Mock Student ID: {student_id}")
+    print(f"Mock Student ID: {stud_id}")
     print("Mock Response:")
-    print(mock_response)
+    print(mock_resp)

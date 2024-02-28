@@ -1,16 +1,18 @@
+"""
+Flask application to handle API endpoints for data retrieval and message reception. 
+"""
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 #from application import scantron
 app = Flask(__name__)
 
-"""
-Module docstring goes here 
-"""
-
 @app.route('/api/data', methods=['GET'])
 def get_data():
     """
-    Gets data using flask
+    Endpoint to retrieve data using Flask.
+
+    :return: JSON response containing a message.
     """
     data = {"message": "Hello from Flask!"}
     return jsonify(data)
@@ -18,7 +20,9 @@ def get_data():
 @app.route('/api/message', methods=['POST'])
 def receive_message():
     """
-    Receives message 
+    Endpoint to receive a message.
+
+    :return: JSON response indicating the status and success message.
     """
     message_data = request.json
     message = message_data.get('message', '')
