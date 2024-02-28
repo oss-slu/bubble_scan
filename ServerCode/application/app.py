@@ -3,14 +3,23 @@ from flask_cors import CORS
 #from application import scantron
 app = Flask(__name__)
 
+"""
+Module docstring goes here 
+"""
+
 @app.route('/api/data', methods=['GET'])
 def get_data():
+    """
+    Gets data using flask
+    """
     data = {"message": "Hello from Flask!"}
     return jsonify(data)
 
 @app.route('/api/message', methods=['POST'])
 def receive_message():
-
+    """
+    Receives message 
+    """
     message_data = request.json
     message = message_data.get('message', '')
 
@@ -20,5 +29,5 @@ def receive_message():
 
 CORS(app)
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     app.run(debug=True)
