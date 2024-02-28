@@ -41,7 +41,7 @@ class ScantronListInvalidRequest:
         :return: bool, False.
         """
         return False
-    
+
 class ScantronListValidRequest:
     """
     Valid request class for scantron list requests.
@@ -72,7 +72,7 @@ def build_scantron_list_request(filters=None):
     :param filters: dict or None, the filters to be applied.
     :return: ScantronListInvalidRequest or ScantronListValidRequest, the request object.
     """
-    accepted_filters = ["code__eq", "first__eq", "last__lt", "idNumber__gt"]
+    accepted_filters = {"code__eq", "first__eq", "last__lt", "idNumber__gt"}
     invalid_req = ScantronListInvalidRequest()
 
     if filters is not None:
@@ -80,10 +80,10 @@ def build_scantron_list_request(filters=None):
             invalid_req.add_error("filters", "Is not iterable")
             return invalid_req
 
-        for key, value in filters.items():
+        for key in filters.items():
             if key not in accepted_filters:
                 invalid_req.add_error(
-                    "filters", "Key {} cannot be used".format(key)
+                    "filters", f"Key {key} cannot be used"
                 )
 
         if invalid_req.has_errors():

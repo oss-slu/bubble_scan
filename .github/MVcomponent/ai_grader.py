@@ -1,10 +1,10 @@
-import random
-import requests
-
 """
 Module to represent MockAI features as a placeholder for future expansion using 
 actual machine learning techniques.
 """
+
+import random
+import requests
 
 class AIGrader:
     def __init__(self, server_url = 'http://localhost:5000', response_file = 'mock_response.txt'):
@@ -14,7 +14,7 @@ class AIGrader:
         :param response_file: the file containing mock responses.
         """
         self.server_url = server_url
-        self.mock_responses = self.load_mock_responses(response_file)
+        self.mock_responses = self.load_responses(response_file)
 
     def load_responses(self, response_file):
         """
@@ -26,7 +26,7 @@ class AIGrader:
             lines = file.readlines()
             return [line.strip().split(',') for line in lines]
 
-    def generate_response(self, student_id):
+    def generate_response(self):
         """
         Generate a mock response for a given student ID
 
@@ -43,7 +43,7 @@ class AIGrader:
         :return: a mock answer for a question.
         """
         answer_choices = ['a', 'b', 'c', 'd', '-']
-        return f"{random.choice(answer_choices)}"
+        return random.choice(answer_choices)
 
     def process_input(self, file_path):
         """
@@ -52,7 +52,7 @@ class AIGrader:
         :param file_path: the path to the input file (PDF or image format)
         :return: A tuple containing the student ID and the mock response
         """
-        student_id = self.get_studentID(file_path)
+        student_id = self.get_student_ID(file_path)
         mock_response = self.send_file_to_server(file_path)
 
         return student_id, mock_response

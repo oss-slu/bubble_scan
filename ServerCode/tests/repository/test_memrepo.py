@@ -29,6 +29,6 @@ def scantron_dicts():
 def test_repository_list_without_parameters(scantron_dicts):
 	repo = MemRepo(scantron_dicts)
       
-	scantrons = [Scantron, scantron_dicts.from_dict(i) for i in scantron_dicts]
+	scantrons = [Scantron.from_dict(i) for i in scantron_dicts]
       
 	assert repo.list() == scantrons

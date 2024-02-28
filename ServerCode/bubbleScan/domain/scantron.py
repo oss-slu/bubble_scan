@@ -20,8 +20,8 @@ class Scantron:
     code: uuid.UUID
     first: str
     last: str
-    idNumber: int
-    
+    ID_Number: int
+
     @classmethod
     def from_dict(cls,d):
         """

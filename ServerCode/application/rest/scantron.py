@@ -37,7 +37,7 @@ scantrons = [
         "first": "Robert",
         "last": "Randy",
         "idNumber": 97564,
-	},   
+	},
 ]
 
 @blueprint.route("/scantrons", methods=["GET"])
