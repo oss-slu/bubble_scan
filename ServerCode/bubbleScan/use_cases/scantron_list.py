@@ -1,3 +1,7 @@
+"""
+Module representing the use case for listing scantrons.
+"""
+
 from bubbleScan.responses import (
     ResponseSuccess,
     ResponseFailure,
@@ -5,8 +9,14 @@ from bubbleScan.responses import (
     build_response_from_invalid_request,
 )
 
-
 def scantron_list_use_case(repo, request):
+    """
+    Use case for listing scantrons.
+
+    :param repo: Repository, the repository for accessing scantron data.
+    :param request: ScantronListValidRequest, the request object containing filters.
+    :return: ResponseSuccess or ResponseFailure, the appropriate response object.
+    """
     if not request:
         return build_response_from_invalid_request(request)
     try:
@@ -14,3 +24,4 @@ def scantron_list_use_case(repo, request):
         return ResponseSuccess(rooms)
     except Exception as exc:
         return ResponseFailure(ResponseTypes.SYSTEM_ERROR, exc)
+    

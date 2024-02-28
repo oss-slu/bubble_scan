@@ -1,6 +1,11 @@
+"""
+Test configuration module.
+"""
+
 import pytest
 
 from application.app import create_app
+
 
 @pytest.fixture
 def app():

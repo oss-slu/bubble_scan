@@ -1,3 +1,7 @@
+"""
+Test Scantron model.
+"""
+
 import uuid
 from bubbleScan.domain.scantron import Scantron
 
