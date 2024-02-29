@@ -14,7 +14,8 @@ def test_serialize_domain_scantron():
     """
     Test the serialization of a domain Scantron object.
     """
-    code = uuid.uuid4()
+    #code = uuid.uuid4()
+    pass
 
 scantron = Scantron(
         code = uuid.uuid4(),

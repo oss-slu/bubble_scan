@@ -30,7 +30,7 @@ class AIGrader:
             lines = file.readlines()
             return [line.strip().split(',') for line in lines]
 
-    def generate_response(self):
+    def generate_response(self, student_id):
         """
         Generate a mock response for a given student ID
 

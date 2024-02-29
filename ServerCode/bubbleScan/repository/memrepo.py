@@ -26,3 +26,11 @@ class MemRepo:
         :return: list, a list of Scantron instances
         """
         return [Scantron.from_dict(i) for i in self.data]
+
+    def add_scantron(self, scantron):
+        """
+        Add a Scantron instance to the repository.
+
+        :param scantron: Scantron, the Scantron instance to be added.
+        """
+        self.data.append(scantron.to_dict())
