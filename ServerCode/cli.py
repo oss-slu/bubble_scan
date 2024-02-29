@@ -21,4 +21,5 @@ def cli(request: Optional[str]):
     print(result)
 
 if __name__ == "__main__":
-    cli()
+    default_request = ""
+    cli(default_request)

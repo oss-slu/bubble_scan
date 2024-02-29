@@ -23,7 +23,7 @@ scantron = Scantron(
         id_number = 34563,
     )
 
-expected_json = f"""{{"code": "{uuid.uuid4()}", "first": "John", 
+expected_json = f"""{{"code": "{uuid.uuid4()}", "first": "John",
 "last": "Charlie", "id_number": 34563 }}
     """
 

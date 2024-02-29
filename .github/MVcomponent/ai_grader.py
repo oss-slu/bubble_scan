@@ -56,12 +56,12 @@ class AIGrader:
         :param file_path: the path to the input file (PDF or image format)
         :return: A tuple containing the student ID and the mock response
         """
-        student_id = self.get_student_ID(file_path)
+        student_id = self.get_student_id(file_path)
         mock_response = self.send_file_to_server(file_path)
 
         return student_id, mock_response
 
-    def get_student_id(self, file_path):
+    def get_student_id(self):
         """
         Generate a mock student ID for a given input file.
 
