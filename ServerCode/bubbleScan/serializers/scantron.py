@@ -28,5 +28,5 @@ class ScantronJsonEncoder(json.JSONEncoder):
                 "idNumber": o.idNumber,
 			}
             return to_serialize
-        except AttributeError: 
+        except AttributeError:
             return super().default(o)

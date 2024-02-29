@@ -33,7 +33,7 @@ def test_scantron_model_from_dict():
 	assert scantron.code == code
 	assert scantron.first == "John"
 	assert scantron.last == "Charlie"
-	assert scantron.idNumber == 34563
+	assert scantron.ID_Number == 34563
 
 def test_scantron_model_to_dict():
 	"""

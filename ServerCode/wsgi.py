@@ -1,3 +1,6 @@
+"""
+Module docstring goes here
+"""
 import os
 
 from application.app import create_app

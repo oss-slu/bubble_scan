@@ -1,36 +1,42 @@
-import pytest
+"""
+Module docstring goes here
+"""
 import uuid
 from unittest import mock
+import pytest
 
 from bubbleScan.domain.scantron import Scantron
 from bubbleScan.use_cases.scantron_list import scantron_list_use_case
-from bubbleScan.requests.room_list import build_room_list_request
+from bubbleScan.requests import build_room_list_request
 from bubbleScan.requests.scantron_list import build_scantron_list_request
 from bubbleScan.responses import ResponseTypes
 
 @pytest.fixture
 def domain_scantrons():
+    """
+    Function docstring goes here
+    """
     scantron_1 = Scantron(
         code = uuid.uuid4(),
         first = "Hannah",
         last = "Stevenson",
         idNumber = 45435,
 	)
-    
+
     scantron_2 = Scantron(
         code = uuid.uuid4(),
         first = "Tracy",
         last = "Richards",
         idNumber = 56346,
 	)
-    
+
     scantron_3 = Scantron(
         code = uuid.uuid4(),
         first = "Kevin",
         last = "Peters",
         idNumber = 89343,
 	)
-    
+
     return [scantron_1, scantron_2, scantron_3]
 
 def test_scantron_list_without_parameters(domain_scantrons):
@@ -39,7 +45,7 @@ def test_scantron_list_without_parameters(domain_scantrons):
     """
     repo = mock.Mock()
     repo.list.return_value = domain_scantrons
-    
+
     request = build_room_list_request()
 
     response = scantron_list_use_case(repo, request)

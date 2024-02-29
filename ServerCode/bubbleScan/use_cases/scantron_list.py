@@ -23,5 +23,5 @@ def scantron_list_use_case(repo, request):
         rooms = repo.list(filters=request.filters)
         return ResponseSuccess(rooms)
     except Exception as exc:
-        return ResponseFailure(ResponseTypes.SYSTEM_ERROR, exc)
-    
+        print(f"An exception occurred: {exc}")
+        return ResponseFailure(ResponseTypes.SYSTEM_ERROR, "An unexpected error occurred.")

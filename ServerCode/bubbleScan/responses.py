@@ -11,6 +11,8 @@ class ResponseTypes:
     SYSTEM_ERROR = "SystemError"
     SUCCESS = "Success"
 
+    pass
+
 
 class ResponseFailure:
     """
@@ -39,9 +41,8 @@ class ResponseFailure:
         :return: str, the formatted error message.
         """
         if isinstance(msg, Exception):
-            return "{}: {}".format(
-                msg.__class__.__name__, "{}".format(msg)
-            )
+
+            return f"{msg.__class__.__name__}: msg"
         return msg
 
     @property
@@ -95,10 +96,8 @@ def build_response_from_invalid_request(invalid_request):
     :param invalid_request: ScantronListInvalidRequest, the invalid request.
     :return: ResponseFailure, the failure response.
     """
-    message = "\n".join(
-        [
-            "{}: {}".format(err["parameter"], err["message"])
-            for err in invalid_request.errors
-        ]
-    )
+    message = "\n".join([
+        f"{err['parameter']}: {err['message']}"
+        for err in invalid_request.errors
+    ])
     return ResponseFailure(ResponseTypes.PARAMETERS_ERROR, message)

@@ -1,3 +1,7 @@
+"""
+Module docstring goes here
+"""
+
 from bubbleScan.responses import (
     ResponseSuccess,
     ResponseFailure,
@@ -5,7 +9,7 @@ from bubbleScan.responses import (
     build_response_from_invalid_request,
 )
 
-from bubbleScan.requests.room_list import ScantronListInvalidRequest
+from bubbleScan.requests import ScantronListInvalidRequest
 
 SUCCESS_VALUE = {"key": ["value1", "value2"]}
 GENERIC_RESPONSE_TYPE = "Response"
