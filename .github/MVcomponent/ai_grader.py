@@ -7,6 +7,10 @@ import random
 import requests
 
 class AIGrader:
+    """
+    Class docstring goes here.
+    """
+
     def __init__(self, server_url = 'http://localhost:5000', response_file = 'mock_response.txt'):
         """
         Initialization of 'AI grader' object
@@ -22,7 +26,7 @@ class AIGrader:
 
         :return: a list of mock responses.
         """
-        with open(response_file, 'r') as file:
+        with open(response_file, 'r', encoding='utf-8') as file:
             lines = file.readlines()
             return [line.strip().split(',') for line in lines]
 
@@ -57,7 +61,7 @@ class AIGrader:
 
         return student_id, mock_response
 
-    def get_student_ID(self, file_path):
+    def get_student_id(self, file_path):
         """
         Generate a mock student ID for a given input file.
 
@@ -71,10 +75,12 @@ class AIGrader:
 
         return: a list of mock answers for each question.
         """
-        files = {'file': open(file_path, 'rb')}
-        response = requests.post(f"{self.server_url}/process_input", files=files)
-        data = response.json()
-        return data.get("mock_response", [])
+
+        with open(file_path, 'rb') as file:
+            files = {'file':file}
+            response = requests.post(f"{self.server_url}/process_input", files=files)
+            data = response.json()
+            return data.get("mock_response", [])
 
 if __name__ == "__main__":
     mock_grader = AIGrader()

@@ -1,3 +1,6 @@
+"""
+Module docstring goes here.
+"""
 import pytest
 
 from bubbleScan.domain.scantron import Scantron
@@ -5,6 +8,10 @@ from bubbleScan.repository.memrepo import MemRepo
 
 @pytest.fixture
 def scantron_dicts():
+    """
+    Function docstring goes here.
+    """
+
     return [
         {
             "code": "f853578c-fc0f-4e65-81b8-566c5dffa35a",
@@ -26,9 +33,9 @@ def scantron_dicts():
 		},
 	]
 
-def test_repository_list_without_parameters(scantron_dicts):
-	repo = MemRepo(scantron_dicts)
+def test_repository_list_without_parameters(scan_dicts):
+    repo = MemRepo(scantron_dicts)
+  
+    scantrons = [Scantron.from_dict(i) for i in scantron_dicts]
       
-	scantrons = [Scantron.from_dict(i) for i in scantron_dicts]
-      
-	assert repo.list() == scantrons
+    assert repo.list() == scantrons

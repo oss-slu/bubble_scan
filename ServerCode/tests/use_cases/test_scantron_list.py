@@ -20,21 +20,21 @@ def domain_scantrons():
         code = uuid.uuid4(),
         first = "Hannah",
         last = "Stevenson",
-        idNumber = 45435,
+        id_number = 45435,
 	)
 
     scantron_2 = Scantron(
         code = uuid.uuid4(),
         first = "Tracy",
         last = "Richards",
-        idNumber = 56346,
+        id_number = 56346,
 	)
 
     scantron_3 = Scantron(
         code = uuid.uuid4(),
         first = "Kevin",
         last = "Peters",
-        idNumber = 89343,
+        id_number = 89343,
 	)
 
     return [scantron_1, scantron_2, scantron_3]

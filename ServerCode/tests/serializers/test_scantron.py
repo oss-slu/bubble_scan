@@ -20,10 +20,11 @@ scantron = Scantron(
         code = uuid.uuid4(),
         first = "John",
         last = "Charlie",
-        idNumber = 34563,
+        id_number = 34563,
     )
 
-expected_json = f"""{{"code": "{uuid.uuid4()}", "first": "John", "last": "Charlie", "idNumber": 34563 }}
+expected_json = f"""{{"code": "{uuid.uuid4()}", "first": "John", 
+"last": "Charlie", "id_number": 34563 }}
     """
 
 json_scantron = json.dumps(scantron, cls = ScantronJsonEncoder)

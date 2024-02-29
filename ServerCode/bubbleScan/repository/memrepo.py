@@ -18,7 +18,7 @@ class MemRepo:
         :param data: list, the list of scantron data to be stored.
         """
         self.data = data
-        
+
     def list(self):
         """
         Retrieve a list of Scantron instances from the stored data.

@@ -7,7 +7,7 @@ including the scantron_list_use_case.
 import json
 from unittest import mock
 
-import pytest
+#import pytest
 
 from bubbleScan.domain.scantron import Scantron
 from bubbleScan.responses import ResponseSuccess

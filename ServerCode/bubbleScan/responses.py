@@ -11,7 +11,10 @@ class ResponseTypes:
     SYSTEM_ERROR = "SystemError"
     SUCCESS = "Success"
 
-    pass
+    def __init__(self, type_, message):
+        """
+        Initialize the ResponseTypes instance
+        """
 
 
 class ResponseFailure:
