@@ -33,11 +33,11 @@ def scantron_dicts():
 		},
 	]
 
-def test_repository_list_without_parameters(scan_dicts):
+def test_repository_list_without_parameters(scantron_dicts):
     """
     Function that tests respository list without parameters
     """
-    
+
     repo = MemRepo(scantron_dicts)
 
     scantrons = [Scantron.from_dict(i) for i in scantron_dicts]
