@@ -46,7 +46,7 @@ class Config():
         :return: dict, a dictionary containing all configuration values.
         """
 
-        return {key: getattr(self, key) for key in dir(self) 
+        return {key: getattr(self, key) for key in dir(self)
             if not callable(getattr(self, key)) and not key.startswith("__")}
 
 
