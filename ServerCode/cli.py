@@ -16,10 +16,9 @@ def cli(request: Optional[str]):
     """
 
     repo = MemRepo([])
-    result = scantron_list_use_case(repo)
+    result = scantron_list_use_case(repo, request)
     click.echo(result)
     print(result)
 
 if __name__ == "__main__":
-    DEFAULT_REQUEST = ""
-    cli(DEFAULT_REQUEST)
+    cli()

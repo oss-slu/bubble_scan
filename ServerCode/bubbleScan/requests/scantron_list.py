@@ -65,6 +65,14 @@ class ScantronListValidRequest:
         """
         return True
 
+    def get_filters(self):
+        """
+        Get the filters from the request.
+
+        :return: dict or None, the filters.
+        """
+        return self.filters
+
 def build_scantron_list_request(filters=None):
     """
     Build a scantron list request object.

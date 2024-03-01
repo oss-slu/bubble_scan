@@ -17,7 +17,7 @@ class Config():
         :return: any, the configuration value or the default value.
         """
         return getattr(self, key, default)
-    
+
     def set_config_value(self, key, value):
         """
         Set a configuration value.
@@ -46,7 +46,8 @@ class Config():
         :return: dict, a dictionary containing all configuration values.
         """
 
-        return {key: getattr(self, key) for key in dir(self) if not callable(getattr(self, key)) and not key.startswith("__")}
+        return {key: getattr(self, key) for key in dir(self) 
+            if not callable(getattr(self, key)) and not key.startswith("__")}
 
 
 #class ProductionConfig(Config):

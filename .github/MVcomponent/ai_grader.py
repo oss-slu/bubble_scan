@@ -38,7 +38,7 @@ class AIGrader:
         :return: A list of mock answers for each question.
         """
         num_questions = len(self.mock_responses[0])
-        return [self.create_response() for _ in range (num_questions)]
+        return [f"{self.create_response()} for {student_id}" for _ in range(num_questions)]
 
     def create_response(self):
         """
@@ -56,7 +56,7 @@ class AIGrader:
         :param file_path: the path to the input file (PDF or image format)
         :return: A tuple containing the student ID and the mock response
         """
-        student_id = self.get_student_id(file_path)
+        student_id = self.get_student_id()
         mock_response = self.send_file_to_server(file_path)
 
         return student_id, mock_response

@@ -16,6 +16,12 @@ class ResponseTypes:
         Initialize the ResponseTypes instance
         """
 
+    type_to_message = {
+        PARAMETERS_ERROR: "Invalid parameters.",
+        RESOURCE_ERROR: "Resource not found.",
+        SYSTEM_ERROR: "Internal system error.",
+        SUCCESS: "Operation successful."
+    }
 
 class ResponseFailure:
     """
@@ -91,6 +97,13 @@ class ResponseSuccess:
         """
         return True
 
+    def get_value(self):
+        """
+        Get the value of the response.
+
+        :return: any, the value of the response.
+        """
+        return self.value
 
 def build_response_from_invalid_request(invalid_request):
     """

@@ -14,8 +14,14 @@ def test_serialize_domain_scantron():
     """
     Test the serialization of a domain Scantron object.
     """
-    #code = uuid.uuid4()
-    pass
+    code = uuid.uuid4() 
+
+    scantron_data = {
+        "code": str(code),
+        "first": "John",
+        "last": "Doe",
+        "id_number": 12345
+    }
 
 scantron = Scantron(
         code = uuid.uuid4(),
