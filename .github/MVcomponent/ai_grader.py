@@ -6,11 +6,18 @@
 
 import requests
 import random
+import requests
 
-"""
-Module to represent MockAI features as a placeholder for future expansion using 
-actual machine learning techniques.
-"""
+class AIGrader:
+    """
+    Class docstring goes here.
+    """
+
+    def __init__(self, server_url = 'http://localhost:5000', response_file = 'mock_response.txt'):
+        """
+        Module to represent MockAI features as a placeholder for future expansion using 
+        actual machine learning techniques.
+        """
 
 class AIGrader:
     def __init__(self, server_url = 'http://localhost:5000', response_file = 'mock_responses.txt'):
