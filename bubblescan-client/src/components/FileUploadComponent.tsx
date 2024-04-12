@@ -1,122 +1,141 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState } from "react";
 
 function FileUploadComponent() {
-  const [jsonFile, setJsonFile] = useState<File | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [csvFileName, setCsvFileName] = useState<string | null>(null); // Track the CSV file name
+  const [file, setFile] = useState<File | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [downloadLink, setDownloadLink] = useState<string>("");
+  const [fileId, setFileId] = useState<string>("");
 
-  const handleJSONChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setJsonFile(event.target.files[0]);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      setFile(selectedFile);
+      setSuccessMessage("");
+      setDownloadLink("");
+    } else {
+      alert("Please select a PDF file.");
+      if (event.target && event.target.value) {
+        event.target.value = ""; // Reset file input
+      }
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!file) {
+      alert("Please select a PDF file before submitting.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:5001/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      // const result = await response.json();
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.status === "success") {
+          setSuccessMessage("File uploaded successfully!");
+          if (result.file_id) {
+            console.log("File ID:", result.file_id);
+            setDownloadLink(`http://localhost:5001/api/download_csv/${result.file_id}`);
+            setFileId(result.file_id);
+          } else {
+            setSuccessMessage("Error: CSV filename not found in the response.");
+          }
+        } else {
+          setSuccessMessage("Error: " + result.message);
+        }
+      } else {
+        setSuccessMessage("Upload failed.");
+      }
+    } catch (error) {
+      console.error("Error during file upload:", error);
+      setSuccessMessage("Error during file upload.");
+    }
+  };
+
+  const handleDownloadCSV = async () => {
+    try {
+      const csvDownloadResponse = await fetch(downloadLink);
+
+      if (csvDownloadResponse.ok) {
+        const blob = await csvDownloadResponse.blob();
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const currentDate = new Date();
+        const dateString = currentDate.toISOString().split('T')[0];
+        const timeString = currentDate.toTimeString().split(' ')[0].replace(/:/g, '-');
+        const filename = `data_${dateString}_${timeString}.csv`;
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+        
+        // Send acknowledgment to Flask
+        const acknowledgmentResponse = await fetch(`http://localhost:5001/api/csv_acknowledgment/${fileId}`, {
+          method: "POST",
+        });
+
+        if (acknowledgmentResponse.ok) {
+          const acknowledgmentResult = await acknowledgmentResponse.json();
+          if (acknowledgmentResult.status === "success") {
+            console.log("CSV acknowledgment received from Flask");
+            alert("CSV file downloaded successfully!");
+          } else {
+            console.error("Error: ", acknowledgmentResult.message);
+          }
+        } else {
+          console.error("Error: Failed to send CSV acknowledgment to Flask");
+        }
+      } else {
+        console.error("Error: Failed to download CSV");
+      }
+    } catch (error) {
+      console.error("Error during CSV download:", error);
     }
   };
 
   const clearForm = () => {
-    setJsonFile(null);
-    setSuccessMessage(null);
-    setCsvFileName(null); // Also clear the CSV file name when clearing the form
+    setFile(null);
+    setSuccessMessage("");
+    setDownloadLink("");
+    setFileId("");
+    const fileInput = document.getElementById("file-input") as HTMLInputElement;
+    if (fileInput) fileInput.value = ""; 
   };
 
-  const submitJSON = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    if (jsonFile) {
-      formData.append("file", jsonFile);
-    }
-
-    try {
-      const response = await fetch("http://localhost:5000/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log("JSON file sent successfully");
-        setSuccessMessage(result.message);
-        setCsvFileName(result.csvFilename); // Adjust based on the actual response key for the CSV filename
-      } else {
-        console.error("Failed to send JSON file");
-        setSuccessMessage("Failed to send JSON file");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setSuccessMessage("Error sending JSON file");
-    }
-  };
-
-  const downloadCSV = () => {
-    if (csvFileName) {
-      window.location.href = `http://localhost:5000/api/download/${csvFileName}`;
-    }
-  };
+  console.log("Download link:", downloadLink);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <form
-        encType="multipart/form-data"
-        onSubmit={submitJSON}
-        style={{ marginBottom: "15px" }}
-      >
+    <div>
+      <form onSubmit={handleSubmit}>
         <input
           type="file"
-          name="file"
-          accept=".json"
-          onChange={handleJSONChange}
+          id="file-input"
+          accept=".pdf"
+          onChange={handleFileChange}
         />
-        <div style={{ display: "flex", marginTop: "10px" }}>
-          <button
-            type="submit"
-            style={{
-              marginRight: "10px",
-              padding: "5px 10px",
-              background: "#4CAF50",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Upload
-          </button>
-          <button
-            type="button"
-            onClick={clearForm}
-            style={{
-              padding: "5px 10px",
-              background: "#f44336",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Clear
-          </button>
-        </div>
+        <button type="submit">Upload</button>
+        <button
+          type="button"
+          onClick={clearForm}
+          style={{ marginLeft: "10px" }}
+        >
+          Clear
+        </button>
       </form>
       {successMessage && <p>{successMessage}</p>}
-      {csvFileName && (
-        <button
-          onClick={downloadCSV}
-          style={{
-            marginTop: "10px",
-            background: "#4CAF50",
-            color: "white",
-            padding: "5px 10px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
+      {downloadLink && (
+        <button onClick={handleDownloadCSV}>
           Download CSV
         </button>
       )}
