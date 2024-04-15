@@ -24,7 +24,7 @@ npm run dev
 http://localhost:5173/
 ```
 
-### You need to run the App server i.e `app.py` and Mock AI server `mock_ai.py` simultaneously to run the app
+### You need to run the App server i.e `AppServer.py` to run the app
 ```bash
 cd ServerCode\application
 ```
@@ -85,16 +85,15 @@ pip3 install -r requirements.txt
 
 ## Step 5: Run Your Flask Application
 
-You can run your Flask applications using the `app.py` and `mock_ai.py`file as your entry point:
+You can run your Flask applications using the `AppServer.py` file as your entry point:
 
 ```bash
-python3 app.py
-python3 mock_ai.py
+python3 AppServer.py
 ```
 
-Your App server Flask application will be accessible at `http://127.0.0.1:5001/` and Mock AI application will be accessible at `http://127.0.0.1:5002/`.
+Your App server Flask application will be accessible at `http://127.0.0.1:5001/`.
 
-## Step 7: Deactivate both the Virtual Environments
+## Step 7: Deactivate the Virtual Environment
 
 When you're done working on your project, you can deactivate the virtual environments by running:
 
