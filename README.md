@@ -28,7 +28,7 @@ http://localhost:5173/
 ```bash
 cd ServerCode\application
 ```
-## Open two terminals and run the two servers using the commands below
+## Open a terminal and run the servers using the commands below
 # Flask Application Setup Guide
 
 This guide provides step-by-step instructions for setting up a Flask application within a virtual environment. This ensures that your project dependencies are managed efficiently without affecting other Python projects.
