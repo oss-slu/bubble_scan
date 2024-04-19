@@ -17,8 +17,6 @@ class Scantron95945:
         self.extractImagesFromPdf()
         self.template_matching()
         self.extractROIs()
-        self.extract_responses()
-        shutil.rmtree("data")
 
     def extractImagesFromPdf(self):
 
@@ -407,7 +405,10 @@ class Scantron95945:
 
         final_output = {"students": students_results}
 
-        with open('result_data.json', 'w') as json_file:
-            json.dump(final_output, json_file, indent=4)
+        # with open('result_data.json', 'w') as json_file:
+        #     json.dump(final_output, json_file, indent=4)
+        # print("Processing complete. Data saved to 'result_data.json'.")
 
-        print("Processing complete. Data saved to 'result_data.json'.")
+        shutil.rmtree("data")
+        print("Processing complete. Returned JSON Data.")
+        return final_output
