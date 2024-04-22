@@ -4,13 +4,13 @@
 ```
 cd bubble_scan
 ```
-2. Open docker and make sure it is open when running the Dockerfiles
+2. Open Docker and make sure it is open when running the Dockerfiles
 3. Type this command into the git terminal
 
 ```
 docker-compose up --build
 ```
-4. Check Docker window to see bubble_scan container
+4. Check the Docker window to see the bubble_scan container
 5. Start up the program and click on the server to see the results
 
 # Server Dockerfile Configuration
@@ -19,56 +19,53 @@ Set a working directory inside the container called /app
 ```
 WORKDIR /app
 ```
-Used pip to install the dependencies inside 'requirements.txt'
+Install system dependencies
 ```
-RUN pip install Flask
-RUN pip install -r mockapp/requirements.txt
+RUN apt-get update \
+    && apt-get install -y python3-venv libgl1-mesa-glx \
+    && rm -rf /var/lib/apt/lists/*
 ```
-Exposed port 5000 for the Flask server
+Exposed port 5001 for the Flask server
 ```
-EXPOSE 5000
+EXPOSE 5001
 ```
-Defined environment variables to specify entry point
+Copy the Flask application code into the image
 ```
-ENV FLASK_APP=application/AppServer.py
-ENV FLASK_RUN_HOST=0.0.0.0
-```
+COPY ServerCode/application /app/flask
 Configured the container to run the Flask application
 ```
-CMD ["flask", "run"]
+Run Flask app
 ```
-
+CMD ["/bin/bash", "-c", "source /app/venv/bin/activate && /app/venv/bin/python /app/AppServer.py"]
+```
 # Client Dockerfile Configuration
 Set another working directory for the client
 ```
 WORKDIR /app
 ```
+Copy package.json and package-lock.json for the npm install
+```
+COPY bubblescan-client/package*.json ./
+```
+
 Installed the dependencies 
 ```
 RUN npm install
 ```
-Ran a build script to compile the code
+Copy the React application code into the image
 ```
-RUN npm run build
+COPY bubblescan-client .
 ```
-Used a multi-stage build where the final stage started with an Nginx base image to serve the static files efficiently
+Exposed port 5173
 ```
-FROM nginx:alpine as production-stage
+EXPOSE 5173
 ```
-Copied the output of the build process into Nginx's serving directory
+Start React Vite development server
 ```
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-```
-Exposed port 80
-```
-EXPOSE 80
-```
-Configured Nginx to start when the container boots
-```
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "dev"]
 ```
 # Handling Multi-Platform Issues
-To make sure the dependencies were compatable across different platforms, 'node_modules' is rebuilt inside the Docker container
+To make sure the dependencies were compatible across different platforms, 'node_modules' is rebuilt inside the Docker container
 
 # Docker Compose
 The docker-compose.yml file configured port mappings for both the server and client to allow local access
