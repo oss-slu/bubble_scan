@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 function FileUploadComponent() {
-  const [file, setFile] = useState<File | null>(null); // File to be uploaded
+  const [file, setFile] = useState<File | null>(null);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [downloadLink, setDownloadLink] = useState<string>("");
+  const [fileId, setFileId] = useState<string>("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -30,16 +31,26 @@ function FileUploadComponent() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:5000/api/upload", {
+      const response = await fetch("http://localhost:5001/api/upload", {
         method: "POST",
         body: formData,
       });
-      const result = await response.json();
+      // const result = await response.json();
 
       if (response.ok) {
-        setSuccessMessage("File uploaded successfully!");
-        // Assume the response includes the path or name of the generated CSV file
-        setDownloadLink(`http://localhost:5000/api/download/${result.message}`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setSuccessMessage("File uploaded successfully!");
+          if (result.file_id) {
+            console.log("File ID:", result.file_id);
+            setDownloadLink(`http://localhost:5001/api/download_csv/${result.file_id}`);
+            setFileId(result.file_id);
+          } else {
+            setSuccessMessage("Error: CSV filename not found in the response.");
+          }
+        } else {
+          setSuccessMessage("Error: " + result.message);
+        }
       } else {
         setSuccessMessage("Upload failed.");
       }
@@ -49,13 +60,60 @@ function FileUploadComponent() {
     }
   };
 
+  const handleDownloadCSV = async () => {
+    try {
+      const csvDownloadResponse = await fetch(downloadLink);
+
+      if (csvDownloadResponse.ok) {
+        const blob = await csvDownloadResponse.blob();
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const currentDate = new Date();
+        const dateString = currentDate.toISOString().split('T')[0];
+        const timeString = currentDate.toTimeString().split(' ')[0].replace(/:/g, '-');
+        const filename = `data_${dateString}_${timeString}.csv`;
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+        
+        // Send acknowledgment to Flask
+        const acknowledgmentResponse = await fetch(`http://localhost:5001/api/csv_acknowledgment/${fileId}`, {
+          method: "POST",
+        });
+
+        if (acknowledgmentResponse.ok) {
+          const acknowledgmentResult = await acknowledgmentResponse.json();
+          if (acknowledgmentResult.status === "success") {
+            console.log("CSV acknowledgment received from Flask");
+            alert("CSV file downloaded successfully!");
+          } else {
+            console.error("Error: ", acknowledgmentResult.message);
+          }
+        } else {
+          console.error("Error: Failed to send CSV acknowledgment to Flask");
+        }
+      } else {
+        console.error("Error: Failed to download CSV");
+      }
+    } catch (error) {
+      console.error("Error during CSV download:", error);
+    }
+  };
+
   const clearForm = () => {
     setFile(null);
     setSuccessMessage("");
     setDownloadLink("");
+    setFileId("");
     const fileInput = document.getElementById("file-input") as HTMLInputElement;
-    if (fileInput) fileInput.value = ""; // Reset file input safely with type casting
+    if (fileInput) fileInput.value = ""; 
   };
+
+  console.log("Download link:", downloadLink);
 
   return (
     <div>
@@ -77,7 +135,7 @@ function FileUploadComponent() {
       </form>
       {successMessage && <p>{successMessage}</p>}
       {downloadLink && (
-        <button onClick={() => (window.location.href = downloadLink)}>
+        <button onClick={handleDownloadCSV}>
           Download CSV
         </button>
       )}
