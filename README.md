@@ -5,7 +5,7 @@ This project automates the scanning of Scantron documents and extraction of data
 
 ## Software Architecture
 
-/Users/nischitanannapaneni/capstone1/bubble_scan/inputData/bubblescan4+1.jpg
+![Optional Alt Text](/Users/nischitanannapaneni/capstone1/bubble_scan/inputData/bubblescan4+1.jpg)
 
 ## Prerequisites
 
@@ -36,7 +36,12 @@ npm run dev
 npm run build
 ```
 
-## Flask Application Setup
+### You need to run the App server i.e `AppServer.py` to run the app
+```bash
+cd ServerCode/application
+```
+## Open a terminal and run the servers using the commands below
+# Flask Application Setup Guide
 
 This guide provides step-by-step instructions for setting up a Flask application within a virtual environment. This ensures that your project dependencies are managed efficiently without affecting other Python projects.
 
@@ -50,7 +55,21 @@ Before you start, make sure you have Python installed on your system. Flask supp
 cd ServerCode/application
 ```
 
-### Step 2: Activate the Virtual Environment
+### Step 2: Create the Virtual Environment
+- **On macOS and Linux:**
+
+  ```bash
+  python3 -m venv venv
+  ```
+
+- **On Windows:**
+
+  ```bash
+  python -m venv venv
+  ```
+
+
+### Step 3: Activate the Virtual Environment
 
 Before you can start using the virtual environment, you need to activate it. The command varies depending on your operating system.
 
@@ -68,7 +87,7 @@ Before you can start using the virtual environment, you need to activate it. The
 
 You'll know the virtual environment is activated because its name will appear at the beginning of the terminal prompt.
 
-### Step 3: Install Flask or dependencies
+### Step 4: Install Flask or dependencies
 
 With the virtual environment activated, install Flask using pip:
 
@@ -78,19 +97,21 @@ pip install Flask
 pip3 install -r requirements.txt
 ```
 
-### Step 4: Run Your Flask Application
+### Step 5: Run Your Flask Application
 
 **You must run the App server i.e `AppServer.py` to run the app**
 
 You can run your Flask applications using the `AppServer.py` file as your entry point:
+You can run your Flask applications using the `AppServer.py` file as your entry point:
 
 ```bash
+python3 AppServer.py
 python3 AppServer.py
 ```
 
 Your App server Flask application will be accessible at `http://127.0.0.1:5001/`.
 
-### Step 5: Deactivate the Virtual Environment
+## Step 6: Deactivate the Virtual Environment
 
 When you're done working on your project, you can deactivate the virtual environments by running:
 
