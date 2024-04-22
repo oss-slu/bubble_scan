@@ -8,6 +8,7 @@ import uuid
 import random
 import string
 from PyPDF2 import PdfReader
+from Scantron import Scantron95945
 
 app = Flask(__name__)
 
@@ -75,15 +76,11 @@ class AppServer:
 
     def process_pdf(self, pdf_file, file_id):
         try:
-            reader = PdfReader(pdf_file)
-            num_pages = len(reader.pages)
-            student_data_list = []
+            scantron = Scantron95945(pdf_file)
+            data = scantron.extract_responses()
+            #print("Received the JSON data as: ", data)
 
-            for i in range(num_pages):
-                student_data = self.generate_student_data()
-                student_data_list.append(student_data)
-
-            csv_data = self.transform_json_to_csv(student_data_list)
+            csv_data = self.transform_json_to_csv(data)
             csv_filename = f'output_{file_id}.csv'
             csv_file_path = os.path.join(self.uploads_dir, csv_filename)
 
@@ -100,22 +97,40 @@ class AppServer:
             logging.error("Error processing PDF: %s", e)
             return ''
 
-    def generate_student_data(self):
-        student_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
-        answers = {f"Q{k+1}": f"Answer_{chr(65 + k % 5)}" for k in range(20)}
-        return {"studentID": student_id, "answers": answers}
-
     def transform_json_to_csv(self, json_data):
         csv_data = ''
-        if isinstance(json_data, list):
-            if json_data:
-                if 'answers' in json_data[0]:
-                    keys = json_data[0]['answers'].keys()
+        print("The JSON data received is:", json_data)
+        if isinstance(json_data, dict) and 'students' in json_data:
+            students = json_data['students']
+            if students:
+                student_data = students[0]
+                if 'answers' in student_data:
+                    keys = student_data['answers'].keys()
+                    print("Keys:", keys)
                     csv_data += ','.join(['studentID'] + list(keys)) + '\n'
-                    for student in json_data:
-                        csv_data += ','.join([student['studentID']] + [student['answers'].get(key, '') for key in keys]) + '\n'
-
+                    for student in students:
+                        student_id = student.get('studentID', '')
+                        answers = []
+                        for key in keys:
+                            answer = student['answers'].get(key, '')
+                            if isinstance(answer, list):
+                                answer = '|'.join(answer)
+                            elif answer is None:
+                                answer = ''
+                            answers.append(answer)
+                        print("Student ID:", student_id)
+                        print("Answers:", answers)
+                        csv_data += ','.join([student_id] + answers) + '\n'
+                else:
+                    print("No 'answers' key found in student data")
+            else:
+                print("No student data found")
+        else:
+            print("Invalid JSON data format")
+        
+        print("The CSV data converted is: ", csv_data)
         return csv_data
+
 
     def download_csv(self, file_id):
         try:
@@ -126,6 +141,9 @@ class AppServer:
             file_path = csv_file_data['path']
             
             if os.path.exists(file_path):
+                with open(file_path, 'r') as csv_file:
+                    csv_data = csv_file.read()
+                    print("CSV Data:\n", csv_data)
                 return send_from_directory(self.uploads_dir, os.path.basename(file_path), as_attachment=True)
             else:
                 return jsonify({"status": "error", "message": "CSV file not found"})
@@ -141,5 +159,10 @@ class AppServer:
             return jsonify({"status": "error", "message": "File ID not found"})
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app_server = AppServer(app)
     app.run(debug=True, port=5001)
+=======
+    app_server = AppServer()
+    app_server.app.run(debug=True, port=5001)
+>>>>>>> main
