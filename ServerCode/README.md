@@ -37,7 +37,7 @@ You'll know the virtual environment is activated because its name will appear at
 With the virtual environment activated, install Flask using pip:
 
 ```bash
-pip install Flask
+pip3 install Flask
 
 pip3 install -r requirements.txt
 ```
