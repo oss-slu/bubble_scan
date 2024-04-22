@@ -8,7 +8,7 @@ This project automates the scanning of Scantron documents and the extraction of 
 
 ## Software Architecture
 
-![Optional Alt Text](inputData/bubblescan4+1.jpg)
+![Optional Alt Text](inputData/Bubblescan4+1.jpg)
 
 ## Prerequisites
 
