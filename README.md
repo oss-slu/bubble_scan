@@ -5,7 +5,7 @@ This project automates the scanning of Scantron documents and extraction of data
 
 ## Software Architecture
 
-![Optional Alt Text](/Users/nischitanannapaneni/capstone1/bubble_scan/inputData/bubblescan4+1.jpg)
+![Optional Alt Text](inputData/bubblescan4+1.jpg)
 
 ## Prerequisites
 
