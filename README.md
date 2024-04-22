@@ -1,6 +1,16 @@
-# React App with Vite
+# Bubblescan
+
+## Project Overview
+This project automates the scanning of Scantron documents and extraction of data to CSV files using a web-based application. Users can upload scanned images of their Scantron forms, which are then processed by our backend AI algorithms to generate and retrieve CSV files containing the extracted data. This system is designed for educational institutions and testing centers to streamline their grading processes and data management.
 
 This project was bootstrapped with [Vite](https://vitejs.dev/). It is a simple setup to get started with React and Vite.
+
+## Prerequisites
+
+Before you begin, ensure you have the following software installed on your system:
+- Node.js (including npm)
+- Python 3.6 or newer
+- Git
 
 ## Getting Started
 
