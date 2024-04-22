@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ServerCode:/app
+    environment:
+      FLASK_APP: application/AppServer.py
+      FLASK_ENV: development
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "80:80"
+    volumes:
+      - ./bubblescan-client:/app
