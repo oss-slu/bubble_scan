@@ -12,29 +12,27 @@ Before you begin, ensure you have the following software installed on your syste
 - Python 3.6 or newer
 - Git
 
-## React Environment Setup
+## Environment Setup
 
-**Start by cloning the repository to your local machine and navigating into the project directory:**
+You will need two terminals to get Bubble scan set up. One for the React component, and one for the Flask component.
+
+## React Application Setup
+
+This project was bootstrapped with [Vite](https://vitejs.dev/). It is a simple setup to get started with React and Vite.
+
+## Getting Started
+
+First, clone the repository and navigate into the project directory:
 
 ```bash
 git clone <your-repository-url>
 cd <your-project-name>
-```
 
-**Go to the bubblescan directory and run the React component using below commands**
 
-```
-cd bubblescan-client
 npm install
-npm install cors
 npm run dev
+npm run build
 ```
-**The React component is accessible at**
-```bash
-http://localhost:5173/
-```
-
-**You must run the App server i.e `AppServer.py` to run the app**
 
 ## Flask Application Setup
 
@@ -50,18 +48,7 @@ Before you start, make sure you have Python installed on your system. Flask supp
 cd ServerCode/application
 ```
 
-### Step 2: Create the Virtual Environment
-
-- **On macOS and Linux:**
-```bash
-python3 -m venv venv
-```
-- **On Windows:**
-```bash
-python -m venv venv
-```
-
-### Step 3: Activate the Virtual Environment
+### Step 2: Activate the Virtual Environment
 
 Before you can start using the virtual environment, you need to activate it. The command varies depending on your operating system.
 
@@ -79,7 +66,7 @@ Before you can start using the virtual environment, you need to activate it. The
 
 You'll know the virtual environment is activated because its name will appear at the beginning of the terminal prompt.
 
-### Step 4: Install Flask or dependencies
+### Step 3: Install Flask or dependencies
 
 With the virtual environment activated, install Flask using pip:
 
@@ -89,7 +76,9 @@ pip install Flask
 pip3 install -r requirements.txt
 ```
 
-### Step 5: Run Your Flask Application
+### Step 4: Run Your Flask Application
+
+**You must run the App server i.e `AppServer.py` to run the app**
 
 You can run your Flask applications using the `AppServer.py` file as your entry point:
 
@@ -99,7 +88,7 @@ python3 AppServer.py
 
 Your App server Flask application will be accessible at `http://127.0.0.1:5001/`.
 
-### Step 7: Deactivate the Virtual Environment
+### Step 5: Deactivate the Virtual Environment
 
 When you're done working on your project, you can deactivate the virtual environments by running:
 
