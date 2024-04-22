@@ -159,10 +159,5 @@ class AppServer:
             return jsonify({"status": "error", "message": "File ID not found"})
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    app_server = AppServer(app)
-    app.run(debug=True, port=5001)
-=======
     app_server = AppServer()
     app_server.app.run(debug=True, port=5001)
->>>>>>> main
