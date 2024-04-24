@@ -5,6 +5,7 @@ function FileUploadComponent() {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [downloadLink, setDownloadLink] = useState<string>("");
   const [fileId, setFileId] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -27,6 +28,7 @@ function FileUploadComponent() {
       return;
     }
 
+    setLoading(true);
     const formData = new FormData();
     formData.append("file", file);
 
@@ -58,9 +60,13 @@ function FileUploadComponent() {
       console.error("Error during file upload:", error);
       setSuccessMessage("Error during file upload.");
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   const handleDownloadCSV = async () => {
+    setLoading(true);
     try {
       const csvDownloadResponse = await fetch(downloadLink);
 
@@ -102,6 +108,9 @@ function FileUploadComponent() {
     } catch (error) {
       console.error("Error during CSV download:", error);
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   const clearForm = () => {
@@ -133,11 +142,17 @@ function FileUploadComponent() {
           Clear
         </button>
       </form>
-      {successMessage && <p>{successMessage}</p>}
-      {downloadLink && (
-        <button onClick={handleDownloadCSV}>
-          Download CSV
-        </button>
+      {loading ? (
+        <div className="spinner"></div> // Show loading spinner when loading
+      ) : (
+        <>
+          {successMessage && <p>{successMessage}</p>}
+          {downloadLink && (
+            <button onClick={handleDownloadCSV}>
+              Download CSV
+            </button>
+          )}
+        </>
       )}
     </div>
   );

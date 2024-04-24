@@ -10,6 +10,12 @@ COPY bubblescan-client/package*.json ./
 # Install npm dependencies
 RUN npm install
 
+# Update npm
+RUN npm install -g npm
+
+# Install npm cors
+RUN npm install cors
+
 # Copy the React application code into the image
 COPY bubblescan-client .
 
