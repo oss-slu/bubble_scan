@@ -8,7 +8,7 @@ import uuid
 import random
 import string
 from PyPDF2 import PdfReader
-from Scantron import Scantron95945
+from testScantron import testScantron95945
 
 app = Flask(__name__)
 
@@ -76,7 +76,7 @@ class AppServer:
 
     def process_pdf(self, pdf_file, file_id):
         try:
-            scantron = Scantron95945(pdf_file)
+            scantron = testScantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 
