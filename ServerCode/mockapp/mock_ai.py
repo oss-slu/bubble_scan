@@ -1,3 +1,8 @@
+"""
+Mock AI Module
+This module provides functionalities to process PDF files and generate mock student data.
+"""
+
 import os
 import random
 import string
@@ -34,7 +39,7 @@ def send_json_to_app_server(json_data):
     try:
         app_server_url = 'http://localhost:5001/json'
         headers = {'Content-Type': 'application/json'}
-        response = requests.post(app_server_url, json=json_data, headers=headers)
+        response = requests.post(app_server_url, json=json_data, headers=headers, timeout=5)  # Added timeout
         logging.debug("Response status code: %d", response.status_code)
         logging.debug("Response text: %s", response.text)
 
@@ -43,7 +48,9 @@ def send_json_to_app_server(json_data):
         else:
             logging.error("Failed to send JSON data to app server: HTTP %d", response.status_code)
     
-    except Exception as e:
+    except requests.Timeout:
+        logging.error("Timeout occurred while sending JSON data to app server")
+    except requests.RequestException as e:
         logging.error("Error sending JSON data to app server: %s", e)
 
 def process_pdf(pdf_file):
