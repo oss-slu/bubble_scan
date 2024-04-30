@@ -20,8 +20,8 @@ jobs:
         pip install pylint
         pip install -r ServerCode/requirements.txt
         pip install pytest
-    - name: Analysing the code with pylint
+    - name: Suppress pylint warnings for specific files
       run: |
         # Suppress pylint warnings for similar lines in specific files
-        sed -i 's/^/\/\/ pylint: disable=R0801\n/' ServerCode/mockapp/mock_ai.py
+        sed -i 's/self.extractImagesFromPdf()/self.extractImagesFromPdf()  # pylint: disable=R0801/' ServerCode/mockapp/mock_ai.py
         pylint $(git ls-files '*.py')
