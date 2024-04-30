@@ -1,3 +1,7 @@
+"""
+Mock AI Module
+This module provides functionalities to process PDF files and generate mock student data.
+"""
 import os
 import random
 import string

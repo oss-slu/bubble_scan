@@ -1,4 +1,7 @@
-import json
+"""
+This module scans the scantrons, uses template.jpg to process the files.
+Then it retrieves the Student ID and the answers based on the bubbled spots.
+"""
 import re
 import shutil
 import fitz  # PyMuPDF

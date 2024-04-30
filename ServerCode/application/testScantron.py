@@ -1,10 +1,13 @@
-import json
+"""
+This module scans the scantrons, uses template.jpg to process the files.
+Then it retrieves the Student ID and the answers based on the bubbled spots.
+"""
 import re
 import shutil
+import os
 from PyPDF2 import PdfReader
 from pdf2image import convert_from_path
 from PIL import Image
-import os
 import cv2
 import numpy as np
 
