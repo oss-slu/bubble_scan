@@ -1,12 +1,12 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import os
 import random
 import string
-from PyPDF2 import PdfReader
 import requests
 from werkzeug.utils import secure_filename
 import logging
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from PyPDF2 import PdfReader
 
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5173","http://localhost:5002", "http://localhost:5001"])
