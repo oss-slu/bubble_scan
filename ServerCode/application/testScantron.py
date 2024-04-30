@@ -1,13 +1,15 @@
 import json
 import re
 import shutil
-import fitz  # PyMuPDF
+from PyPDF2 import PdfReader
+from pdf2image import convert_from_path
+from PIL import Image
 import os
 import cv2
 import numpy as np
 
 
-class Scantron95945:
+class testScantron95945:
     def __init__(self, pdf_path):
         self.pdf_name = None
         self.pdf_path = pdf_path
@@ -20,41 +22,31 @@ class Scantron95945:
 
     def extractImagesFromPdf(self):
 
-        # Opening the PDF file
-        pdf_document = fitz.open(self.pdf_path)
-        print("------Extracting all the Images from PDF------")
+        # Open the PDF file
+        with open(self.pdf_path, 'rb') as pdf_file:
+            pdf_reader = PdfReader(pdf_file)
+            print("------Extracting all the Images from PDF------")
 
-        # Determining PDF name for creating a Sub folder
-        self.pdf_name = os.path.splitext(os.path.basename(self.pdf_path))[0]
+            # Determining PDF name for creating a Sub folder
+            self.pdf_name = os.path.splitext(os.path.basename(self.pdf_path))[0]
 
-        # Creating a Sub Folder for the PDF
-        pdf_folder = os.path.join(self.output_folder, self.pdf_name)
-        os.makedirs(pdf_folder, exist_ok=True)
+            # Creating a Sub Folder for the PDF
+            pdf_folder = os.path.join(self.output_folder, self.pdf_name)
+            os.makedirs(pdf_folder, exist_ok=True)
 
-        # Iterating over pages and save them as images
-        for page_number, page in enumerate(pdf_document):
-            page_number += 1
-            image_filename = f"Image_{page_number}.jpg"
-
-            # Get the pixmap of the current page
-            original_pix = page.get_pixmap(matrix=fitz.Identity, colorspace=fitz.csRGB, clip=None, annots=True)
-
-            # Calculating scaling factors
-            scale_x = 1689 / original_pix.width
-            scale_y = 2186 / original_pix.height
-
-            # Apply scaling
-            matrix = fitz.Matrix(scale_x, scale_y)
-
-            # Get the scaled pixmap
-            pix = page.get_pixmap(matrix=matrix, colorspace=fitz.csRGB, clip=None, annots=True)
-
-            # Saving the image
-            image_path = os.path.join(pdf_folder, image_filename)
-            pix.save(image_path)
-            print(f"Extracted {image_filename}")
-
-        pdf_document.close()
+            # Iterating over pages and save them as images
+            for page_number in range(len(pdf_reader.pages)):
+                image_filename = f"Image_{page_number + 1}.jpg"
+                page_image = convert_from_path(self.pdf_path, first_page=page_number+1, last_page=page_number+1)[0]
+                
+                # Resize the image to the desired dimensions
+                page_image = page_image.resize((1689, 2186))
+                
+                # Save the image
+                image_path = os.path.join(pdf_folder, image_filename)
+                page_image.save(image_path, 'JPEG')
+                
+                print(f"Extracted {image_filename}")
 
     def align_image(self, image, template):
 

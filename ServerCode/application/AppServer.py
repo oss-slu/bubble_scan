@@ -8,11 +8,13 @@ import uuid
 import random
 import string
 from PyPDF2 import PdfReader
-from Scantron import Scantron95945
+from testScantron import testScantron95945
+
+app = Flask(__name__)
 
 class AppServer:
-    def __init__(self):
-        self.app = Flask(__name__)
+    def __init__(self, flask_app):
+        self.app = flask_app
         CORS(self.app)
         self.uploads_dir = os.path.join(self.app.instance_path, 'uploads')
         os.makedirs(self.uploads_dir, exist_ok=True)
@@ -74,7 +76,7 @@ class AppServer:
 
     def process_pdf(self, pdf_file, file_id):
         try:
-            scantron = Scantron95945(pdf_file)
+            scantron = testScantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 
@@ -157,5 +159,5 @@ class AppServer:
             return jsonify({"status": "error", "message": "File ID not found"})
 
 if __name__ == '__main__':
-    app_server = AppServer()
+    app_server = AppServer(app)
     app_server.app.run(debug=True, port=5001)
