@@ -2,8 +2,8 @@ import os
 import random
 import string
 import requests
-from werkzeug.utils import secure_filename
 import logging
+from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PyPDF2 import PdfReader
