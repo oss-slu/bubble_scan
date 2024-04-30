@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import json
 import random
 import string
 from PyPDF2 import PdfReader
@@ -54,7 +53,7 @@ def process_pdf(pdf_file):
         num_pages = len(reader.pages)
         student_data_list = []
 
-        for i in range(num_pages):
+        for _ in range(num_pages):
             student_data = generate_student_data()
             student_data_list.append(student_data)
 
