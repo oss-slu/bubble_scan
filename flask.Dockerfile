@@ -6,7 +6,11 @@ WORKDIR /app/flask
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y python3-venv libgl1-mesa-glx \
+    && apt-get install -y poppler-utils \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Poppler
+RUN apt-get update && apt-get install -y poppler-utils
 
 # Copy the Flask application code into the image
 COPY ServerCode/application /app/flask
@@ -40,6 +44,7 @@ RUN pip uninstall -y PyMuPDF && pip install PyMuPDF --no-cache-dir
 # Install libgl1-mesa-glx
 RUN apt-get update \
     && apt-get install -y libgl1-mesa-glx \
+    && apt-get install -y poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy built Flask app from previous stage
