@@ -160,4 +160,4 @@ class AppServer:
 
 if __name__ == '__main__':
     app_server = AppServer(app)
-    app_server.app.run(debug=True, port=5001)
+    app_server.app.run(host='0.0.0.0', port=5001, debug=True)
