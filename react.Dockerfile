@@ -5,7 +5,7 @@ FROM node:latest AS react-builder
 WORKDIR /app/frontend
 
 # Copy package.json and package-lock.json for npm install
-COPY bubblescan-client/package*.json ./
+COPY bubblescan-client/package*.json /app/frontend
 
 # Install npm dependencies
 RUN npm install
@@ -17,7 +17,7 @@ RUN npm install -g npm
 RUN npm install cors
 
 # Copy the React application code into the image
-COPY bubblescan-client .
+COPY bubblescan-client /app/frontend
 
 # Expose port for React Vite development server
 EXPOSE 5173
