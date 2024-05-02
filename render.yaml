@@ -1,17 +1,17 @@
 services:
   - name: frontend
-    env: docker
+    type: docker
     dockerfileDir: .
     dockerfileName: react.Dockerfile
     staticPublishPath: ./build
     envVars:
       - key: PORT
-        value: 5173
-    
+        value: "5173"
+
   - name: backend
-    env: docker
+    type: docker
     dockerfileDir: .
     dockerfileName: flask.Dockerfile
     envVars:
       - key: PORT
-        value: 5001
+        value: "5001"
