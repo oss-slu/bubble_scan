@@ -4,7 +4,6 @@ services:
     runtime: docker
     buildCommand: |
       docker build -t my-frontend-image -f frontend/react.Dockerfile .
-    startCommand: docker run -p 5173:5173 my-frontend-image
     envVars:
       - key: PORT
         value: "5173"
@@ -14,7 +13,6 @@ services:
     runtime: docker
     buildCommand: |
       docker build -t my-backend-image -f backend/flask.Dockerfile .
-    startCommand: docker run -p 5001:5001 my-backend-image
     envVars:
       - key: PORT
         value: "5001"
