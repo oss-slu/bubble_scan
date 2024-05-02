@@ -49,5 +49,5 @@ EXPOSE 5173
 # Start React Vite development server
 #CMD ["npm", "run", "dev"]
 
-#CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
-CMD npm run dev
+CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
+#CMD npm run dev
