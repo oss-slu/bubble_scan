@@ -1,17 +1,16 @@
 services:
   - name: frontend
-    type: docker
-    dockerfileDir: .
-    dockerfileName: react.Dockerfile
-    staticPublishPath: ./build
+    buildCommand: |
+      docker build -t react-image -f frontend/react.Dockerfile .
+    startCommand: docker run -p 5173:5173 my-frontend-image
     envVars:
       - key: PORT
         value: "5173"
 
   - name: backend
-    type: docker
-    dockerfileDir: .
-    dockerfileName: flask.Dockerfile
+    buildCommand: |
+      docker build -t flask-image -f backend/flask.Dockerfile .
+    startCommand: docker run -p 5001:5001 my-backend-image
     envVars:
       - key: PORT
         value: "5001"
