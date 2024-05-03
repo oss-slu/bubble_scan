@@ -123,7 +123,7 @@ class AppServer:
             csv_filename = f'output_{file_id}.csv'
             csv_file_path = os.path.join(self.uploads_dir, csv_filename)
 
-            with open(csv_file_path, 'w', newline='') as csv_file:
+            with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 csv_file.write(csv_data)
 
             self.csv_files[file_id] = {'filename': csv_filename, 'path': csv_file_path}
@@ -148,37 +148,41 @@ class AppServer:
         """
         csv_data = ''
         print("The JSON data received is:", json_data)
-        if isinstance(json_data, dict) and 'students' in json_data:
-            students = json_data['students']
-            if students:
-                student_data = students[0]
-                if 'answers' in student_data:
-                    keys = student_data['answers'].keys()
-                    print("Keys:", keys)
-                    csv_data += ','.join(['studentID'] + list(keys)) + '\n'
-                    for student in students:
-                        student_id = student.get('studentID', '')
-                        answers = []
-                        for key in keys:
-                            answer = student['answers'].get(key, '')
-                            if isinstance(answer, list):
-                                answer = '|'.join(answer)
-                            elif answer is None:
-                                answer = ''
-                            answers.append(answer)
-                        print("Student ID:", student_id)
-                        print("Answers:", answers)
-                        csv_data += ','.join([student_id] + answers) + '\n'
-                else:
-                    print("No 'answers' key found in student data")
-            else:
-                print("No student data found")
-        else:
+
+        if not isinstance(json_data, dict) or 'students' not in json_data:
             print("Invalid JSON data format")
-        
+            return csv_data
+
+        students = json_data['students']
+        if not students:
+            print("No student data found")
+            return csv_data
+
+        student_data = students[0]
+        if 'answers' not in student_data:
+            print("No 'answers' key found in student data")
+            return csv_data
+
+        keys = student_data['answers'].keys()
+        print("Keys:", keys)
+        csv_data += ','.join(['studentID'] + list(keys)) + '\n'
+
+        for student in students:
+            student_id = student.get('studentID', '')
+            answers = []
+            for key in keys:
+                answer = student['answers'].get(key, '')
+                if isinstance(answer, list):
+                    answer = '|'.join(answer)
+                elif answer is None:
+                    answer = ''
+                answers.append(answer)
+            print("Student ID:", student_id)
+            print("Answers:", answers)
+            csv_data += ','.join([student_id] + answers) + '\n'
+
         print("The CSV data converted is: ", csv_data)
         return csv_data
-
 
     def download_csv(self, file_id):
         """
