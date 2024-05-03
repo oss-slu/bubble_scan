@@ -6,6 +6,8 @@ import os
 import logging
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 from testScantron import testScantron95945
 
 app = Flask(__name__)
