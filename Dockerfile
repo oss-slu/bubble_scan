@@ -23,10 +23,11 @@ COPY bubblescan-client /app
 RUN npm install
 RUN npm install cors
 
-COPY service_script.conf /app
+#COPY service_script.conf /app
 
 # Expose ports
 EXPOSE 5173
+EXPOSE 5001
 
 #RUN gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app&
 
@@ -39,12 +40,9 @@ EXPOSE 5173
 
 # Copy the React application code into the image
 
-# Expose port for React Vite development server
 
 # Start React Vite development server
-#CMD ["npm", "run", "dev"]
-
-CMD gunicorn --bind 172.17.0.2:5001 --chdir flask AppServer:app & npm run dev
+CMD gunicorn --bind localhost:5001 --chdir flask AppServer:app --daemon & npm run dev --network=host 
 #CMD npm run dev
 
 #CMD ["supervisord","-c","/app/service_script.conf"]
