@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from testScantron import testScantron95945
+from Scantron import Scantron95945
 
 app = Flask(__name__)
 
@@ -76,7 +76,7 @@ class AppServer:
 
     def process_pdf(self, pdf_file, file_id):
         try:
-            scantron = testScantron95945(pdf_file)
+            scantron = Scantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 
