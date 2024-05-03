@@ -338,9 +338,9 @@ class Scantron95945:
             return None
         if len(filled_bubbles) == 1:
             return chr(ord('A') + filled_bubbles[0])
-        else:
-            return [chr(ord('A') + index) for index in filled_bubbles]
-            # return "multi"
+        
+        return [chr(ord('A') + index) for index in filled_bubbles]
+        # return "multi"
 
     def find_rows(self, image):
         """
