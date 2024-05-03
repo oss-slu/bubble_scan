@@ -9,9 +9,18 @@ import fitz  # PyMuPDF
 import cv2
 import numpy as np
 
-"""Class that defines the Scanning process and retrieval of json"""
 class Scantron95945:
+    """Class that defines the Scanning process and retrieval of json"""
     def __init__(self, pdf_path):
+        """
+        Initializes a Scantron95945 object.
+
+        Parameters:
+            pdf_path (str): The path to the PDF file.
+
+        Returns:
+            None
+        """
         self.pdf_name = None
         self.pdf_path = pdf_path
         self.source_folder = "data"
@@ -21,9 +30,16 @@ class Scantron95945:
         self.template_matching()
         self.extractROIs()
 
-    """Separate the PDF into individual pages"""
     def extractImagesFromPdf(self):
+        """
+        Separate the PDF into individual pages and save them as images.
 
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         # Opening the PDF file
         pdf_document = fitz.open(self.pdf_path)
         print("------Extracting all the Images from PDF------")
@@ -60,9 +76,17 @@ class Scantron95945:
 
         pdf_document.close()
 
-    """Align each page to fit the fixed size and add white color to the borders if needed""" 
     def align_image(self, image, template):
+        """
+        Aligns each page to fit the fixed size and add white color to the borders if needed.
 
+        Parameters:
+            image (numpy.ndarray): The image to align.
+            template (numpy.ndarray): The template image.
+
+        Returns:
+            numpy.ndarray: The aligned image.
+        """
         # Initializing ORB detector
         orb = cv2.ORB_create(nfeatures=10000)
 
@@ -110,11 +134,19 @@ class Scantron95945:
 
             return aligned_image
         
-        print("Not enough good matches are found - {}/{}".format(len(good), 10))
+        print(f"Not enough good matches are found - {len(good)}/{10}")
         return image
 
-    """Matching the aligned page to template.jpg image"""
     def template_matching(self):
+        """
+        Matches the aligned page to the template image.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         print("------Template Matching------")
         template = cv2.imread(self.template_path)
         folder = os.path.join(self.source_folder, self.pdf_name)
@@ -141,8 +173,16 @@ class Scantron95945:
                 cv2.imwrite(output_path, aligned_image)
                 print(f"Aligned {image_file}")
 
-    """Crop the regions of interest"""
     def crop_roi(self, image_path):
+        """
+        Crop the regions of interest from the given image.
+
+        Parameters:
+            image_path (str): The path to the image.
+
+        Returns:
+            Tuple[str, str, str]: Paths to the cropped images.
+        """
         # Load the image
         image = cv2.imread(image_path)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -240,8 +280,16 @@ class Scantron95945:
 
         return first_column_path, second_column_path, student_id_path
 
-    """Extract the regions of interest"""
     def extractROIs(self):
+        """
+        Extract the regions of interest from the aligned images.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         folder = os.path.join(self.source_folder, "alignedImages")
         # Fetching the list of image files and sort them by name
         image_files = [f for f in os.listdir(folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
@@ -259,8 +307,17 @@ class Scantron95945:
 
         print("------Extracted all the ROI's------")
 
-    """For each bubble based on every row assign the character"""
     def get_responses_bubble_row(self, image, num_choices=5):
+        """
+        For each bubble based on every row, assigns the character.
+
+        Parameters:
+            image (numpy.ndarray): The image containing bubbles.
+            num_choices (int): The number of choices per question.
+
+        Returns:
+            Union[str, List[str], None]: The filled bubble(s) or None if no bubble is filled.
+        """
         bubble_width = image.shape[1] // num_choices
         filled_bubbles = []
 
@@ -285,9 +342,16 @@ class Scantron95945:
             return [chr(ord('A') + index) for index in filled_bubbles]
             # return "multi"
 
-    """Search for rows"""
     def find_rows(self, image):
+        """
+        Finds the rows in the image.
 
+        Parameters:
+            image (numpy.ndarray): The image.
+
+        Returns:
+            List[Tuple[int, int]]: List of row boundaries.
+        """
         # Converting the image to grayscale and apply Gaussian blur to reduce noise
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         blurred = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -317,8 +381,18 @@ class Scantron95945:
 
         return row_boundaries
 
-    """Fixing the regions of interest for each page"""
     def roi(self, image, start_question_num, num_choices=5):
+        """
+        Fixes the regions of interest for each page.
+
+        Parameters:
+            image (numpy.ndarray): The image.
+            start_question_num (int): The starting question number.
+            num_choices (int): The number of choices per question.
+
+        Returns:
+            Dict[str, Union[str, List[str]]]: The responses for each question.
+        """
         responses = {}
         row_boundaries = self.find_rows(image)
 
@@ -337,8 +411,17 @@ class Scantron95945:
 
         return responses
 
-    """Separate the bubble columns and extract them"""
     def bubble_column(self, column, num_bubbles=10):
+        """
+        Separates the bubble columns and extracts them.
+
+        Parameters:
+            column (numpy.ndarray): The column image.
+            num_bubbles (int): The number of bubbles.
+
+        Returns:
+            Union[int, None]: The filled bubble index or None if no bubble is filled.
+        """
         max_white_pixels = 0
         filled_bubble_index = None
 
@@ -363,8 +446,18 @@ class Scantron95945:
         # The filled_bubble_index corresponds to the digit
         return filled_bubble_index
 
-    """Get the student IDs"""
     def student_id(self, roi, num_columns=10, num_bubbles=10):
+        """
+        Gets the student IDs.
+
+        Parameters:
+            roi (numpy.ndarray): The ROI image.
+            num_columns (int): The number of columns in the ROI.
+            num_bubbles (int): The number of bubbles per column.
+
+        Returns:
+            str: The student ID.
+        """
         student_id = ''
 
         # Calculating the width of each response column in the ROI
@@ -386,8 +479,16 @@ class Scantron95945:
 
         return student_id
 
-    """Extract all the bubbles and save them to a JSON"""
     def extract_responses(self):
+        """
+        Extracts all the bubbles and saves them to a JSON.
+
+        Parameters:
+            None
+
+        Returns:
+            Dict[str, List[Dict[str, Union[str, Dict[str, Union[str, List[str]]]]]]]: The student results.
+        """
         students_results = []
         base_folder_path = os.path.join(self.source_folder, "ROIs")
 

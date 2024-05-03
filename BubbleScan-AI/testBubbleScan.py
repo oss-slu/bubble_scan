@@ -3,9 +3,19 @@ This module calls the class Scantron95945 and takes a PDF file as input for proc
 """
 from Scantron import Scantron95945
 
-"""Main method to recieve the input file"""
 def main():
+    """
+    Main function to process a PDF file using Scantron95945 class.
 
+    This function initializes a Scantron95945 object with a PDF file path and
+    prints the extracted responses.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     pdf_path = 'PDF/Super30.pdf'
     sc = Scantron95945(pdf_path)
     print(sc.extract_responses())
