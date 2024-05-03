@@ -11,7 +11,7 @@ from PIL import Image
 import cv2
 import numpy as np
 
-
+# Class that defines the Scanning process and retrieval of json
 class testScantron95945:
     def __init__(self, pdf_path):
         self.pdf_name = None
@@ -23,6 +23,7 @@ class testScantron95945:
         self.template_matching()
         self.extractROIs()
 
+    # Separate the PDF into individual pages
     def extractImagesFromPdf(self):
 
         # Open the PDF file
@@ -51,6 +52,7 @@ class testScantron95945:
                 
                 print(f"Extracted {image_filename}")
 
+    # Align each page to fit the fixed size and add white color to the borders if needed
     def align_image(self, image, template):
 
         # Initializing ORB detector
@@ -103,6 +105,7 @@ class testScantron95945:
             print("Not enough good matches are found - {}/{}".format(len(good), 10))
             return image
 
+    # Matching the aligned page to template.jpg image
     def template_matching(self):
         print("------Template Matching------")
         template = cv2.imread(self.template_path)
@@ -130,6 +133,7 @@ class testScantron95945:
                 cv2.imwrite(output_path, aligned_image)
                 print(f"Aligned {image_file}")
 
+    # Crop the regions of interest
     def crop_roi(self, image_path):
         # Load the image
         image = cv2.imread(image_path)
@@ -228,6 +232,7 @@ class testScantron95945:
 
         return first_column_path, second_column_path, student_id_path
 
+    # Extract the regions of interest
     def extractROIs(self):
         folder = os.path.join(self.source_folder, "alignedImages")
         # Fetching the list of image files and sort them by name
@@ -246,6 +251,7 @@ class testScantron95945:
 
         print("------Extracted all the ROI's------")
 
+    # For each bubble based on every row assign the character
     def get_responses_bubble_row(self, image, num_choices=5):
         bubble_width = image.shape[1] // num_choices
         filled_bubbles = []
@@ -265,12 +271,13 @@ class testScantron95945:
 
         if len(filled_bubbles) == 0:
             return None
-        elif len(filled_bubbles) == 1:
+        if len(filled_bubbles) == 1:
             return chr(ord('A') + filled_bubbles[0])
         else:
             return [chr(ord('A') + index) for index in filled_bubbles]
             # return "multi"
 
+    # Search for rows
     def find_rows(self, image):
 
         # Converting the image to grayscale and apply Gaussian blur to reduce noise
@@ -302,6 +309,7 @@ class testScantron95945:
 
         return row_boundaries
 
+    # Fixing the regions of interest for each page
     def roi(self, image, start_question_num, num_choices=5):
         responses = {}
         row_boundaries = self.find_rows(image)
@@ -321,6 +329,7 @@ class testScantron95945:
 
         return responses
 
+    # Separate the bubble columns and extract them
     def bubble_column(self, column, num_bubbles=10):
         max_white_pixels = 0
         filled_bubble_index = None
@@ -346,6 +355,7 @@ class testScantron95945:
         # The filled_bubble_index corresponds to the digit
         return filled_bubble_index
 
+    # Get the student IDs
     def student_id(self, roi, num_columns=10, num_bubbles=10):
         student_id = ''
 
@@ -368,6 +378,7 @@ class testScantron95945:
 
         return student_id
 
+    # Extract all the bubbles and save them to a JSON
     def extract_responses(self):
         students_results = []
         base_folder_path = os.path.join(self.source_folder, "ROIs")

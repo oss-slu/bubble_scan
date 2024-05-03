@@ -26,6 +26,7 @@ opencv-python==4.9.0.80
 packaging==24.0
 pandas==2.2.2
 pathlib==1.0.1
+pdf2image==1.17.0
 prov==2.0.0
 pydot==2.0.0
 PyMuPDF==1.24.2
