@@ -10,24 +10,22 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y poppler-utils && apt-get install -y supervisor
+RUN npm install -g npm
 
 # Copy the Flask application code into the image
 COPY ServerCode/application /app/flask
-#COPY bubblescan-client/package*.json /app
-COPY bubblescan-client /app
-COPY service_script.conf /app
-
 # Install npm dependencies
 RUN /bin/bash -c "pip install --upgrade pip \
     && pip install -r /app/flask/requirements.txt \
     && pip install gunicorn"
 
-RUN npm install -g npm
+COPY bubblescan-client /app
 RUN npm install
 RUN npm install cors
 
+COPY service_script.conf /app
+
 # Expose ports
-EXPOSE 5001
 EXPOSE 5173
 
 #RUN gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app&
@@ -46,7 +44,7 @@ EXPOSE 5173
 # Start React Vite development server
 #CMD ["npm", "run", "dev"]
 
-#CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
+CMD gunicorn --bind 172.17.0.2:5001 --chdir flask AppServer:app & npm run dev
 #CMD npm run dev
 
-CMD ["supervisord","-c","/app/service_script.conf"]
+#CMD ["supervisord","-c","/app/service_script.conf"]

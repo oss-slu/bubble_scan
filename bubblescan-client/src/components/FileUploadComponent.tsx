@@ -33,7 +33,7 @@ function FileUploadComponent() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:5001/api/upload", {
+      const response = await fetch("http://172.17.0.2:5001/api/upload", {
         method: "POST",
         body: formData,
       });
@@ -45,7 +45,7 @@ function FileUploadComponent() {
           setSuccessMessage("File uploaded successfully!");
           if (result.file_id) {
             console.log("File ID:", result.file_id);
-            setDownloadLink(`http://localhost:5001/api/download_csv/${result.file_id}`);
+            setDownloadLink(`http://172.17.0.2:5001/api/download_csv/${result.file_id}`);
             setFileId(result.file_id);
           } else {
             setSuccessMessage("Error: CSV filename not found in the response.");
@@ -87,7 +87,7 @@ function FileUploadComponent() {
         window.URL.revokeObjectURL(url);
         
         // Send acknowledgment to Flask
-        const acknowledgmentResponse = await fetch(`http://localhost:5001/api/csv_acknowledgment/${fileId}`, {
+        const acknowledgmentResponse = await fetch(`http://172.17.0.2:5001/api/csv_acknowledgment/${fileId}`, {
           method: "POST",
         });
 
