@@ -202,12 +202,12 @@ class AppServer:
             file_path = csv_file_data['path']
             
             if os.path.exists(file_path):
-                with open(file_path, 'r') as csv_file:
+                with open(file_path, 'r', encoding='utf-8') as csv_file:
                     csv_data = csv_file.read()
                     print("CSV Data:\n", csv_data)
                 return send_from_directory(self.uploads_dir, os.path.basename(file_path), as_attachment=True)
-            else:
-                return jsonify({"status": "error", "message": "CSV file not found"})
+            
+            return jsonify({"status": "error", "message": "CSV file not found"})
 
         except Exception as e:
             return jsonify({"status": "error", "message": f"Error downloading CSV: {e}"}), 500
@@ -225,8 +225,8 @@ class AppServer:
         if file_id in self.file_info:
             self.file_info[file_id]['csv_sent'] = True
             return jsonify({"status": "success", "message": "CSV is sent to the React successfully"})
-        else:
-            return jsonify({"status": "error", "message": "File ID not found"})
+        
+        return jsonify({"status": "error", "message": "File ID not found"})
 
 if __name__ == '__main__':
     app_server = AppServer(app)
