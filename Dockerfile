@@ -1,23 +1,34 @@
-FROM nikolaik/python-nodejs:latest
+FROM python:3.11
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y \
+ nodejs \
+ npm \
+ curl \
+ wget \
+ poppler-utils
+
 # Stage 1: Build Flask Application
 # Install system dependencies
-RUN apt-get update \
-    && apt-get install -y python3-venv libgl1-mesa-glx \
-    && apt-get install -y poppler-utils \
-    && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update \
+#    && apt-get install -y nodejs \
+#    && apt-get install -y npm \
+#    && apt-get install -y python3 libgl1-mesa-glx \
+#    && apt-get install -y poppler-utils
 
-RUN apt-get update && apt-get install -y poppler-utils && apt-get install -y supervisor
+#    && rm -rf /var/lib/apt/lists/*
+
+#RUN apt-get update && apt-get install -y poppler-utils && apt-get install -y supervisor
+
 RUN npm install -g npm
 
 # Copy the Flask application code into the image
 COPY ServerCode/application /app/flask
+
 # Install npm dependencies
-RUN /bin/bash -c "pip install --upgrade pip \
-    && pip install -r /app/flask/requirements.txt \
-    && pip install gunicorn"
+RUN pip install -r /app/flask/requirements.txt
+RUN pip install gunicorn
 
 COPY bubblescan-client /app
 RUN npm install
@@ -29,20 +40,6 @@ RUN npm install cors
 EXPOSE 5173
 EXPOSE 5001
 
-#RUN gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app&
-
-# Stage 2: Build React Application
-# Copy package.json and package-lock.json for npm install
-
-
-
-# Install npm cors
-
-# Copy the React application code into the image
-
-
-# Start React Vite development server
-CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app --daemon & npm run dev 
-#CMD npm run dev
+CMD gunicorn --bind [::]:5001 --chdir flask AppServer:app --daemon & npm run dev 
 
 #CMD ["supervisord","-c","/app/service_script.conf"]
