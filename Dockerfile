@@ -42,7 +42,7 @@ EXPOSE 5001
 
 
 # Start React Vite development server
-CMD gunicorn --bind localhost:5001 --chdir flask AppServer:app --daemon & npm run dev --network=host 
+CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app --daemon & npm run dev 
 #CMD npm run dev
 
 #CMD ["supervisord","-c","/app/service_script.conf"]
