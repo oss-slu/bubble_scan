@@ -40,6 +40,6 @@ RUN npm install cors
 EXPOSE 5001
 EXPOSE 5173
 
-CMD gunicorn --bind [::]:5001 --chdir flask AppServer:app --daemon & npm run dev 
+CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app --daemon & npm run dev 
 
 #CMD ["supervisord","-c","/app/service_script.conf"]
