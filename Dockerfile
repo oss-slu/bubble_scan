@@ -37,8 +37,8 @@ RUN npm install cors
 #COPY service_script.conf /app
 
 # Expose ports
-EXPOSE 5173
 EXPOSE 5001
+EXPOSE 5173
 
 CMD gunicorn --bind [::]:5001 --chdir flask AppServer:app --daemon & npm run dev 
 
