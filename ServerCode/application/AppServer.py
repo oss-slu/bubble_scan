@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
 import os
 import logging
@@ -10,12 +10,12 @@ import string
 from PyPDF2 import PdfReader
 from testScantron import testScantron95945
 
-app = Flask(__name__)
-
+app = Flask(__name__, static_folder='static')
+#CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
+CORS(app, resources={r"/static/*": {"origins": "*"}})
 class AppServer:
     def __init__(self, flask_app):
         self.app = flask_app
-        CORS(self.app)
         self.uploads_dir = os.path.join(self.app.instance_path, 'uploads')
         os.makedirs(self.uploads_dir, exist_ok=True)
         logging.basicConfig(level=logging.DEBUG)
@@ -24,12 +24,24 @@ class AppServer:
         self.routes()
 
     def routes(self):
+        self.app.route('/', methods=['GET'])(self.frontend)
+        self.app.route('/static/<path:path>',methods=['GET'])(self.serve_static)
+        self.app.route('/assets/<path:path>',methods=['GET'])(self.serve_assets)
         self.app.route('/api/data', methods=['GET'])(self.get_data)
         self.app.route('/api/message', methods=['POST'])(self.receive_message)
         self.app.route('/api/upload', methods=['POST'])(self.file_upload)
         self.app.route('/api/process_pdf', methods=['POST'])(self.process_pdf)
         self.app.route('/api/download_csv/<file_id>', methods=['GET'])(self.download_csv)
         self.app.route('/api/csv_acknowledgment/<file_id>', methods=['POST'])(self.csv_acknowledgment)
+
+    def frontend(self):
+        return send_from_directory('static', 'index.html')
+
+    def serve_static(self,path):
+        return send_from_directory('static', path)
+
+    def serve_assets(self,path):
+        return redirect(url_for('serve_static', path=f'assets/{path}'))
 
     def get_data(self):
         data = {"message": "Hello from Flask!"}
