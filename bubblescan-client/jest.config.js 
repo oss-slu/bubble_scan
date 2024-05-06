@@ -1,0 +1,10 @@
+// jest.config.js
+module.exports = {
+  testEnvironment: 'jsdom', // Ensures Jest uses the jsdom environment
+  transform: {
+    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest", // Transform TypeScript and JavaScript files
+  },
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy" // Handles style imports
+  }
+};
