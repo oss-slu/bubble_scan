@@ -3,6 +3,7 @@ This module calls the class Scantron95945 and takes a PDF file as input for proc
 """
 from Scantron import Scantron95945
 
+
 def main():
     """
     Main function to process a PDF file using Scantron95945 class.
@@ -16,7 +17,7 @@ def main():
     Returns:
     None
     """
-    pdf_path = 'PDF/Super30.pdf'
+    pdf_path = 'PDF/BubbleScans-redacted 1-4.pdf'
     sc = Scantron95945(pdf_path)
     print(sc.extract_responses())
 
