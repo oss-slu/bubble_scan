@@ -14,6 +14,11 @@ cd <your-project-name>
 
 
 npm install
-npm run dev
 npm run build
+npm run dev
+```
+
+## To run the Jest test cases
+```bash
+npx jest --env=jsdom
 ```
