@@ -36,7 +36,6 @@ function App() {
   return (
     <div className="welcome">
       <h1>Welcome to Bubble Scan</h1>
-      <h4>You can upload your files below</h4>
       <FileUploadComponent />
     </div>
   );
