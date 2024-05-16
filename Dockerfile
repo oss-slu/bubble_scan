@@ -1,53 +1,35 @@
-FROM --platform=linux/arm64 nikolaik/python-nodejs:python3.12-nodejs22
+FROM python:3.11
 
 WORKDIR /app
 
-# Stage 1: Build Flask Application
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y python3-venv libgl1-mesa-glx \
-    && apt-get install -y poppler-utils \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+ nodejs \
+ npm \
+ curl \
+ wget \
+ poppler-utils
 
-# Install Poppler
-#RUN apt-get update && apt-get install -y poppler-utils
+RUN npm install -g npm
 
 # Copy the Flask application code into the image
 COPY ServerCode/application /app/flask
+# Install npm dependencies
+RUN pip install -r /app/flask/requirements.txt
+RUN pip install gunicorn
 
-# Debugging: List contents of /app/flask directory
-RUN ls -la /app/flask
-
-RUN /bin/bash -c "pip install --upgrade pip \
-    && pip install -r /app/flask/requirements.txt \
-    && pip install gunicorn"
-
-# Expose ports
 EXPOSE 5001
 
-#RUN gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app&
-
-# Stage 2: Build React Application
-# Copy package.json and package-lock.json for npm install
-COPY bubblescan-client/package*.json /app
-
-# Install npm dependencies
+COPY bubblescan-client /app
 RUN npm install
-
-# Update npm
-RUN npm install -g npm
-
-# Install npm cors
 RUN npm install cors
 
-# Copy the React application code into the image
-COPY bubblescan-client /app
+RUN npm run build
+RUN cp -r dist/ flask/static/
+#COPY dist flask/static
 
-# Expose port for React Vite development server
+# Expose ports
 EXPOSE 5173
 
-# Start React Vite development server
-#CMD ["npm", "run", "dev"]
-
 CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
-#CMD npm run dev
+
+#CMD ["supervisord","-c","/app/service_script.conf"]

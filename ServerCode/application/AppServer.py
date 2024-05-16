@@ -10,6 +10,7 @@ from flask_cors import CORS
 from testScantron import testScantron95945
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
 
 class AppServer:
     """
@@ -23,7 +24,7 @@ class AppServer:
             flask_app (Flask): The Flask application instance.
         """
         self.app = flask_app
-        CORS(self.app)
+        #CORS(self.app)
         self.uploads_dir = os.path.join(self.app.instance_path, 'uploads')
         os.makedirs(self.uploads_dir, exist_ok=True)
         logging.basicConfig(level=logging.DEBUG)
