@@ -11,7 +11,12 @@ function App() {
   useEffect(() => {
     console.log("Fetching initial data...");
     fetch("http://localhost:5001/api/data")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Data received:", data);
         setData(data.message)})

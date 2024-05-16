@@ -10,7 +10,8 @@ from flask_cors import CORS
 from testScantron import testScantron95945
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+#CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
 
 class AppServer:
     """

@@ -17,8 +17,6 @@ COPY ServerCode/application /app/flask
 RUN pip install -r /app/flask/requirements.txt
 RUN pip install gunicorn
 
-EXPOSE 5001
-
 COPY bubblescan-client /app
 RUN npm install
 RUN npm install cors
@@ -28,7 +26,7 @@ RUN cp -r dist/ flask/static/
 #COPY dist flask/static
 
 # Expose ports
-EXPOSE 5173
+EXPOSE 5001
 
 CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
 
