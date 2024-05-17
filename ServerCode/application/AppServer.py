@@ -8,7 +8,7 @@ import uuid
 import random
 import string
 from PyPDF2 import PdfReader
-from testScantron import testScantron95945
+from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
 #CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
@@ -88,7 +88,7 @@ class AppServer:
 
     def process_pdf(self, pdf_file, file_id):
         try:
-            scantron = testScantron95945(pdf_file)
+            scantron = Scantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 

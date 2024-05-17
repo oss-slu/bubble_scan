@@ -139,6 +139,7 @@ class Scantron95945:
         # Load the image
         image = cv2.imread(image_path)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 
         # Defining the regions of interest from the top and left parts of the image
         height, width = gray.shape
@@ -148,8 +149,7 @@ class Scantron95945:
         left_region_height = int(height * 0.035)
 
         # Threshold the entire image first to get potential markers
-        _, binary_image = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
+        _, binary_image = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
         # Finding contours in the threshold image
         contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -208,7 +208,7 @@ class Scantron95945:
         second_column_roi = image[y1_columns:y2_columns, x1_second_column:x2_second_column]
 
         # Calculating the ROI for the student ID section
-        x1_student_id = top_marker_4[0] - 130
+        x1_student_id = top_marker_4[0] - 132
         x2_student_id = top_marker_4[0] + top_marker_4[2] + 165
         y1_student_id = left_marker_34[1] + 20
         y2_student_id = left_marker_43[1] + left_marker_43[3] + 30
@@ -256,10 +256,11 @@ class Scantron95945:
         filled_bubbles = []
 
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        _, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
+        blurred = cv2.GaussianBlur(gray, (15, 15), 0)
+        _, binary = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
 
-        min_white_pixels_to_fill = binary.size // num_choices * 0.38
-        # Adjust the 0.38 value to consider the lightly bubbled responses.
+        min_white_pixels_to_fill = binary.size // num_choices * 0.32
+        # Adjust the 0.32 value to consider the lightly bubbled responses.
 
         for i in range(num_choices):
             bubble = binary[:, i * bubble_width:(i + 1) * bubble_width]
@@ -344,7 +345,7 @@ class Scantron95945:
                 max_white_pixels = white_pixels
                 filled_bubble_index = i
 
-        min_white_pixels_to_fill = column.size // num_bubbles * 0.3
+        min_white_pixels_to_fill = column.size // num_bubbles * 0.32
 
         if max_white_pixels < min_white_pixels_to_fill:
             return None
@@ -363,7 +364,8 @@ class Scantron95945:
 
             # Column ROI to grayscale and threshold it to create a binary image
             gray = cv2.cvtColor(column_roi, cv2.COLOR_BGR2GRAY)
-            _, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
+            blurred = cv2.GaussianBlur(gray, (15, 15), 0)
+            _, binary = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
 
             # Column to determine the filled bubble
             filled_digit = self.bubble_column(binary, num_bubbles)
