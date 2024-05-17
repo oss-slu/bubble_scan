@@ -9,8 +9,6 @@ from flask import Flask, request, jsonify, send_from_directory, redirect, url_fo
 from flask_cors import CORS
 from Scantron import Scantron95945
 
-from flask_cors import CORS
-
 app = Flask(__name__, static_folder='static')
 #CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
 CORS(app, resources={r"/static/*": {"origins": "*"}})
@@ -48,12 +46,48 @@ class AppServer:
         self.app.route('/api/csv_acknowledgment/<file_id>', methods=['POST'])(self.csv_acknowledgment)
 
     def frontend(self):
+        """
+        Serves the frontend of the web application.
+
+        This method handles the request to the root URL and serves the main HTML file 
+        (typically 'index.html') from the 'static' directory, which is the entry point 
+        for the frontend of the application.
+
+        Returns:
+            Response: The HTML content of the 'index.html' file located in the 'static' directory.
+        """
         return send_from_directory('static', 'index.html')
 
     def serve_static(self,path):
+        """
+        Serves static files from the 'static' directory.
+
+        This method handles requests for static files by serving them from the 'static' 
+        directory based on the given path. It can serve various types of static content 
+        such as JavaScript, CSS, images, etc.
+
+        Args:
+            path (str): The relative path to the static file within the 'static' directory.
+
+        Returns:
+            Response: The content of the requested static file.
+        """
         return send_from_directory('static', path)
 
     def serve_assets(self,path):
+        """
+        Redirects to serve asset files from the 'assets' subdirectory within 'static'.
+
+        This method handles requests for assets by redirecting them to the appropriate 
+        static file path within the 'assets' subdirectory. It constructs the new path and 
+        then uses the 'serve_static' method to serve the file.
+
+        Args:
+            path (str): The relative path to the asset file within the 'assets' subdirectory.
+
+        Returns:
+            Response: A redirect response to the constructed URL for the asset file.
+        """
         return redirect(url_for('serve_static', path=f'assets/{path}'))
 
     def get_data(self):
