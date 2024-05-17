@@ -1,20 +1,28 @@
-from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
-from flask_cors import CORS
+"""
+This module provides functionalities to upload files.
+Convert JSON to CSV and allow dowloading the CSV.
+"""
 import os
 import logging
 from werkzeug.utils import secure_filename
-import csv
-import uuid
-import random
-import string
-from PyPDF2 import PdfReader
+from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
+from flask_cors import CORS
 from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
 #CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
 CORS(app, resources={r"/static/*": {"origins": "*"}})
 class AppServer:
+    """
+    Class for managing routes and functionalities of the Flask app.
+    """
     def __init__(self, flask_app):
+        """
+        Initializes the AppServer class.
+
+        Parameters:
+            flask_app (Flask): The Flask application instance.
+        """
         self.app = flask_app
         self.uploads_dir = os.path.join(self.app.instance_path, 'uploads')
         os.makedirs(self.uploads_dir, exist_ok=True)
@@ -24,6 +32,9 @@ class AppServer:
         self.routes()
 
     def routes(self):
+        """
+        Defines the routes for various functionalities of the app.
+        """
         self.app.route('/', methods=['GET'])(self.frontend)
         self.app.route('/static/<path:path>',methods=['GET'])(self.serve_static)
         self.app.route('/assets/<path:path>',methods=['GET'])(self.serve_assets)
@@ -44,16 +55,34 @@ class AppServer:
         return redirect(url_for('serve_static', path=f'assets/{path}'))
 
     def get_data(self):
+        """
+        Returns a simple message as JSON data.
+
+        Returns:
+            dict: JSON data with a message.
+        """
         data = {"message": "Hello from Flask!"}
         return jsonify(data)
 
     def receive_message(self):
+        """
+        Receives a message from the client and logs it.
+
+        Returns:
+            dict: JSON data indicating successful message reception.
+        """
         message_data = request.json
         message = message_data.get('message', '')
         print(f"Received message: {message}")
         return jsonify({"status": "success", "message": "Message received successfully!"})
 
     def file_upload(self):
+        """
+        Handles file upload requests, processes PDF files, and returns CSV data.
+
+        Returns:
+            dict: JSON data indicating the status of the file upload and processing.
+        """
         if 'file' not in request.files:
             return jsonify({"status": "error", "message": "No file part in the request"})
 
@@ -87,6 +116,16 @@ class AppServer:
             return jsonify({"status": "error", "message": "Only PDF files are allowed"})
 
     def process_pdf(self, pdf_file, file_id):
+        """
+        Processes a PDF file to extract responses and convert them to CSV.
+
+        Parameters:
+            pdf_file (str): Path to the PDF file.
+            file_id (str): Unique identifier for the file.
+
+        Returns:
+            str: Name of the generated CSV file.
+        """
         try:
             scantron = Scantron95945(pdf_file)
             data = scantron.extract_responses()
@@ -110,6 +149,15 @@ class AppServer:
             return ''
 
     def transform_json_to_csv(self, json_data):
+        """
+        Transforms JSON data to CSV format.
+
+        Parameters:
+            json_data (dict): JSON data to be converted to CSV.
+
+        Returns:
+            str: CSV data as a string.
+        """
         csv_data = ''
         print("The JSON data received is:", json_data)
         if isinstance(json_data, dict) and 'students' in json_data:
@@ -145,6 +193,15 @@ class AppServer:
 
 
     def download_csv(self, file_id):
+        """
+        Allows downloading of a CSV file.
+
+        Parameters:
+            file_id (str): Unique identifier for the file.
+
+        Returns:
+            Response: Flask response object containing the CSV file.
+        """
         try:
             if file_id not in self.csv_files:
                 return jsonify({"status": "error", "message": "CSV file not found"})
@@ -164,6 +221,15 @@ class AppServer:
             return jsonify({"status": "error", "message": f"Error downloading CSV: {e}"}), 500
 
     def csv_acknowledgment(self, file_id):
+        """
+        Handles acknowledgment of CSV file transmission.
+
+        Parameters:
+            file_id (str): Unique identifier for the file.
+
+        Returns:
+            dict: JSON data indicating the status of the acknowledgment.
+        """
         if file_id in self.file_info:
             self.file_info[file_id]['csv_sent'] = True
             return jsonify({"status": "success", "message": "CSV is sent to the React successfully"})
