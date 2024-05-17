@@ -76,4 +76,3 @@ deactivate
 ```
 
 This command will return you to your system's default Python interpreter.
-

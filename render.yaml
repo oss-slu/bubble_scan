@@ -1,0 +1,18 @@
+services:
+  - name: frontend
+    type: web
+    runtime: docker
+    buildCommand: |
+      docker build -t my-frontend-image -f frontend/react.Dockerfile .
+    envVars:
+      - key: PORT
+        value: "5173"
+
+  - name: backend
+    type: web
+    runtime: docker
+    buildCommand: |
+      docker build -t my-backend-image -f backend/flask.Dockerfile .
+    envVars:
+      - key: PORT
+        value: "5001"
