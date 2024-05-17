@@ -1,11 +1,14 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
+"""
+This module provides functionalities to upload files.
+Convert JSON to CSV and allow dowloading the CSV.
+"""
 import os
 import logging
-from werkzeug.utils import secure_filename
 import requests
-import csv
-import uuid
+from werkzeug.utils import secure_filename
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
