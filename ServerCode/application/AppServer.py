@@ -2,8 +2,6 @@
 This module provides functionalities to upload files.
 Convert JSON to CSV and allow dowloading the CSV.
 """
-from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
-from flask_cors import CORS
 import os
 import logging
 from werkzeug.utils import secure_filename
