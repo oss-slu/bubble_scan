@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "ES2017"],  // Added "ES2017" for better async/await support
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,  // Changed from false to true
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,6 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src",    // Ensure to include source files
+    "src/**/*.ts",  // Include all TypeScript files in src
+    "src/**/*.tsx"  // Include all TypeScript React files in src
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ]
 }
