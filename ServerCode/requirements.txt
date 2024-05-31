@@ -7,7 +7,6 @@ configobj==5.0.8
 configparser==7.0.0
 etelemetry==0.3.1
 filelock==3.13.4
-fitz==0.0.1.dev2
 Flask==3.0.3
 Flask-Cors==4.0.0
 httplib2==0.22.0
@@ -30,7 +29,6 @@ pdf2image==1.17.0
 prov==2.0.0
 pydot==2.0.0
 PyMuPDF==1.24.2
-PyMuPDFb==1.24.1
 pyparsing==3.1.2
 PyPDF2==3.0.1
 python-dateutil==2.9.0.post0

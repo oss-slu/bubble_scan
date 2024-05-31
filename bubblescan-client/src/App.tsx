@@ -17,6 +17,7 @@ function App() {
 
   // Function to send message to Flask
   const sendMessage = async () => {
+    console.log("Sending message to Flask...");
     try {
       const res = await fetch("/api/message", {
         method: "POST",
@@ -26,6 +27,7 @@ function App() {
         body: JSON.stringify({ message }),
       });
       const data = await res.json();
+      console.log("Message sent successfully. Response:", data);
       setResponse(data.message);
     } catch (error) {
       console.error("Error sending message:", error);

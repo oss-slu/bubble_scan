@@ -7,8 +7,13 @@ configobj==5.0.8
 configparser==7.0.0
 etelemetry==0.3.1
 filelock==3.13.4
+<<<<<<< HEAD
 flask==3.0.3
 flask-cors==4.0.0
+=======
+Flask==3.0.3
+Flask-Cors==4.0.0
+>>>>>>> f310e947c255d64472e0eab02e27d3e3eacda8f2
 httplib2==0.22.0
 idna==3.7
 isodate==0.6.1

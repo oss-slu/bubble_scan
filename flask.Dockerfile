@@ -30,16 +30,10 @@ RUN /bin/bash -c "source venv/bin/activate \
 # Reinstall requirements without cache
 RUN pip uninstall -y -r requirements.txt && pip install -r requirements.txt --no-cache-dir
 
-# Uninstall PyMuPDF if it's already installed and upgrade
-RUN pip uninstall -y PyMuPDF && pip install PyMuPDF --no-cache-dir
-
 # Stage 3: Final Image
 FROM python:latest
 
 WORKDIR /app
-
-# Uninstall PyMuPDF if it's already installed and upgrade
-RUN pip uninstall -y PyMuPDF && pip install PyMuPDF --no-cache-dir
 
 # Install libgl1-mesa-glx
 RUN apt-get update \

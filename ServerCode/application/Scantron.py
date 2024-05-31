@@ -1,17 +1,18 @@
 """
-This module scans the scantrons, uses template.jpg to process the files.
+This module scans the scantron sheets, uses template.jpg to align the images.
 Then it retrieves the Student ID and the answers based on the bubbled spots.
 """
+import os
 import re
 import shutil
-import os
-from PyPDF2 import PdfReader
-from pdf2image import convert_from_path
+import fitz  # PyMuPDF
 import cv2
 import numpy as np
 
+
 class Scantron95945:
     """Class that defines the Scanning process and retrieval of json"""
+
     def __init__(self, pdf_path):
         """
         Initializes a Scantron95945 object.
@@ -36,36 +37,46 @@ class Scantron95945:
         Separate the PDF into individual pages and save them as images.
 
         Parameters:
-            None
+            self
 
         Returns:
             None
         """
-        # Open the PDF file
-        with open(self.pdf_path, 'rb') as pdf_file:
-            pdf_reader = PdfReader(pdf_file)
-            print("------Extracting all the Images from PDF------")
+        # Opening the PDF file
+        pdf_document = fitz.open(self.pdf_path)
+        print("------Extracting all the Images from PDF------")
 
-            # Determining PDF name for creating a Sub folder
-            self.pdf_name = os.path.splitext(os.path.basename(self.pdf_path))[0]
+        # Determining PDF name for creating a Sub folder
+        self.pdf_name = os.path.splitext(os.path.basename(self.pdf_path))[0]
 
-            # Creating a Sub Folder for the PDF
-            pdf_folder = os.path.join(self.output_folder, self.pdf_name)
-            os.makedirs(pdf_folder, exist_ok=True)
+        # Creating a Sub Folder for the PDF
+        pdf_folder = os.path.join(self.output_folder, self.pdf_name)
+        os.makedirs(pdf_folder, exist_ok=True)
 
-            # Iterating over pages and save them as images
-            for page_number in range(len(pdf_reader.pages)):
-                image_filename = f"Image_{page_number + 1}.jpg"
-                page_image = convert_from_path(self.pdf_path, first_page=page_number+1, last_page=page_number+1)[0]
-                
-                # Resize the image to the desired dimensions
-                page_image = page_image.resize((1689, 2186))
-                
-                # Save the image
-                image_path = os.path.join(pdf_folder, image_filename)
-                page_image.save(image_path, 'JPEG')
-                
-                print(f"Extracted {image_filename}")
+        # Iterating over pages and save them as images
+        for page_number, page in enumerate(pdf_document):
+            page_number += 1
+            image_filename = f"Image_{page_number}.jpg"
+
+            # Get the pixmap of the current page
+            original_pix = page.get_pixmap(matrix=fitz.Identity, colorspace=fitz.csRGB, clip=None, annots=True)
+
+            # Calculating scaling factors
+            scale_x = 1689 / original_pix.width
+            scale_y = 2186 / original_pix.height
+
+            # Apply scaling
+            matrix = fitz.Matrix(scale_x, scale_y)
+
+            # Get the scaled pixmap
+            pix = page.get_pixmap(matrix=matrix, colorspace=fitz.csRGB, clip=None, annots=True)
+
+            # Saving the image
+            image_path = os.path.join(pdf_folder, image_filename)
+            pix.save(image_path)
+            print(f"Extracted {image_filename}")
+
+        pdf_document.close()
 
     def align_image(self, image, template):
         """
@@ -124,7 +135,7 @@ class Scantron95945:
             aligned_image[mask] = 255
 
             return aligned_image
-        
+
         print(f"Not enough good matches are found - {len(good)}/{10}")
         return image
 
@@ -133,7 +144,7 @@ class Scantron95945:
         Matches the aligned page to the template image.
 
         Parameters:
-            None
+            self
 
         Returns:
             None
@@ -188,6 +199,10 @@ class Scantron95945:
 
         # Threshold the entire image first to get potential markers
         _, binary_image = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+<<<<<<< HEAD
+=======
+
+>>>>>>> f310e947c255d64472e0eab02e27d3e3eacda8f2
         # Finding contours in the threshold image
         contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -276,7 +291,7 @@ class Scantron95945:
         Extract the regions of interest from the aligned images.
 
         Parameters:
-            None
+            self
 
         Returns:
             None
@@ -330,7 +345,7 @@ class Scantron95945:
             return None
         if len(filled_bubbles) == 1:
             return chr(ord('A') + filled_bubbles[0])
-        
+
         return [chr(ord('A') + index) for index in filled_bubbles]
         # return "multi"
 
@@ -477,7 +492,7 @@ class Scantron95945:
         Extracts all the bubbles and saves them to a JSON.
 
         Parameters:
-            None
+            self
 
         Returns:
             Dict[str, List[Dict[str, Union[str, Dict[str, Union[str, List[str]]]]]]]: The student results.
@@ -514,6 +529,5 @@ class Scantron95945:
         final_output = {"students": students_results}
 
         shutil.rmtree("data")
-        print("Processing complete. Returned JSON Data.")    
+        print("Processing complete. Returned JSON Data.")
         return final_output
-    
