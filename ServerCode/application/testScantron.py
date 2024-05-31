@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 
 
-class Scantron95945:
+class testScantron95945:
     """Class that defines the Scanning process and retrieval of json"""
 
     def __init__(self, pdf_path):
