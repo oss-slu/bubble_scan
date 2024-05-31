@@ -7,7 +7,7 @@ import logging
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
-from testScantron import testScantron95945
+from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
 #CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
@@ -163,7 +163,7 @@ class AppServer:
             str: Name of the generated CSV file.
         """
         try:
-            scantron = testScantron95945(pdf_file)
+            scantron = Scantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 
