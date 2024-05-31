@@ -25,6 +25,13 @@ You will need two terminals to get Bubble scan set up. One for the React compone
 
 This project was bootstrapped with [Vite](https://vitejs.dev/). It is a simple setup to get started with React and Vite.
 
+## Prerequisites
+
+Before you begin, ensure you have the following software installed on your system:
+- Node.js (including npm)
+- Python 3.6 or newer
+- Git
+
 ## Getting Started
 
 First, clone the repository and navigate into the project directory:
