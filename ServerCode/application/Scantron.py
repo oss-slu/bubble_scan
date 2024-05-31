@@ -199,7 +199,6 @@ class Scantron95945:
 
         # Threshold the entire image first to get potential markers
         _, binary_image = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
         # Finding contours in the threshold image
         contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 

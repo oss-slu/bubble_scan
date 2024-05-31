@@ -5,14 +5,13 @@ Convert JSON to CSV and allow dowloading the CSV.
 import os
 import logging
 from werkzeug.utils import secure_filename
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
-from testScantron import testScantron95945
+from Scantron import Scantron95945
 
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
-#CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
-
+app = Flask(__name__, static_folder='static')
+#CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
+CORS(app, resources={r"/static/*": {"origins": "*"}})
 class AppServer:
     """
     Class for managing routes and functionalities of the Flask app.
@@ -25,7 +24,6 @@ class AppServer:
             flask_app (Flask): The Flask application instance.
         """
         self.app = flask_app
-        #CORS(self.app)
         self.uploads_dir = os.path.join(self.app.instance_path, 'uploads')
         os.makedirs(self.uploads_dir, exist_ok=True)
         logging.basicConfig(level=logging.DEBUG)
@@ -37,12 +35,60 @@ class AppServer:
         """
         Defines the routes for various functionalities of the app.
         """
+        self.app.route('/', methods=['GET'])(self.frontend)
+        self.app.route('/static/<path:path>',methods=['GET'])(self.serve_static)
+        self.app.route('/assets/<path:path>',methods=['GET'])(self.serve_assets)
         self.app.route('/api/data', methods=['GET'])(self.get_data)
         self.app.route('/api/message', methods=['POST'])(self.receive_message)
         self.app.route('/api/upload', methods=['POST'])(self.file_upload)
         self.app.route('/api/process_pdf', methods=['POST'])(self.process_pdf)
         self.app.route('/api/download_csv/<file_id>', methods=['GET'])(self.download_csv)
         self.app.route('/api/csv_acknowledgment/<file_id>', methods=['POST'])(self.csv_acknowledgment)
+
+    def frontend(self):
+        """
+        Serves the frontend of the web application.
+
+        This method handles the request to the root URL and serves the main HTML file 
+        (typically 'index.html') from the 'static' directory, which is the entry point 
+        for the frontend of the application.
+
+        Returns:
+            Response: The HTML content of the 'index.html' file located in the 'static' directory.
+        """
+        return send_from_directory('static', 'index.html')
+
+    def serve_static(self,path):
+        """
+        Serves static files from the 'static' directory.
+
+        This method handles requests for static files by serving them from the 'static' 
+        directory based on the given path. It can serve various types of static content 
+        such as JavaScript, CSS, images, etc.
+
+        Args:
+            path (str): The relative path to the static file within the 'static' directory.
+
+        Returns:
+            Response: The content of the requested static file.
+        """
+        return send_from_directory('static', path)
+
+    def serve_assets(self,path):
+        """
+        Redirects to serve asset files from the 'assets' subdirectory within 'static'.
+
+        This method handles requests for assets by redirecting them to the appropriate 
+        static file path within the 'assets' subdirectory. It constructs the new path and 
+        then uses the 'serve_static' method to serve the file.
+
+        Args:
+            path (str): The relative path to the asset file within the 'assets' subdirectory.
+
+        Returns:
+            Response: A redirect response to the constructed URL for the asset file.
+        """
+        return redirect(url_for('serve_static', path=f'assets/{path}'))
 
     def get_data(self):
         """
@@ -117,7 +163,7 @@ class AppServer:
             str: Name of the generated CSV file.
         """
         try:
-            scantron = testScantron95945(pdf_file)
+            scantron = Scantron95945(pdf_file)
             data = scantron.extract_responses()
             #print("Received the JSON data as: ", data)
 
@@ -230,6 +276,7 @@ class AppServer:
         
         return jsonify({"status": "error", "message": "File ID not found"})
 
+app_server = AppServer(app)
+
 if __name__ == '__main__':
-    app_server = AppServer(app)
     app_server.app.run(host='0.0.0.0', port=5001, debug=True)

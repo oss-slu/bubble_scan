@@ -28,6 +28,6 @@ RUN cp -r dist/ flask/static/
 # Expose ports
 EXPOSE 5001
 
-CMD gunicorn --bind 0.0.0.0:5001 --chdir flask AppServer:app & npm run dev
+CMD gunicorn --bind 0.0.0.0:5001 --timeout 120 --chdir flask AppServer:app 
 
 #CMD ["supervisord","-c","/app/service_script.conf"]

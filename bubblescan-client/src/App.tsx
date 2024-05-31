@@ -9,17 +9,9 @@ function App() {
 
   // Fetch initial data from Flask
   useEffect(() => {
-    console.log("Fetching initial data...");
-    fetch("http://localhost:5001/api/data")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data received:", data);
-        setData(data.message)})
+    fetch("/api/data")
+      .then((response) => response.json())
+      .then((data) => setData(data.message))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
@@ -27,7 +19,7 @@ function App() {
   const sendMessage = async () => {
     console.log("Sending message to Flask...");
     try {
-      const res = await fetch("http://localhost:5001/api/message", {
+      const res = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
