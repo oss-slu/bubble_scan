@@ -1,0 +1,13 @@
+module.exports = {
+  setupFilesAfterEnv: ['./src/setupTests.js'],
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom', // Set test environment to jsdom
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.jsx?$': 'babel-jest', // Transform JSX with Babel
+  },
+  moduleNameMapper: {
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
+  },
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+};

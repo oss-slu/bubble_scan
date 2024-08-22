@@ -122,11 +122,12 @@ function FileUploadComponent() {
     if (fileInput) fileInput.value = ""; 
   };
 
-  console.log("Download link:", downloadLink);
+  //console.log("Download link:", downloadLink);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <label htmlFor="file-input">Upload File:</label>
         <input
           type="file"
           id="file-input"
