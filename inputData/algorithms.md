@@ -187,13 +187,13 @@ To overcome the challenge of limited datasets, synthetic data can be generated t
 
 ## Comparative Analysis
 
-| Criteria                | Current Method                        | Edge Detection & Perspective Transformation | Grid-Based Approach               | Fiducial Marker Detection           | CNN-Based Method                   |
-|-------------------------|---------------------------------------|---------------------------------------------|------------------------------------|-------------------------------------|-------------------------------------|
-| **Accuracy**            | Near 100%                             | High (with good image quality)              | Moderate to High (alignment-dependent) | High                               | High (with sufficient training data) |
-| **Processing Speed**    | Slow (feature matching is intensive)  | Fast                                        | Very Fast                          | Fast                                | Moderate (can be optimized)         |
-| **Resource Usage**      | High CPU and memory usage             | Low                                         | Very Low                           | Moderate                            | High (requires GPU for training)    |
-| **Implementation Complexity** | Complex (hard to maintain and scale) | Simple                                      | Very Simple                        | Moderate (requires form changes)    | Complex (requires ML expertise)     |
-| **Scalability**         | Difficult (complex for custom forms)  | Easy (adjust corner detection)              | Easy (adjust grid parameters)      | Easy (with marker placement)        | Easy (with additional training)     |
+| Criteria                | Current Method                        | Edge Detection & Perspective Transformation | Grid-Based Approach                | CNN-Based Method                   |
+|-------------------------|---------------------------------------|---------------------------------------------|------------------------------------|-------------------------------------|
+| **Accuracy**            | Near 100%                             | High (with good image quality)              | Moderate to High (alignment-dependent)|High (with sufficient training data) |
+| **Processing Speed**    | Slow (feature matching is intensive)  | Fast                                        | Very Fast                          | Moderate (can be optimized)         |
+| **Resource Usage**      | High CPU and memory usage             | Low                                         | Very Low                           | High (requires GPU for training)    |
+| **Implementation Complexity** | Complex (hard to maintain and scale) | Simple                                      | Very Simple                   | Complex (requires ML expertise)     |
+| **Scalability**         | Difficult (complex for custom forms)  | Easy (adjust corner detection)              | Easy (adjust grid parameters)      | Easy (with additional training)     |
 
 ---
 
