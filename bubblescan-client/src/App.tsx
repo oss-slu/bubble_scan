@@ -6,6 +6,7 @@ function App() {
   const [data, setData] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [response, setResponse] = useState<string>("");
+  const [isFormVisible, setFormVisible] = useState(false)
 
   // Fetch initial data from Flask
   useEffect(() => {
@@ -35,11 +36,19 @@ function App() {
     }
   };
 
+  const handleButtonClick = () => {
+
+    setFormVisible(true);
+
+  }
+
   return (
     <div className="welcome">
       <h1>Welcome to Bubble Scan</h1>
       <h4>You can upload your files below</h4>
       <FileUploadComponent />
+      <h1>You can create Custom Sheets here</h1>
+      <button onClick={handleButtonClick}>Custom Sheet</button>
     </div>
   );
 }
