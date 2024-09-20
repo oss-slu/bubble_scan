@@ -91,4 +91,98 @@ body::before {
       transform: rotate(360deg);
     }
   }
+
+  /* General Styles */
+  .exam-sheet {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid black;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
   
+  .student-info {
+    margin-bottom: 30px;
+  }
+  
+  .static-box-label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  /* Large static boxes for student name and ID */
+  .static-box {
+    width: 100%;
+    height: 150px; /* Very large for printing */
+    border: 3px solid black; /* Thicker border to look like a write-in box */
+    margin-top: 10px;
+  }
+  
+  .questions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .question-row {
+    margin-bottom: 50px; /* Larger margin to separate questions */
+  }
+  
+  .question-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .options {
+    display: flex;
+    gap: 50px; /* Larger gap to separate big bubbles */
+    align-items: center;
+  }
+  
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+  
+  /* Custom static bubble with 1000px size */
+  .custom-bubble {
+    display: inline-block;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    border: 5px solid black;
+    background-color: white;
+  }
+  
+  .bubble-label {
+    font-size: 36px; /* Larger labels */
+    display: block;
+  }
+  
+  /* Print-specific styles */
+  @media print {
+    .exam-sheet {
+      width: 100%;
+      margin: 0;
+      border: none;
+    }
+  
+    .custom-bubble {
+      width: 1000px;
+      height: 1000px;
+    }
+  
+    .static-box {
+      height: 150px;
+    }
+  
+    .question-label,
+    .bubble-label {
+      font-size: 36px;
+    }
+  }
