@@ -7,11 +7,12 @@ import logging
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
+from config import CORS_ORIGINS
 from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
-#CORS(app, resources={r"/*": {"origins": ["http://localhost:5001"]}})
-CORS(app, resources={r"/static/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
+
 class AppServer:
     """
     Class for managing routes and functionalities of the Flask app.
