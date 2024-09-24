@@ -15,6 +15,7 @@ function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  
   // Function to send message to Flask
   const sendMessage = async () => {
     console.log("Sending message to Flask...");
