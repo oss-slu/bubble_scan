@@ -140,3 +140,10 @@ docker run -p 5001:5001 -p 5173:5173 bscan
 ```
 
 Your bubble scan application will be accessible at `http://127.0.0.1:5001/`.
+
+## Upcoming Features: Custom Sheet Processing
+**Description**
+The program will allow the users to create custom sheets based on the amount of questions and answer choices the user desires. These sheets will then be seamlesssly processed in the program.
+
+**Key Development Milestones**
+- Adding frontend functinality to create custom sheets and preview them

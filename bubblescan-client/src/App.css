@@ -91,4 +91,77 @@ body::before {
       transform: rotate(360deg);
     }
   }
+
+  /* General Styles */
+  .exam-sheet {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid black;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
   
+  .student-info {
+    margin-bottom: 30px;
+  }
+  
+  .static-box-label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  /* Large static boxes for student name and ID */
+  .static-box {
+    width: 100%;
+    height: 150px;
+    border: 3px solid black;
+    margin-top: 10px;
+  }
+  
+  .questions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .question-row {
+    margin-bottom: 50px;
+  }
+  
+  .question-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .options {
+    display: flex;
+    gap: 50px; /* Larger gap to separate big circles */
+    align-items: center;
+  }
+  
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+  
+  /* Static Circle (no interaction, no radio buttons) */
+  /* Additional styles for dynamic form elements */
+.question {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.choice input {
+  margin-right: 10px;
+}
