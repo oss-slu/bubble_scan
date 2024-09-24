@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 interface ExamSheetProps {
   numQuestions: number;
@@ -7,7 +8,6 @@ interface ExamSheetProps {
 
 
 const ExamSheet: React.FC<ExamSheetProps> = ({ numQuestions, numOptions }) => {
-
   const optionsArray = Array.from({ length: numOptions }, (_, i) => String.fromCharCode(65 + i)); 
 
   return (
@@ -18,11 +18,11 @@ const ExamSheet: React.FC<ExamSheetProps> = ({ numQuestions, numOptions }) => {
         {/* Static larger boxes for student name and ID */}
         <label className="static-box-label">
           <strong>Student Name:</strong>
-          <div className="static-box"></div> {/* Static large box */}
+          <div className="static-box"></div> {/* Static large box for name */}
         </label>
         <label className="static-box-label">
           <strong>Student ID:</strong>
-          <div className="static-box"></div> {/* Static large box */}
+          <div className="static-box"></div> {/* Static large box for ID */}
         </label>
       </div>
 
@@ -33,7 +33,16 @@ const ExamSheet: React.FC<ExamSheetProps> = ({ numQuestions, numOptions }) => {
             <div className="options">
               {optionsArray.map((option, optionIndex) => (
                 <label key={optionIndex} className="option">
-                  <div className="custom-bubble"></div> {/* Static visual bubble */}
+                  {/* Apply inline styles here */}
+                  <div
+                    style={{
+                      width: '500px',
+                      height: '500px',
+                      borderRadius: '50%',
+                      border: '5px solid black',
+                      backgroundColor: 'blue',
+                    }}
+                  ></div>
                   <span className="bubble-label">{option}</span>
                 </label>
               ))}
@@ -44,7 +53,4 @@ const ExamSheet: React.FC<ExamSheetProps> = ({ numQuestions, numOptions }) => {
     </div>
   );
 };
-
-
-
 export default ExamSheet;

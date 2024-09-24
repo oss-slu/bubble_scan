@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FileUploadComponent from "./components/FileUploadComponent";
-import ExamSheet from "./components/CustomSheetComponent"
+import CustomSheetComponent from "./components/CustomSheetComponent"
 import "./App.css";
 
 function App() {
@@ -62,7 +62,14 @@ function App() {
               .student-info label { display: block; margin-bottom: 10px; }
               .question-row { margin-bottom: 15px; }
               .options { display: flex; gap: 10px; }
-              .option { display: flex; align-items: center; }
+              .option { display: flex; align-items: center; gap: 5px; }
+              .circle {
+                width: 15px;
+                height: 15px;
+                border: 2px solid black;
+                border-radius: 50%;
+                display: inline-block;
+              }
             </style>
           </head>
           <body>
@@ -77,10 +84,10 @@ function App() {
                   <span>Question ${questionIndex + 1}:</span>
                   <div class="options">
                     ${Array.from({ length: numOptions }).map((_, optionIndex) => `
-                      <label class="option">
-                        <input type="radio" name="question-${questionIndex}" />
+                      <span class="option">
+                        <span class="circle"></span>
                         ${String.fromCharCode(65 + optionIndex)} <!-- A, B, C, etc. -->
-                      </label>
+                      </span>
                     `).join('')}
                   </div>
                 </div>
@@ -91,6 +98,7 @@ function App() {
       `);
       sheetWindow.document.close();
     }
+    
   };
 
   return (
