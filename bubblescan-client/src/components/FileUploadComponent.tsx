@@ -9,14 +9,17 @@ function FileUploadComponent() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      setFile(selectedFile);
-      setSuccessMessage("");
-      setDownloadLink("");
-    } else {
-      alert("Please select a PDF file.");
-      if (event.target && event.target.value) {
-        event.target.value = ""; // Reset file input
+    if (selectedFile) {
+      const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
+      if (allowedTypes.includes(selectedFile.type)) {
+        setFile(selectedFile);
+        setSuccessMessage("");
+        setDownloadLink("");
+      } else {
+        alert("Please select a valid file type (PDF, JPEG, or PNG).");
+        if (event.target && event.target.value) {
+          event.target.value = ""; // Reset file input
+        }
       }
     }
   };
@@ -24,7 +27,7 @@ function FileUploadComponent() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!file) {
-      alert("Please select a PDF file before submitting.");
+      alert("Please select a file before submitting.");
       return;
     }
 
@@ -37,7 +40,6 @@ function FileUploadComponent() {
         method: "POST",
         body: formData,
       });
-      // const result = await response.json();
 
       if (response.ok) {
         const result = await response.json();
@@ -45,7 +47,9 @@ function FileUploadComponent() {
           setSuccessMessage("File uploaded successfully!");
           if (result.file_id) {
             console.log("File ID:", result.file_id);
-            setDownloadLink(`http://localhost:5001/api/download_csv/${result.file_id}`);
+            setDownloadLink(
+              `http://localhost:5001/api/download_csv/${result.file_id}`
+            );
             setFileId(result.file_id);
           } else {
             setSuccessMessage("Error: CSV filename not found in the response.");
@@ -59,8 +63,7 @@ function FileUploadComponent() {
     } catch (error) {
       console.error("Error during file upload:", error);
       setSuccessMessage("Error during file upload.");
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -74,22 +77,28 @@ function FileUploadComponent() {
         const blob = await csvDownloadResponse.blob();
         const url = window.URL.createObjectURL(new Blob([blob]));
         const currentDate = new Date();
-        const dateString = currentDate.toISOString().split('T')[0];
-        const timeString = currentDate.toTimeString().split(' ')[0].replace(/:/g, '-');
+        const dateString = currentDate.toISOString().split("T")[0];
+        const timeString = currentDate
+          .toTimeString()
+          .split(" ")[0]
+          .replace(/:/g, "-");
         const filename = `data_${dateString}_${timeString}.csv`;
 
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);
         a.click();
         a.remove();
         window.URL.revokeObjectURL(url);
-        
+
         // Send acknowledgment to Flask
-        const acknowledgmentResponse = await fetch(`http://localhost:5001/api/csv_acknowledgment/${fileId}`, {
-          method: "POST",
-        });
+        const acknowledgmentResponse = await fetch(
+          `http://localhost:5001/api/csv_acknowledgment/${fileId}`,
+          {
+            method: "POST",
+          }
+        );
 
         if (acknowledgmentResponse.ok) {
           const acknowledgmentResult = await acknowledgmentResponse.json();
@@ -107,8 +116,7 @@ function FileUploadComponent() {
       }
     } catch (error) {
       console.error("Error during CSV download:", error);
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -119,7 +127,7 @@ function FileUploadComponent() {
     setDownloadLink("");
     setFileId("");
     const fileInput = document.getElementById("file-input") as HTMLInputElement;
-    if (fileInput) fileInput.value = ""; 
+    if (fileInput) fileInput.value = "";
   };
 
   console.log("Download link:", downloadLink);
@@ -130,7 +138,7 @@ function FileUploadComponent() {
         <input
           type="file"
           id="file-input"
-          accept=".pdf"
+          accept=".pdf, .jpeg, .jpg, .png"
           onChange={handleFileChange}
         />
         <button type="submit">Upload</button>
@@ -148,9 +156,7 @@ function FileUploadComponent() {
         <>
           {successMessage && <p>{successMessage}</p>}
           {downloadLink && (
-            <button onClick={handleDownloadCSV}>
-              Download CSV
-            </button>
+            <button onClick={handleDownloadCSV}>Download CSV</button>
           )}
         </>
       )}
