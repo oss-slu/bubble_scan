@@ -6,7 +6,7 @@ Thank you for your interest in contributing to the BubbleScan project! We're exc
 ## General Guidelines
 
 1. **Be Respectful:**
-   - Follow the [Code of Conduct](https://github.com/oss-slu/bubble_scan/CODE_OF_CONDUCT.md) at all times.
+   - Follow the [Code of Conduct]((https://github.com/oss-slu/bubble_scan/blob/main/CODE_OF_CONDUCT.md)) at all times.
    - Be respectful in discussions and when reviewing or providing feedback.
    - Constructive criticism is welcomed, but please be kind and patient with others.
 
