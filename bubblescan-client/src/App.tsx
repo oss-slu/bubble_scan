@@ -63,71 +63,100 @@ function App() {
               body {
                 font-family: Arial, sans-serif;
                 margin: 5px;
-                font-size: 8px;
+                font-size: 9px; /* Slightly increased base font size */
                 display: grid;
-                grid-template-columns: 3fr 1fr; /* 3 parts for questions, 1 part for the right column */
-                gap: 20px; /* Space between the question columns and the right column */
+                grid-template-columns: 1fr 3fr; /* 1 part for Key ID, 3 parts for questions */
+                grid-template-rows: auto 1fr; /* Auto height for Key ID, rest for questions */
+                gap: 20px;
                 height: 100vh;
+                position: relative;
               }
               .title {
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 20px; /* Slightly larger title */
                 text-align: center;
                 margin-bottom: 20px;
                 grid-column: 1 / span 2; /* Span the title across both columns */
               }
               .questions-container {
                 column-count: 4; /* Define number of columns for questions */
-                column-gap: 15px; /* Smaller gap between columns */
+                column-gap: 12px; /* Adjust the gap for a slightly larger layout */
                 column-fill: auto; /* Fill columns vertically first */
               }
               .question {
-                border: 1px solid #ddd;
-                padding: 2px;
-                border-radius: 3px;
-                text-align: center;
-                break-inside: avoid;
-                margin-bottom: 2px;
-                font-size: 7px;
-                width: 100%;
+                display: flex; /* Use flexbox for horizontal alignment */
+                align-items: center;
+                padding: 3px; /* Slightly larger padding */
+                margin-bottom: 2px; /* Adjust the margin for a compact but larger layout */
+                font-size: 9px; /* Slightly larger font size for questions */
                 box-sizing: border-box;
+                break-inside: avoid;
+              }
+              .question-label {
+                font-weight: bold;
+                margin-right: 4px; /* Adjust spacing for a slightly larger layout */
+                font-size: 10px; /* Slightly larger font size for question numbers */
               }
               .bubble {
-                width: 5px;
-                height: 5px;
+                width: 7px; /* Slightly larger bubbles */
+                height: 7px; /* Slightly larger bubbles */
                 border-radius: 50%;
                 border: 1px solid black;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 6px;
+                font-size: 6px; /* Slightly larger font inside bubbles */
                 text-align: center;
-                margin: 1px;
+                margin: 2px; /* Slightly larger margin between bubbles */
               }
               .options {
                 display: flex;
-                justify-content: center;
-                gap: 1px;
-                margin-top: 1px;
+                gap: 5px; /* Adjust gap for slightly larger bubbles and labels */
                 align-items: center;
               }
               .option-label {
-                margin-right: 1px;
+                margin-right: 3px; /* Slightly larger margin */
                 font-weight: bold;
-                font-size: 6px;
+                font-size: 9px; /* Slightly larger font size for option labels */
               }
+  
               .right-column {
                 border-left: 1px solid #ddd;
                 padding-left: 10px;
               }
-              .id-container {
-                margin-top: 20px;
+  
+              /* Positioning the student ID section next to the second row of questions */
+              .student-id-container {
+                position: absolute;
+                top: 30%; /* Moved higher by reducing the top value */
+                left: 52%; /* Push it a bit more to the right */
+                transform: translateX(-25%); /* Shift further toward the center */
+                z-index: 1000; /* Ensure it's on top */
+                border: 1px solid #ddd;
+                padding: 15px; /* Smaller padding */
+                background-color: white; /* Add background color to avoid text interference */
+                border-radius: 8px;
+                width: 200px; /* Slightly smaller width */
+                text-align: center;
               }
               .id-header {
                 font-weight: bold;
                 text-align: center;
-                font-size: 9px;
+                font-size: 12px; /* Slightly larger font for ID header */
                 margin-bottom: 10px;
+              }
+              .id-inputs {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 5px;
+              }
+              .id-input {
+                width: 16px; /* Increased width */
+                height: 22px; /* Increased height */
+                border: 1px solid black;
+                border-radius: 3px;
+                text-align: center;
+                font-size: 12px; /* Larger font size */
               }
               .id-row {
                 display: flex;
@@ -140,45 +169,84 @@ function App() {
                 align-items: center;
               }
               .id-bubble {
-                width: 10px; /* Increased size for the student ID bubbles */
-                height: 10px; /* Increased size for the student ID bubbles */
+                width: 12px; /* Slightly smaller size for the student ID bubbles */
+                height: 12px; /* Slightly smaller size for the student ID bubbles */
                 border-radius: 50%;
                 border: 1px solid black;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 6px; /* Keep the font size same for readability */
+                font-size: 7px; /* Slightly smaller font size inside bubbles */
                 text-align: center;
-                margin: 2px; /* Slightly larger margin */
+                margin: 3px; /* Slightly smaller margin */
               }
+  
+              /* Additional section below the student ID for Name, Date, and Subject */
+              .info-container {
+                display: flex;
+                flex-direction: column;
+                margin-top: 15px;
+                border: 1px solid green;
+                width: 100%; /* Match the width of the Student ID section */
+                padding: 5px;
+                text-align: left;
+              }
+              .info-item {
+                border-bottom: 1px solid green;
+                padding: 8px;
+                text-align: left;
+                font-size: 10px;
+                font-weight: bold;
+                background-color: white;
+                color: green;
+              }
+              .info-item:last-child {
+                border-bottom: none;
+              }
+  
               .key-id-container {
-                margin-top: 20px;
+                grid-column: 1; /* Place it in the first column */
+                grid-row: 1; /* Place it in the first row */
                 border: 1px solid #ddd;
                 padding: 10px;
                 text-align: center;
                 border-radius: 5px;
-                width: 120px;
-                margin-left: auto;
-                margin-right: auto;
+                width: 140px; /* Slightly larger width */
+                margin-bottom: 10px;
               }
               .key-id-header {
                 font-weight: bold;
-                font-size: 8px;
+                font-size: 10px; /* Slightly larger font for Key ID header */
                 margin-bottom: 5px;
               }
               .key-id-options {
                 display: flex;
                 justify-content: space-between;
-                gap: 5px;
+                gap: 5px; /* Adjust gap for slightly larger bubbles */
               }
             </style>
           </head>
           <body>
             <div class="title">${examTitle}</div> <!-- Title added here in the body -->
+  
+            <!-- KEY ID section -->
+            <div class="key-id-container">
+              <div class="key-id-header">KEY ID</div>
+              <div class="key-id-options">
+                ${['A', 'B', 'C', 'D'].map(option => `
+                  <div>
+                    <span class="option-label">${option}</span>
+                    <div class="bubble"></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+  
+            <!-- Questions section -->
             <div class="questions-container">
               ${Array.from({ length: numQuestions }, (_, i) => `
                 <div class="question">
-                  <strong>${i + 1}.</strong><br/>
+                  <span class="question-label">${i + 1}.</span> <!-- Question label on the left -->
                   <div class="options">
                     ${Array.from({ length: numOptions }, (__, j) => `
                       <span class="option-label">${String.fromCharCode(65 + j)}</span>
@@ -188,40 +256,42 @@ function App() {
                 </div>
               `).join('')}
             </div>
-            
-            <div class="right-column">
-              <h2>Student ID</h2>
-              <div class="id-container">
-                <div class="id-header">STUDENT ID NUMBER</div>
-                <div class="id-row">
-                  ${Array.from({ length: 10 }, (_, i) => `
-                    <div class="id-column">
-                      ${Array.from({ length: 10 }, (_, j) => `
-                        <div class="id-bubble">${j}</div> <!-- Number inside the bubble -->
-                      `).join('')}
-                    </div>
-                  `).join('')}
-                </div>
+  
+            <!-- Student ID section -->
+            <div class="student-id-container">
+              <div class="id-header">STUDENT ID NUMBER</div>
+              <!-- Add input boxes above bubbles -->
+              <div class="id-inputs">
+                ${Array.from({ length: 10 }).map(() => `
+                  <input type="text" class="id-input" maxlength="1" />
+                `).join('')}
               </div>
-              <!-- KEY ID section -->
-              <div class="key-id-container">
-                <div class="key-id-header">KEY ID</div>
-                <div class="key-id-options">
-                  ${['A', 'B', 'C', 'D'].map(option => `
-                    <div>
-                      <span class="option-label">${option}</span>
-                      <div class="bubble"></div>
-                    </div>
-                  `).join('')}
-                </div>
+              <div class="id-row">
+                ${Array.from({ length: 10 }, (_, i) => `
+                  <div class="id-column">
+                    ${Array.from({ length: 10 }, (_, j) => `
+                      <div class="id-bubble">${j}</div> <!-- Number inside the bubble -->
+                    `).join('')}
+                  </div>
+                `).join('')}
               </div>
+  
+              <!-- Additional vertical section for Name, Date, and Subject -->
+              <div class="info-container">
+                <div class="info-item">NAME:</div>
+                <div class="info-item">DATE:</div>
+                <div class="info-item">SUBJECT:</div>
+              </div>
+  
             </div>
+  
           </body>
         </html>
       `);
       sheetWindow.document.close();
     }
   };
+  
   
 
   return (
