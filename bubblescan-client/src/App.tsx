@@ -48,15 +48,9 @@ function App() {
 
   }
 
-  const handleGenerateSheet = (event: React.FormEvent) => {
-    event.preventDefault();
-  
-    // Open a new window for the custom sheet
-    const sheetWindow = window.open("", "_blank", "width=800,height=600");
-  
-    // Inject the custom sheet HTML into the new window
-    if (sheetWindow) {
-      sheetWindow.document.write(`
+  const generateExam = () => {
+    const examWindow = window.open("", "Exam", "width=800,height=600");
+    const examContent = `
         <html>
           <head>
             <title>${examTitle}</title> <!-- Exam title as the HTML page title -->
@@ -291,11 +285,38 @@ function App() {
   
           </body>
         </html>
-      `);
-      sheetWindow.document.close();
+      `;
+
+    examWindow?.document.write(examContent);
+    localStorage.setItem("storedExam", examContent); // Store the exam
+    examWindow?.document.close();
+  };
+
+  const loadStoredExam = () => {
+    const storedExam = localStorage.getItem("storedExam");
+    if (storedExam) {
+      const examWindow = window.open("", "Stored Exam", "width=800,height=600");
+      examWindow?.document.write(storedExam);
+      examWindow?.document.close();
+    } else {
+      alert("No stored exam found.");
     }
   };
-  
+
+  const printStoredExam = () => {
+    const storedExam = localStorage.getItem("storedExam");
+    if (storedExam) {
+      const examWindow = window.open("", "Stored Exam", "width=800,height=600");
+      examWindow?.document.write(storedExam);
+      examWindow?.document.close();
+      examWindow?.focus();
+      examWindow?.print(); // Automatically open the print dialog
+    } else {
+      alert("No stored exam found.");
+    }
+  };
+
+
   
 
   return (
@@ -305,7 +326,7 @@ function App() {
       <FileUploadComponent />
 
       <h1>You can create Custom Sheets here</h1>
-      <form onSubmit={handleGenerateSheet}>
+      <form onSubmit={generateExam}>
         <label>
           Exam Title: {/* New input field for the exam title */}
           <input
@@ -339,6 +360,7 @@ function App() {
         </label>
         <button type="submit">Generate Exam Sheet</button>
       </form>
+      <button onClick={printStoredExam}>Print Stored Exam</button>
     </div>
   );
 };
