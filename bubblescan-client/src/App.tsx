@@ -182,17 +182,25 @@ function App() {
                 flex-direction: column;
                 align-items: center;
               }
-              .id-bubble {
-                width: 12px; /* Slightly smaller size for the student ID bubbles */
-                height: 12px; /* Slightly smaller size for the student ID bubbles */
+              /* Original bubbles for the Key ID and Student ID sections */
+              .key-id-options div {
+                display: flex;
+                align-items: center; /* Align bubbles and letters vertically */
+                justify-content: center; /* Align bubbles and letters horizontally */
+              }
+
+              .key-id-container .bubble {
+                width: 7px; /* Standard size bubbles for these sections */
+                height: 7px;
                 border-radius: 50%;
                 border: 1px solid black;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 7px; /* Slightly smaller font size inside bubbles */
+                font-size: 6px;
                 text-align: center;
-                margin: 3px; /* Slightly smaller margin */
+                margin-left: 2px; /* Reduce space between letter and bubble */
+                margin-right: 0;  /* No extra space on the right side */
               }
   
               /* Additional section below the student ID for Name, Date, and Subject */
@@ -307,9 +315,6 @@ function App() {
     localStorage.setItem("storedExam", examContent); // Store the exam
     examWindow?.document.close();
 };
-
-
-
 
   const loadStoredExam = () => {
     const storedExam = localStorage.getItem("storedExam");
