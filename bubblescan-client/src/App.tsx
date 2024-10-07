@@ -67,6 +67,18 @@ function App() {
                 position: relative;
                 align-content: start;
               }
+              @media print {
+                /* Force content to fit into a single page */
+                body {
+                  margin: 0;
+                  height: 100vh; /* Ensures content fits within one view height */
+                  overflow: hidden; /* Prevents overflow from creating a second page */
+                }
+                /* Avoid page breaks inside elements */
+                .title, .questions-container, .student-id-container {
+                  page-break-inside: avoid;
+                }
+              }
               .title {
                 font-weight: bold;
                 font-size: 20px; /* Slightly larger title */
