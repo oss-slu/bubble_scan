@@ -107,17 +107,21 @@ function App() {
                 margin-right: 4px; /* Adjust spacing for a slightly larger layout */
                 font-size: 10px; /* Slightly larger font size for question numbers */
               }
-              .bubble {
-                width: 7px; /* Slightly larger bubbles */
-                height: 7px; /* Slightly larger bubbles */
+              /* Larger bubbles only for the questions section */
+              .questions-container .bubble {
+                width: 10px; /* Larger bubbles */
+                height: 10px; /* Larger bubbles */
                 border-radius: 50%;
                 border: 1px solid black;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 6px; /* Slightly larger font inside bubbles */
+                font-size: 7px; /* Slightly larger font inside bubbles */
                 text-align: center;
-                margin: 2px; /* Slightly larger margin between bubbles */
+                margin: 1px; /* Reduced margin between bubbles */
+              }
+              .questions-container .option-label {
+                margin-right: 2px; /* Reduced margin between label and bubble */
               }
               .options {
                 display: flex;
@@ -139,14 +143,14 @@ function App() {
               .student-id-container {
                 position: absolute;
                 top: 30%; /* Moved higher by reducing the top value */
-                left: 52%; /* Push it a bit more to the right */
+                left: 55%; /* Pushed further to the right */
                 transform: translateX(-25%); /* Shift further toward the center */
                 z-index: 1000; /* Ensure it's on top */
                 border: 1px solid #ddd;
-                padding: 15px; /* Smaller padding */
+                padding: 10px; /* Smaller padding */
                 background-color: white; /* Add background color to avoid text interference */
                 border-radius: 8px;
-                width: 200px; /* Slightly smaller width */
+                width: 180px; /* Smaller width */
                 text-align: center;
               }
               .id-header {
@@ -302,7 +306,10 @@ function App() {
     examWindow?.document.write(examContent);
     localStorage.setItem("storedExam", examContent); // Store the exam
     examWindow?.document.close();
-  };
+};
+
+
+
 
   const loadStoredExam = () => {
     const storedExam = localStorage.getItem("storedExam");
