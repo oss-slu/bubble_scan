@@ -11,6 +11,7 @@ function App() {
   const [numQuestions, setNumQuestions] = useState<number>(5);  
   const [numOptions, setNumOptions] = useState<number>(4); 
   const [examTitle, setExamTitle] = useState('');
+  
 
   // Fetch initial data from Flask
   useEffect(() => {
@@ -66,10 +67,11 @@ function App() {
                 font-size: 9px; /* Slightly increased base font size */
                 display: grid;
                 grid-template-columns: 1fr 3fr; /* 1 part for Key ID, 3 parts for questions */
-                grid-template-rows: auto 1fr; /* Auto height for Key ID, rest for questions */
+                grid-template-rows: auto auto; /* Auto height for Key ID, rest for questions */
                 gap: 20px;
                 height: 100vh;
                 position: relative;
+                align-content: start;
               }
               .title {
                 font-weight: bold;
@@ -79,10 +81,12 @@ function App() {
                 grid-column: 1 / span 2; /* Span the title across both columns */
               }
               .questions-container {
-                column-count: 4; /* Define number of columns for questions */
-                column-gap: 12px; /* Adjust the gap for a slightly larger layout */
-                column-fill: auto; /* Fill columns vertically first */
+                column-count: 4;
+                column-gap: 12px;
+                column-fill: auto;
+                min-height: 200px; /* Ensure there's enough vertical space */
               }
+
               .question {
                 display: flex; /* Use flexbox for horizontal alignment */
                 align-items: center;
