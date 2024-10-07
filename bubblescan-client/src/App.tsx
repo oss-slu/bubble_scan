@@ -142,8 +142,8 @@ function App() {
               /* Positioning the student ID section next to the second row of questions */
               .student-id-container {
                 position: absolute;
-                top: 30%; /* Moved higher by reducing the top value */
-                left: 55%; /* Pushed further to the right */
+                top: 15%; /* Adjusted to be slightly lower */
+                left: 55%; /* Keep the horizontal alignment the same */
                 transform: translateX(-25%); /* Shift further toward the center */
                 z-index: 1000; /* Ensure it's on top */
                 border: 1px solid #ddd;
