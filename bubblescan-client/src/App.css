@@ -132,16 +132,6 @@ body::before {
     padding: 5px;
   }
   
-  .bubble {
-    width: calc(15px + 0.5vw);
-    height: calc(15px + 0.5vw);
-    border-radius: 50%;
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
   .options {
     display: flex;
     justify-content: center;
