@@ -59,18 +59,19 @@ function CustomExamSheetComponent()	{
 				  }
 	
 				  .question {
-					display: flex; /* Use flexbox for horizontal alignment */
+					display: flex;
 					align-items: center;
-					padding: 3px; /* Slightly larger padding */
-					margin-bottom: 2px; /* Adjust the margin for a compact but larger layout */
-					font-size: 9px; /* Slightly larger font size for questions */
+					padding: 3px;
+					margin-bottom: 2px;
+					font-size: 9px;
 					box-sizing: border-box;
-					break-inside: avoid;
 				  }
 				  .question-label {
 					font-weight: bold;
-					margin-right: 4px; /* Adjust spacing for a slightly larger layout */
-					font-size: 10px; /* Slightly larger font size for question numbers */
+					margin-right: 4px;
+					font-size: 10px;
+					width: 20px; /* Fixed width to handle both one- and two-digit numbers */
+					text-align: right;
 				  }
 				  /* Larger bubbles only for the questions section */
 				  .questions-container .bubble {
@@ -90,11 +91,11 @@ function CustomExamSheetComponent()	{
 				  }
 				  .options {
 					display: flex;
-					gap: 5px; /* Adjust gap for slightly larger bubbles and labels */
+					gap: 2px; /* Adjust gap for slightly larger bubbles and labels */
 					align-items: center;
 				  }
 				  .option-label {
-					margin-right: 3px; /* Slightly larger margin */
+					margin-right: 1px; /* Slightly larger margin */
 					font-weight: bold;
 					font-size: 9px; /* Slightly larger font size for option labels */
 				  }
@@ -167,6 +168,19 @@ function CustomExamSheetComponent()	{
 					margin-left: 2px; /* Reduce space between letter and bubble */
 					margin-right: 0;  /* No extra space on the right side */
 				  }
+
+				  .id-bubble {
+					width: 12px; /* Adjust the size as needed */
+					height: 12px; /* Adjust the size as needed */
+					border-radius: 50%; /* Makes the bubble round */
+					border: 1px solid black; /* Defines the border for the bubble */
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 8px; /* Adjust the font size for the number inside */
+					text-align: center;
+					margin: 2px; /* Adjust spacing between the bubbles */
+					}
 	  
 				  /* Additional section below the student ID for Name, Date, and Subject */
 				  .info-container {
