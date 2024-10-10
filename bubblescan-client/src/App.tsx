@@ -49,7 +49,7 @@ function App() {
       <h4>You can upload your files below</h4>
       <FileUploadComponent />
 
-      <h1>You can create Custom Sheets here</h1>
+      
       <CustomExamSheetComponent />
     </div>
   );
