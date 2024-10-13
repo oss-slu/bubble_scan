@@ -7,8 +7,8 @@ import logging
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
-from .config import CORS_ORIGINS
-from .Scantron import Scantron95945  # Use relative import
+from config import CORS_ORIGINS
+from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
