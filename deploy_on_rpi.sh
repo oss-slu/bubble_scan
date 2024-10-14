@@ -12,4 +12,7 @@ cp -r dist/* ../ServerCode/application/static
 
 # start the app
 cd ../ServerCode
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 python application/AppServer.py
