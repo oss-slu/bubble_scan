@@ -1,0 +1,38 @@
+service: flask-api-lambda
+
+provider:
+  name: aws
+  runtime: python3.12.2
+  region: us-east-1
+
+functions:
+  api:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /{proxy+}  
+          method: any
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+  - serverless-offline
+
+custom:
+  wsgi:
+    app: Servercode.application.AppServer.app
+    packRequirements: true
+
+package:
+  exclude:
+    - ci-info/**
+    - isodate/**
+    - looseversion/**
+    - networkx/**
+    - prov/**
+    - python-dateutil/**
+    - pytz/**
+    - traits/**
+    - tzdata/**
+
+      
