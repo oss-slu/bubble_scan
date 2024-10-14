@@ -5,6 +5,7 @@ mkdir -p ServerCode/application/static
 
 # generate front-end files
 cd bubblescan-client
+npm install
 npm run build
 
 # copy front-end files to the application server
