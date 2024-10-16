@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-function CustomExamSheetComponent()	{
+function CustomExamSheetComponent() {
+  const [isFormVisible, setFormVisible] = useState(false);
+  const [numQuestions, setNumQuestions] = useState<number>(5);
+  const [numOptions, setNumOptions] = useState<number>(4);
+  const [examTitle, setExamTitle] = useState("");
 
-	const [isFormVisible, setFormVisible] = useState(false);
-	const [numQuestions, setNumQuestions] = useState<number>(5);  
-	const [numOptions, setNumOptions] = useState<number>(4); 
-	const [examTitle, setExamTitle] = useState('');
+  const handleButtonClick = () => {
+    setFormVisible(true);
+  };
 
-	const handleButtonClick = () => {
-
-		setFormVisible(true);
-	
-	  }
-	
-	  const generateExam = () => {
-		const examWindow = window.open("", "Exam", "width=800,height=600");
-		const examContent = `
+  const generateExam = () => {
+    const examWindow = window.open("", "Exam", "width=800,height=600");
+    const examContent = `
 			<html>
 			  <head>
 				<title>${examTitle}</title> <!-- Exam title as the HTML page title -->
@@ -53,10 +50,17 @@ function CustomExamSheetComponent()	{
 				  }
 				  .questions-container {
 					column-count: 4;
+					-webkit-column-count: 4;
 					column-gap: 12px;
+					-webkit-column-gap: 12px;
 					column-fill: auto;
+					-webkit-column-fill: auto;
 					min-height: 200px; /* Ensure there's enough vertical space */
 				  }
+				  .question:nth-child(35) {
+                    break-after: column;
+					-webkit-column-break-after: column;
+                  }	
 	
 				  .question {
 					display: flex;
@@ -75,8 +79,8 @@ function CustomExamSheetComponent()	{
 				  }
 				  /* Larger bubbles only for the questions section */
 				  .questions-container .bubble {
-					width: 10px; /* Larger bubbles */
-					height: 10px; /* Larger bubbles */
+					width: 13px; /* Larger bubbles */
+					height: 13px; /* Larger bubbles */
 					border-radius: 50%;
 					border: 1px solid black;
 					display: inline-flex;
@@ -108,8 +112,8 @@ function CustomExamSheetComponent()	{
 				  /* Positioning the student ID section next to the second row of questions */
 				  .student-id-container {
 					position: absolute;
-					top: 15%; /* Adjusted to be slightly lower */
-					left: 55%; /* Keep the horizontal alignment the same */
+					top: 13%; /* Adjusted to be slightly lower */
+					left: 56%; /* Keep the horizontal alignment the same */
 					transform: translateX(-25%); /* Shift further toward the center */
 					z-index: 1000; /* Ensure it's on top */
 					border: 1px solid #ddd;
@@ -234,28 +238,40 @@ function CustomExamSheetComponent()	{
 				<div class="key-id-container">
 				  <div class="key-id-header">KEY ID</div>
 				  <div class="key-id-options">
-					${['A', 'B', 'C', 'D'].map(option => `
+					${["A", "B", "C", "D"]
+            .map(
+              (option) => `
 					  <div>
 						<span class="option-label">${option}</span>
 						<div class="bubble"></div>
 					  </div>
-					`).join('')}
+					`
+            )
+            .join("")}
 				  </div>
 				</div>
 	  
 				<!-- Questions section -->
 				<div class="questions-container">
-				  ${Array.from({ length: numQuestions }, (_, i) => `
+				  ${Array.from(
+            { length: numQuestions },
+            (_, i) => `
 					<div class="question">
-					  <span class="question-label">${i + 1}.</span> <!-- Question label on the left -->
+					  <span class="question-label">${
+              i + 1
+            }.</span> <!-- Question label on the left -->
 					  <div class="options">
-						${Array.from({ length: numOptions }, (__, j) => `
+						${Array.from(
+              { length: numOptions },
+              (__, j) => `
 						  <span class="option-label">${String.fromCharCode(65 + j)}</span>
 						  <div class="bubble"></div>
-						`).join('')}
+						`
+            ).join("")}
 					  </div>
 					</div>
-				  `).join('')}
+				  `
+          ).join("")}
 				</div>
 	  
 				<!-- Student ID section -->
@@ -263,18 +279,28 @@ function CustomExamSheetComponent()	{
 				  <div class="id-header">STUDENT ID NUMBER</div>
 				  <!-- Add input boxes above bubbles -->
 				  <div class="id-inputs">
-					${Array.from({ length: 10 }).map(() => `
+					${Array.from({ length: 10 })
+            .map(
+              () => `
 					  <input type="text" class="id-input" maxlength="1" />
-					`).join('')}
+					`
+            )
+            .join("")}
 				  </div>
 				  <div class="id-row">
-					${Array.from({ length: 10 }, (_, i) => `
+					${Array.from(
+            { length: 10 },
+            (_, i) => `
 					  <div class="id-column">
-						${Array.from({ length: 10 }, (_, j) => `
+						${Array.from(
+              { length: 10 },
+              (_, j) => `
 						  <div class="id-bubble">${j}</div> <!-- Number inside the bubble -->
-						`).join('')}
+						`
+            ).join("")}
 					  </div>
-					`).join('')}
+					`
+          ).join("")}
 				  </div>
 	  
 				  <!-- Additional vertical section for Name, Date, and Subject -->
@@ -289,40 +315,39 @@ function CustomExamSheetComponent()	{
 			  </body>
 			</html>
 		  `;
-	
-		examWindow?.document.write(examContent);
-		localStorage.setItem("storedExam", examContent); // Store the exam
-		examWindow?.document.close();
-	};
-	
-	  const loadStoredExam = () => {
-		const storedExam = localStorage.getItem("storedExam");
-		if (storedExam) {
-		  const examWindow = window.open("", "Stored Exam", "width=800,height=600");
-		  examWindow?.document.write(storedExam);
-		  examWindow?.document.close();
-		} else {
-		  alert("No stored exam found.");
-		}
-	  };
-	
-	  const printStoredExam = () => {
-		const storedExam = localStorage.getItem("storedExam");
-		if (storedExam) {
-		  const examWindow = window.open("", "Stored Exam", "width=800,height=600");
-		  examWindow?.document.write(storedExam);
-		  examWindow?.document.close();
-		  examWindow?.focus();
-		  examWindow?.print(); // Automatically open the print dialog
-		} else {
-		  alert("No stored exam found.");
-		}
-	  };
-	
-	
-	  return (
-		<div>
-		<h1>You can create Custom Sheets here</h1>
+
+    examWindow?.document.write(examContent);
+    localStorage.setItem("storedExam", examContent); // Store the exam
+    examWindow?.document.close();
+  };
+
+  const loadStoredExam = () => {
+    const storedExam = localStorage.getItem("storedExam");
+    if (storedExam) {
+      const examWindow = window.open("", "Stored Exam", "width=800,height=600");
+      examWindow?.document.write(storedExam);
+      examWindow?.document.close();
+    } else {
+      alert("No stored exam found.");
+    }
+  };
+
+  const printStoredExam = () => {
+    const storedExam = localStorage.getItem("storedExam");
+    if (storedExam) {
+      const examWindow = window.open("", "Stored Exam", "width=800,height=600");
+      examWindow?.document.write(storedExam);
+      examWindow?.document.close();
+      examWindow?.focus();
+      examWindow?.print(); // Automatically open the print dialog
+    } else {
+      alert("No stored exam found.");
+    }
+  };
+
+  return (
+    <div>
+      <h1>You can create Custom Sheets here</h1>
       <form onSubmit={generateExam}>
         <label>
           Exam Title: {/* New input field for the exam title */}
@@ -359,12 +384,7 @@ function CustomExamSheetComponent()	{
       </form>
       <button onClick={printStoredExam}>Print Stored Exam</button>
     </div>
-	  );
-
-
+  );
 }
 
-  
-  export default CustomExamSheetComponent;
-  
-
+export default CustomExamSheetComponent;
