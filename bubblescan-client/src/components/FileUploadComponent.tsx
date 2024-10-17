@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
-  const [sheetType, setSheetType] = useState<string>("scantron"); // Default to Scantron
+  const [sheetType, setSheetType] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [downloadLink, setDownloadLink] = useState<string>("");
   const [fileId, setFileId] = useState<string>("");
@@ -31,6 +31,11 @@ function FileUploadComponent() {
     event.preventDefault();
     if (!file) {
       alert("Please select a PDF or image file before submitting.");
+      return;
+    }
+
+    if (sheetType === "") {
+      alert("Please select a sheet type.");
       return;
     }
 
@@ -71,6 +76,7 @@ function FileUploadComponent() {
         <div>
           <label htmlFor="sheetType">Select Sheet Type:</label>
           <select id="sheetType" value={sheetType} onChange={(e) => setSheetType(e.target.value)}>
+            <option value="">-----</option> {/* Placeholder option */}
             <option value="scantron">Scantron</option>
             <option value="custom">Custom Sheet</option>
           </select>
@@ -87,6 +93,7 @@ function FileUploadComponent() {
           type="button"
           onClick={() => {
             setFile(null);
+            setSheetType("");  // Reset the selected option to placeholder
             setSuccessMessage("");
             setDownloadLink("");
             setFileId("");
