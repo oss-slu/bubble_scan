@@ -116,19 +116,25 @@ class AppServer:
     def file_upload(self):
         """
         Handles file upload requests, processes PDF files, and returns CSV data.
-
-        Returns:
-            dict: JSON data indicating the status of the file upload and processing.
+        Allows the user to specify whether the sheet is a standard Scantron or a custom sheet.
         """
-        if 'file' not in request.files:
-            return jsonify({"status": "error", "message": "No file part in the request"})
+        if 'file' not in request.files or 'sheetType' not in request.form:
+            return jsonify({"status": "error", "message": "No file or sheet type in the request"})
 
         file = request.files['file']
+        sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
             return jsonify({"status": "error", "message": "No selected file"})
 
         if file and file.filename.lower().endswith('.pdf'):
+            if sheet_type == "custom":
+                # If it's a custom sheet, return "Not yet supported"
+                return jsonify({
+                    "status": "custom_sheet",
+                    "message": "Custom sheets are not yet supported"
+                })
+
             try:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(self.uploads_dir, filename)
