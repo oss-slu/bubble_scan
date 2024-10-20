@@ -3,31 +3,110 @@ import React, { useState } from "react";
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [downloadLink, setDownloadLink] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
+  // Handle file input change
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-    if (selectedFile) {
+    if (
+      selectedFile &&
+      (selectedFile.type === "application/pdf" ||
+        selectedFile.type.startsWith("image/"))
+    ) {
+      // Allow PDF and image formats (JPEG, PNG, etc.)
       setFile(selectedFile);
       setSuccessMessage("");
+      setDownloadLink("");
+    } else {
+      alert("Please select a valid PDF or image file.");
+      if (event.target && event.target.value) {
+        event.target.value = ""; // Reset file input
+      }
     }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!file) {
-      alert("Please select a file before submitting.");
+      alert("Please select a PDF or image file before submitting.");
       return;
     }
 
-    // Simulate file upload
-    setSuccessMessage("File uploaded successfully!");
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:5001/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.status === "success") {
+          setSuccessMessage("File uploaded successfully!");
+          if (result.file_id) {
+            setDownloadLink(
+              `http://localhost:5001/api/download_csv/${result.file_id}`
+            );
+          } else {
+            setSuccessMessage("Error: CSV filename not found in the response.");
+          }
+        } else {
+          setSuccessMessage("Error: " + result.message);
+        }
+      } else {
+        setSuccessMessage("Upload failed.");
+      }
+    } catch (error) {
+      console.error("Error during file upload:", error);
+      setSuccessMessage("Error during file upload.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clearForm = () => {
     setFile(null);
     setSuccessMessage("");
+    setDownloadLink("");
     const fileInput = document.getElementById("file-input") as HTMLInputElement;
     if (fileInput) fileInput.value = "";
+  };
+
+  const handleDownloadCSV = async () => {
+    setLoading(true);
+    try {
+      const csvDownloadResponse = await fetch(downloadLink);
+
+      if (csvDownloadResponse.ok) {
+        const blob = await csvDownloadResponse.blob();
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const currentDate = new Date();
+        const dateString = currentDate.toISOString().split("T")[0];
+        const timeString = currentDate
+          .toTimeString()
+          .split(" ")[0]
+          .replace(/:/g, "-");
+        const filename = `data_${dateString}_${timeString}.csv`;
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      } else {
+        console.error("Error: Failed to download CSV");
+      }
+    } catch (error) {
+      console.error("Error during CSV download:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,8 +115,8 @@ function FileUploadComponent() {
         <input
           type="file"
           id="file-input"
+          accept=".pdf, image/*" // Accept both PDFs and images
           onChange={handleFileChange}
-          accept=".pdf, image/*" // Accept PDFs and images
         />
         <div className="button-group">
           <button type="submit">Upload</button>
@@ -46,7 +125,11 @@ function FileUploadComponent() {
           </button>
         </div>
       </form>
+      {loading && <p>Loading...</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
+      {downloadLink && (
+        <button onClick={handleDownloadCSV}>Download CSV</button>
+      )}
     </div>
   );
 }
