@@ -120,7 +120,7 @@ function CustomExamSheetComponent() {
 					padding: 10px; /* Smaller padding */
 					background-color: white; /* Add background color to avoid text interference */
 					border-radius: 8px;
-					width: 180px; /* Smaller width */
+					width: 200px; /* Smaller width */
 					text-align: center;
 				  }
 				  .id-header {
@@ -192,7 +192,7 @@ function CustomExamSheetComponent() {
 					flex-direction: column;
 					margin-top: 15px;
 					border: 1px solid green;
-					width: 100%; /* Match the width of the Student ID section */
+					width: 93%; /* Match the width of the Student ID section */
 					padding: 5px;
 					text-align: left;
 				  }
