@@ -1,18 +1,10 @@
-.home-page {
-  text-align: center;
-  padding-top: 100px;
-}
-
-.scan-button {
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.scan-page {
-  text-align: center;
-  padding-top: 50px;
+  color: #333;
 }
 
 nav ul {
@@ -20,6 +12,8 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: center;
+  background-color: #333;
+  padding: 20px;
 }
 
 nav ul li {
@@ -28,5 +22,136 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: black;
+  color: white;
+  font-size: 18px;
 }
+
+nav ul li a:hover {
+  color: #f0f0f0;
+  background-color: #555;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+/* Home Page Styles */
+.home-page {
+  text-align: center;
+  padding-top: 100px;
+  background-color: #f5f1eb;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+/* Button Group to align buttons horizontally */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Adds space between the buttons */
+}
+
+/* Scan and Custom Sheets Button Styles */
+.scan-button,
+.custom-sheets-button {
+  background-color: #333;
+  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.scan-button:hover,
+.custom-sheets-button:hover {
+  background-color: #555;
+}
+
+
+/* Scan and Custom Sheets Page Styles */
+.scan-page,
+.custom-sheets-page {
+  text-align: center;
+  padding-top: 50px;
+  background-color: #f5f1eb;
+  height: 100vh;
+}
+
+.scan-page h1,
+.custom-sheets-page h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.scan-page p,
+.custom-sheets-page p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* File Upload Styles */
+.file-upload-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Same shadow as before */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload-container input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Style buttons similar to the home page */
+.file-upload-container button {
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-container button:hover {
+  background-color: #555;
+}
+
+.file-upload-container .success-message {
+  color: green;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Align buttons below the file input */
+.button-group {
+  display: flex;
+  gap: 20px; /* Spacing between buttons */
+  flex-direction: row;
+  justify-content: center;
+}
+
