@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from "react";
 
+/*
+	This component generates a custom exam sheet based on user input.
+	It needs to have two columns of questions with bubbles for answers.
+	The bubbles for answers are in the form of A, B, C, D, etc. The letter
+	needs to be located inside the bubble.
+	The questions should be numbered.
+	The two colunns of questions should have the same number of questions - 
+	totalling to the number of questions specified by the user.
+
+	The exam sheet should have the following title at the top: 
+	Bubble scan exam sheet <Number of questions> - <number of answer options>
+	Where number of questions and number of answer options are as specified by the user.
+
+	The form must have another section for the student ID number with 10 numbers
+	At the bottom of that section, the form must provide space for the student name, date, and subject.
+*/
+
 function CustomExamSheetComponent() {
   const [isFormVisible, setFormVisible] = useState(false);
   const [numQuestions, setNumQuestions] = useState<number>(5);
@@ -12,10 +29,10 @@ function CustomExamSheetComponent() {
 
   const generateExam = () => {
     const examWindow = window.open("", "Exam", "width=800,height=600");
-    const examContent = `
+	const examContent = `
 			<html>
 			  <head>
-				<title>${examTitle}</title> <!-- Exam title as the HTML page title -->
+				<title>Bubble Scan Exam Sheet ${numQuestions}-${numOptions}</title> <!-- Exam title as the HTML page title -->
 				<style>
 				  body {
 					font-family: Arial, sans-serif;
@@ -49,19 +66,10 @@ function CustomExamSheetComponent() {
 					grid-column: 1 / span 2; /* Span the title across both columns */
 				  }
 				  .questions-container {
-					column-count: 4;
-					-webkit-column-count: 4;
-					column-gap: 12px;
-					-webkit-column-gap: 12px;
-					column-fill: auto;
-					-webkit-column-fill: auto;
-					min-height: 200px; /* Ensure there's enough vertical space */
+					display: grid;
+					grid-template-columns: 1fr 1fr; /* Two equal columns */
+					gap: 12px;
 				  }
-				  .question:nth-child(35) {
-                    break-after: column;
-					-webkit-column-break-after: column;
-                  }	
-	
 				  .question {
 					display: flex;
 					align-items: center;
@@ -233,45 +241,65 @@ function CustomExamSheetComponent() {
 			  </head>
 			  <body>
 				<div class="title">${examTitle}</div> <!-- Title added here in the body -->
-	  
-				<!-- KEY ID section -->
+			
+				<!-- KEY ID section 
 				<div class="key-id-container">
 				  <div class="key-id-header">KEY ID</div>
 				  <div class="key-id-options">
 					${["A", "B", "C", "D"]
-            .map(
-              (option) => `
+			.map(
+			  (option) => `
 					  <div>
 						<span class="option-label">${option}</span>
 						<div class="bubble"></div>
 					  </div>
 					`
-            )
-            .join("")}
+			)
+			.join("")} 
 				  </div>
 				</div>
-	  
+				-->
+
 				<!-- Questions section -->
 				<div class="questions-container">
-				  ${Array.from(
-            { length: numQuestions },
-            (_, i) => `
-					<div class="question">
-					  <span class="question-label">${
-              i + 1
-            }.</span> <!-- Question label on the left -->
-					  <div class="options">
-						${Array.from(
-              { length: numOptions },
-              (__, j) => `
-						  <span class="option-label">${String.fromCharCode(65 + j)}</span>
-						  <div class="bubble"></div>
-						`
-            ).join("")}
+				  <div>
+					${Array.from(
+			{ length: Math.ceil(numQuestions / 2) },
+			(_, i) => `
+					  <div class="question">
+						<span class="question-label">${i + 1}.</span> <!-- Question label on the left -->
+						<div class="options">
+						  ${Array.from(
+			  { length: numOptions },
+			  (__, j) => `
+							<span class="option-label">${String.fromCharCode(65 + j)}</span>
+							<div class="bubble"></div>
+						  `
+			).join("")}
+						</div>
 					  </div>
-					</div>
-				  `
-          ).join("")}
+					`
+		  ).join("")}
+				  </div>
+				  <div>
+					${Array.from(
+			{ length: Math.floor(numQuestions / 2) },
+			(_, i) => `
+					  <div class="question">
+						<span class="question-label">${Math.ceil(numQuestions / 2) + i + 1}.</span> <!-- Question label on the left -->
+						<div class="options">
+						  ${Array.from(
+			  { length: numOptions },
+			  (__, j) => `
+							<span class="option-label">${String.fromCharCode(65 + j)}</span>
+							<div class="bubble"></div>
+						  `
+			).join("")}
+						</div>
+					  </div>
+					`
+		  ).join("")}
+				  </div>
 				</div>
 	  
 				<!-- Student ID section -->
@@ -280,27 +308,27 @@ function CustomExamSheetComponent() {
 				  <!-- Add input boxes above bubbles -->
 				  <div class="id-inputs">
 					${Array.from({ length: 10 })
-            .map(
-              () => `
+			.map(
+			  () => `
 					  <input type="text" class="id-input" maxlength="1" />
 					`
-            )
-            .join("")}
+			)
+			.join("")}
 				  </div>
 				  <div class="id-row">
 					${Array.from(
-            { length: 10 },
-            (_, i) => `
+			{ length: 10 },
+			(_, i) => `
 					  <div class="id-column">
 						${Array.from(
-              { length: 10 },
-              (_, j) => `
+			  { length: 10 },
+			  (_, j) => `
 						  <div class="id-bubble">${j}</div> <!-- Number inside the bubble -->
 						`
-            ).join("")}
+			).join("")}
 					  </div>
 					`
-          ).join("")}
+		  ).join("")}
 				  </div>
 	  
 				  <!-- Additional vertical section for Name, Date, and Subject -->
