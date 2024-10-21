@@ -1,96 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
+/* Global Styles */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-image: url('./assets/img2.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-  }
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom right, #FF7A00, #FF511C, #FF1C4A);
-    opacity: 0.4;
-    z-index: -1;
-    backdrop-filter: blur(5px);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
 }
-  
-  .welcome {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Nunito', sans-serif;
-    gap: 10px;
-    max-width: 600px;
-    width: 100%;
-    background: white;
-    padding: 2rem;
-    opacity: 0.8;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
 
-  h1 {
-    font-weight: 1200;
-  }
+/* Updated Navbar Styles - Right Aligned */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end; /* Right-align the navbar */
+  background-color: white;
+  padding: 20px;
+}
 
-  input[type="text"], input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box; 
-  }
-  
-  input[type="submit"], button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin: 10px 0;
-  }
-  
-  input[type="submit"]:hover, button:hover {
-    background-color: #45a049;
-  }
-  
-  .FileUploadComponent {
-    margin-bottom: 20px;
-  }
+nav ul li {
+  margin: 0 15px;
+}
 
-  .spinner {
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-top: 3px solid #000;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 0.6s linear infinite;
-  }
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+nav ul li a:hover {
+  color: #f0f0f0;
+  background-color: #555;
+  padding: 5px;
+  border-radius: 8px;
+}
 
-  /* General Styles */
-  
+/* Home Page Styles */
+.home-page {
+  text-align: center;
+  padding-top: 100px;
+  background-color: #f3f3f3;
+  height: 100vh;
+}
+
+.home-page h1 {
+  font-size: 65px; 
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
+p {
+  font-size: 35px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+/* Button Group to align buttons horizontally */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Adds space between the buttons */
+}
+
+/* Updated Scan and Custom Sheets Button Styles */
+.scan-button,
+.custom-sheets-button {
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Ensure buttons look like links */
+}
+
+.scan-button:hover,
+.custom-sheets-button:hover {
+  background-color: #555;
+}
+
+/* Scan and Custom Sheets Page Styles */
+.scan-page,
+.custom-sheets-page {
+  text-align: center;
+  padding-top: 50px;
+  background-color: #f3f3f3;
+  height: 100vh;
+}
+
+.scan-page h1,
+.custom-sheets-page h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.scan-page p,
+.custom-sheets-page p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* File Upload Styles */
+.file-upload-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload-container input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Style buttons similar to the home page */
+.file-upload-container button {
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-container button:hover {
+  background-color: #555;
+}
+
+/* Align buttons below the file input */
+.button-group {
+  display: flex;
+  gap: 20px; /* Spacing between buttons */
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* About Us Page Styles */
+.about-page {
+  text-align: center;
+  padding: 50px;
+  background-color: #f3f3f3;
+  height: 100vh;
+}
+
+.about-page h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.about-page p {
+  font-size: 18px;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
