@@ -272,8 +272,7 @@ function CustomExamSheetComponent() {
 						  ${Array.from(
 			  { length: numOptions },
 			  (__, j) => `
-							<span class="option-label">${String.fromCharCode(65 + j)}</span>
-							<div class="bubble"></div>
+							<div class="bubble">${String.fromCharCode(65 + j)}</div>
 						  `
 			).join("")}
 						</div>
@@ -291,8 +290,7 @@ function CustomExamSheetComponent() {
 						  ${Array.from(
 			  { length: numOptions },
 			  (__, j) => `
-							<span class="option-label">${String.fromCharCode(65 + j)}</span>
-							<div class="bubble"></div>
+							<div class="bubble">${String.fromCharCode(65 + j)}</div>
 						  `
 			).join("")}
 						</div>
