@@ -4,6 +4,7 @@ function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [downloadLink, setDownloadLink] = useState<string>("");
+  const [fileId, setFileId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   // Handle file input change
@@ -48,9 +49,11 @@ function FileUploadComponent() {
         if (result.status === "success") {
           setSuccessMessage("File uploaded successfully!");
           if (result.file_id) {
+            console.log("File ID:", result.file_id);
             setDownloadLink(
               `http://localhost:5001/api/download_csv/${result.file_id}`
             );
+            setFileId(result.file_id);
           } else {
             setSuccessMessage("Error: CSV filename not found in the response.");
           }
@@ -66,14 +69,6 @@ function FileUploadComponent() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const clearForm = () => {
-    setFile(null);
-    setSuccessMessage("");
-    setDownloadLink("");
-    const fileInput = document.getElementById("file-input") as HTMLInputElement;
-    if (fileInput) fileInput.value = "";
   };
 
   const handleDownloadCSV = async () => {
@@ -99,6 +94,27 @@ function FileUploadComponent() {
         a.click();
         a.remove();
         window.URL.revokeObjectURL(url);
+
+        // Send acknowledgment to Flask
+
+        const acknowledgmentResponse = await fetch(
+          `http://localhost:5001/api/csv_acknowledgment/${fileId}`,
+          {
+            method: "POST",
+          }
+        );
+
+        if (acknowledgmentResponse.ok) {
+          const acknowledgmentResult = await acknowledgmentResponse.json();
+          if (acknowledgmentResult.status === "success") {
+            console.log("CSV acknowledgment received from Flask");
+            alert("CSV file downloaded successfully!");
+          } else {
+            console.error("Error: ", acknowledgmentResult.message);
+          }
+        } else {
+          console.error("Error: Failed to send CSV acknowledgment to Flask");
+        }
       } else {
         console.error("Error: Failed to download CSV");
       }
@@ -107,6 +123,15 @@ function FileUploadComponent() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const clearForm = () => {
+    setFile(null);
+    setSuccessMessage("");
+    setDownloadLink("");
+    setFileId("");
+    const fileInput = document.getElementById("file-input") as HTMLInputElement;
+    if (fileInput) fileInput.value = "";
   };
 
   return (
@@ -118,17 +143,24 @@ function FileUploadComponent() {
           accept=".pdf, image/*" // Accept both PDFs and images
           onChange={handleFileChange}
         />
-        <div className="button-group">
-          <button type="submit">Upload</button>
-          <button type="button" onClick={clearForm}>
-            Clear
-          </button>
-        </div>
+        <button type="submit">Upload</button>
+        <button
+          type="button"
+          onClick={clearForm}
+          style={{ marginLeft: "10px" }}
+        >
+          Clear
+        </button>
       </form>
-      {loading && <p>Loading...</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      {downloadLink && (
-        <button onClick={handleDownloadCSV}>Download CSV</button>
+      {loading ? (
+        <div className="spinner"></div> // Show loading spinner when loading
+      ) : (
+        <>
+          {successMessage && <p>{successMessage}</p>}
+          {downloadLink && (
+            <button onClick={handleDownloadCSV}>Download CSV</button>
+          )}
+        </>
       )}
     </div>
   );

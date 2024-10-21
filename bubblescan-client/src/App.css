@@ -7,12 +7,13 @@ body {
   color: #333;
 }
 
+/* Updated Navbar Styles - Right Aligned */
 nav ul {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: center;
-  background-color: #333;
+  justify-content: flex-end; /* Right-align the navbar */
+  background-color: white;
   padding: 20px;
 }
 
@@ -22,7 +23,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: white;
+  color: black;
   font-size: 18px;
 }
 
@@ -37,19 +38,20 @@ nav ul li a:hover {
 .home-page {
   text-align: center;
   padding-top: 100px;
-  background-color: #f5f1eb;
+  background-color: #f3f3f3;
   height: 100vh;
 }
 
-h1 {
-  font-size: 48px;
+.home-page h1 {
+  font-size: 65px; 
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
 }
 
+
 p {
-  font-size: 18px;
+  font-size: 35px;
   margin-bottom: 30px;
   color: #666;
 }
@@ -61,17 +63,18 @@ p {
   gap: 20px; /* Adds space between the buttons */
 }
 
-/* Scan and Custom Sheets Button Styles */
+/* Updated Scan and Custom Sheets Button Styles */
 .scan-button,
 .custom-sheets-button {
   background-color: #333;
   color: white;
-  padding: 15px 30px;
+  padding: 10px 15px;
   font-size: 20px;
   cursor: pointer;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   transition: background-color 0.3s ease;
+  text-decoration: none; /* Ensure buttons look like links */
 }
 
 .scan-button:hover,
@@ -79,13 +82,12 @@ p {
   background-color: #555;
 }
 
-
 /* Scan and Custom Sheets Page Styles */
 .scan-page,
 .custom-sheets-page {
   text-align: center;
   padding-top: 50px;
-  background-color: #f5f1eb;
+  background-color: #f3f3f3;
   height: 100vh;
 }
 
@@ -109,7 +111,7 @@ p {
   padding: 30px;
   max-width: 500px;
   margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Same shadow as before */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,12 +143,6 @@ p {
   background-color: #555;
 }
 
-.file-upload-container .success-message {
-  color: green;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
 /* Align buttons below the file input */
 .button-group {
   display: flex;
@@ -155,3 +151,34 @@ p {
   justify-content: center;
 }
 
+/* About Us Page Styles */
+.about-page {
+  text-align: center;
+  padding: 50px;
+  background-color: #f3f3f3;
+  height: 100vh;
+}
+
+.about-page h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.about-page p {
+  font-size: 18px;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
