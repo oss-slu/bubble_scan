@@ -60,7 +60,7 @@ function CustomExamSheetComponent() {
 				  }
 				  .title {
 					font-weight: bold;
-					font-size: 20px; /* Slightly larger title */
+					font-size: 18px; /* Slightly larger title */
 					text-align: center;
 					margin-bottom: 20px;
 					grid-column: 1 / span 2; /* Span the title across both columns */
@@ -68,7 +68,7 @@ function CustomExamSheetComponent() {
 				  .questions-container {
 					display: grid;
 					grid-template-columns: 1fr 1fr; /* Two equal columns */
-					gap: 12px;
+					gap: 30px;
 				  }
 				  .question {
 					display: flex;
@@ -87,14 +87,14 @@ function CustomExamSheetComponent() {
 				  }
 				  /* Larger bubbles only for the questions section */
 				  .questions-container .bubble {
-					width: 13px; /* Larger bubbles */
+					width: 16px; /* Larger bubbles */
 					height: 13px; /* Larger bubbles */
 					border-radius: 50%;
 					border: 1px solid black;
 					display: inline-flex;
 					align-items: center;
 					justify-content: center;
-					font-size: 7px; /* Slightly larger font inside bubbles */
+					font-size: 10px; /* Slightly larger font inside bubbles */
 					text-align: center;
 					margin: 1px; /* Reduced margin between bubbles */
 				  }
@@ -240,7 +240,7 @@ function CustomExamSheetComponent() {
 				</style>
 			  </head>
 			  <body>
-				<div class="title">${examTitle}</div> <!-- Title added here in the body -->
+				<div class="title">Bubble Scan Exam Sheet ${numQuestions}-${numOptions}</div> <!-- Title added here in the body -->
 			
 				<!-- KEY ID section 
 				<div class="key-id-container">
