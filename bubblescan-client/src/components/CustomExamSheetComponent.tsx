@@ -117,18 +117,15 @@ function CustomExamSheetComponent() {
 					padding-left: 10px;
 				  }
 	  
-				  /* Positioning the student ID section next to the second row of questions */
+				  /* Positioning the student ID section under the questions container */
 				  .student-id-container {
-					position: absolute;
-					top: 13%; /* Adjusted to be slightly lower */
-					left: 56%; /* Keep the horizontal alignment the same */
-					transform: translateX(-25%); /* Shift further toward the center */
-					z-index: 1000; /* Ensure it's on top */
+					grid-column: 1 / span 2; /* Span across both columns */
+					width: 40%; /* Occupy 40% of the page width */
+					
 					border: 1px solid #ddd;
 					padding: 10px; /* Smaller padding */
 					background-color: white; /* Add background color to avoid text interference */
 					border-radius: 8px;
-					width: 200px; /* Smaller width */
 					text-align: center;
 				  }
 				  .id-header {
@@ -328,15 +325,14 @@ function CustomExamSheetComponent() {
 					`
 		  ).join("")}
 				  </div>
-	  
+				</div>
 				  <!-- Additional vertical section for Name, Date, and Subject -->
 				  <div class="info-container">
 					<div class="info-item">NAME:</div>
 					<div class="info-item">DATE:</div>
 					<div class="info-item">SUBJECT:</div>
 				  </div>
-	  
-				</div>
+	
 	  
 			  </body>
 			</html>
