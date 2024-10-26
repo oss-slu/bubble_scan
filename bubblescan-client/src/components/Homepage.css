@@ -1,0 +1,146 @@
+/* General Layout */
+.homepage {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(rgba(31, 46, 53, 0.3), rgba(31, 46, 53, 0.3)), url('/path-to-your-background-image.jpg') no-repeat center center fixed;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centers children horizontally */
+    justify-content: center; /* Centers children vertically */
+    min-height: 100vh;
+  }
+  
+  .welcome-section {
+    padding: 4rem 2rem 2rem;
+    display: block;
+    border-radius: 8px;
+    max-width: 80%;
+    text-align: center;
+  }
+  
+  .typing-effect {
+    font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #433d40;
+    text-align: center;
+    padding: 1rem 0;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .typing-effect span {
+    font-size: 5.5rem;
+    display: block;
+    letter-spacing: 3.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing-effect 1s steps(20, end), blink-caret 1s step-end infinite;
+  }
+  
+  /* Typing Effect Animation */
+  @keyframes typing-effect {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  /* 
+  /* Blinking Cursor Animation */
+  /* @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+  } */ */
+  
+  
+  
+  .description {
+    font-size: 1.2rem;
+    color: #ddd;
+    max-width: 800px;
+    margin: 1rem auto;
+  }
+  
+  /* About Section in the Middle */
+  .about-section {
+    background: linear-gradient(rgba(53, 45, 31, 0.5), rgba(53, 43, 31, 0.5)), url('/path-to-your-background-image.jpg') no-repeat center center fixed; /* Cool, professional background */;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 1.5rem; /* Adds space above and below */
+    border-radius: 8px;
+  }
+  
+  .about-section h2 {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+  }
+  
+  .about-section p {
+    font-size: 1rem;
+    color: #ddd;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Features Section at the Bottom */
+  .features-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
+    max-width: 1200px;
+    margin: 2rem auto; /* Adds space above */
+  }
+  
+  .feature-box {
+    background: linear-gradient(rgba(53, 45, 31, 0.5), rgba(53, 43, 31, 0.5)), url('/path-to-your-background-image.jpg') no-repeat center center fixed; /* Cool, professional background */;
+   
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 300px;
+    flex: 1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-box p {
+    font-size: 1rem;
+    color: #ddd;
+  }
+  
+  .feature-box:hover {
+    transform: translateY(-5px);
+    background: #4c423b;
+    }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .features-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .feature-box {
+      max-width: 100%;
+      margin: 1rem 0;
+    }
+  
+    .typing-effect {
+      font-size: 2rem;
+    }
+  
+    .about-section h2, .feature-box h3 {
+      font-size: 1.8rem;
+    }
+  }
+  
