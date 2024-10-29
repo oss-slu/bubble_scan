@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-const apiBaseUrl = process.env.VUE_APP_API_BASE_URL || '';
+import config from "../utils/config";
 
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
@@ -41,7 +40,7 @@ function FileUploadComponent() {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`${apiBaseUrl}/api/upload`, {
+      const response = await fetch(`${config.apiBaseUrl}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -52,7 +51,7 @@ function FileUploadComponent() {
           setSuccessMessage("File uploaded successfully!");
           if (result.file_id) {
             console.log("File ID:", result.file_id);
-            setDownloadLink(`${apiBaseUrl}api/download_csv/${result.file_id}`);
+            setDownloadLink(`${config.apiBaseUrl}api/download_csv/${result.file_id}`);
             setFileId(result.file_id);
           } else {
             setSuccessMessage("Error: CSV filename not found in the response.");
@@ -97,7 +96,7 @@ function FileUploadComponent() {
 
         // Send acknowledgment to Flask
 
-        const acknowledgmentResponse = await fetch(`${apiBaseUrl}/api/csv_acknowledgment/${fileId}`, {
+        const acknowledgmentResponse = await fetch(`${config.apiBaseUrl}/api/csv_acknowledgment/${fileId}`, {
           method: "POST",
         });
 
