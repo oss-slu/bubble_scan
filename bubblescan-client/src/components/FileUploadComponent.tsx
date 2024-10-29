@@ -3,6 +3,7 @@ import config from "../utils/config";
 
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
+  const [sheetType, setSheetType] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [downloadLink, setDownloadLink] = useState<string>("");
   const [fileId, setFileId] = useState<string>("");
@@ -16,7 +17,6 @@ function FileUploadComponent() {
       (selectedFile.type === "application/pdf" ||
         selectedFile.type.startsWith("image/"))
     ) {
-      // Allow PDF and image formats (JPEG, PNG, etc.)
       setFile(selectedFile);
       setSuccessMessage("");
       setDownloadLink("");
@@ -35,9 +35,15 @@ function FileUploadComponent() {
       return;
     }
 
+    if (sheetType === "") {
+      alert("Please select a sheet type.");
+      return;
+    }
+
     setLoading(true);
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("sheetType", sheetType); // Include the sheet type in the form data
 
     try {
       const response = await fetch(`${config.apiBaseUrl}/api/upload`, {
@@ -45,22 +51,19 @@ function FileUploadComponent() {
         body: formData,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        if (result.status === "success") {
-          setSuccessMessage("File uploaded successfully!");
-          if (result.file_id) {
-            console.log("File ID:", result.file_id);
-            setDownloadLink(`${config.apiBaseUrl}api/download_csv/${result.file_id}`);
-            setFileId(result.file_id);
-          } else {
-            setSuccessMessage("Error: CSV filename not found in the response.");
-          }
-        } else {
-          setSuccessMessage("Error: " + result.message);
+
+      const result = await response.json();
+      if (result.status === "success") {
+        setSuccessMessage("File uploaded successfully!");
+        if (result.file_id) {
+          setDownloadLink(`${config.apiBaseUrl}/api/download_csv/${result.file_id}`);
+          setFileId(result.file_id);
+
         }
+      } else if (result.status === "custom_sheet") {
+        setSuccessMessage("Custom sheets are not yet supported.");
       } else {
-        setSuccessMessage("Upload failed.");
+        setSuccessMessage("Error: " + result.message);
       }
     } catch (error) {
       console.error("Error during file upload:", error);
@@ -70,69 +73,19 @@ function FileUploadComponent() {
     }
   };
 
-  const handleDownloadCSV = async () => {
-    setLoading(true);
-    try {
-      const csvDownloadResponse = await fetch(downloadLink);
-
-      if (csvDownloadResponse.ok) {
-        const blob = await csvDownloadResponse.blob();
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const currentDate = new Date();
-        const dateString = currentDate.toISOString().split("T")[0];
-        const timeString = currentDate
-          .toTimeString()
-          .split(" ")[0]
-          .replace(/:/g, "-");
-        const filename = `data_${dateString}_${timeString}.csv`;
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-
-        // Send acknowledgment to Flask
-
-        const acknowledgmentResponse = await fetch(`${config.apiBaseUrl}/api/csv_acknowledgment/${fileId}`, {
-          method: "POST",
-        });
-
-        if (acknowledgmentResponse.ok) {
-          const acknowledgmentResult = await acknowledgmentResponse.json();
-          if (acknowledgmentResult.status === "success") {
-            console.log("CSV acknowledgment received from Flask");
-            alert("CSV file downloaded successfully!");
-          } else {
-            console.error("Error: ", acknowledgmentResult.message);
-          }
-        } else {
-          console.error("Error: Failed to send CSV acknowledgment to Flask");
-        }
-      } else {
-        console.error("Error: Failed to download CSV");
-      }
-    } catch (error) {
-      console.error("Error during CSV download:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const clearForm = () => {
-    setFile(null);
-    setSuccessMessage("");
-    setDownloadLink("");
-    setFileId("");
-    const fileInput = document.getElementById("file-input") as HTMLInputElement;
-    if (fileInput) fileInput.value = "";
-  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="sheetType">Select Sheet Type:</label>
+          <select id="sheetType" value={sheetType} onChange={(e) => setSheetType(e.target.value)}>
+            <option value="">-----</option> {/* Placeholder option */}
+            <option value="scantron">Scantron</option>
+            <option value="custom">Custom Sheet</option>
+          </select>
+        </div>
+
         <input
           type="file"
           id="file-input"
@@ -142,7 +95,15 @@ function FileUploadComponent() {
         <button type="submit">Upload</button>
         <button
           type="button"
-          onClick={clearForm}
+          onClick={() => {
+            setFile(null);
+            setSheetType("");  // Reset the selected option to placeholder
+            setSuccessMessage("");
+            setDownloadLink("");
+            setFileId("");
+            const fileInput = document.getElementById("file-input") as HTMLInputElement;
+            if (fileInput) fileInput.value = "";
+          }}
           style={{ marginLeft: "10px" }}
         >
           Clear
@@ -153,9 +114,7 @@ function FileUploadComponent() {
       ) : (
         <>
           {successMessage && <p>{successMessage}</p>}
-          {downloadLink && (
-            <button onClick={handleDownloadCSV}>Download CSV</button>
-          )}
+          {downloadLink && <button onClick={() => window.open(downloadLink, "_blank")}>Download CSV</button>}
         </>
       )}
     </div>
