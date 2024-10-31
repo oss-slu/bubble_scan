@@ -8,9 +8,10 @@ import shutil
 import fitz  # PyMuPDF
 import cv2
 import numpy as np
+from SheetProcessor import SheetProcessor
 
 
-class Scantron95945:
+class Scantron95945(SheetProcessor):
     """Class that defines the Scanning process and retrieval of json"""
 
     def __init__(self, pdf_path):
