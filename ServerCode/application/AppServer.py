@@ -5,7 +5,6 @@ Convert JSON to CSV and allow dowloading the CSV.
 import os
 import logging
 import webbrowser
-import time
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
@@ -290,8 +289,6 @@ class AppServer:
 app_server = AppServer(app)
 
 if __name__ == '__main__':
-    # Delay to ensure the server is up
-    time.sleep(2)
 
     # Open the browser
     webbrowser.open('http://127.0.0.1:5001')

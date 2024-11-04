@@ -12,7 +12,7 @@ cp -r dist/* ../ServerCode/application/static/
 # Go back to main directory, activate Python environment, and install dependencies
 cd ..
 cd ServerCode
-python3 -m venv venv  # Use python3 for virtual environment creation in bash
+python -m venv venv  # Use python3 for virtual environment creation in bash
 
 # Check if running on Windows or Linux/macOS and activate environment accordingly
 if [[ -f "venv/bin/activate" ]]; then
