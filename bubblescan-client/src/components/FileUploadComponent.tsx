@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import config from "../utils/config";
 
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
@@ -45,17 +46,19 @@ function FileUploadComponent() {
     formData.append("sheetType", sheetType); // Include the sheet type in the form data
 
     try {
-      const response = await fetch("http://localhost:5001/api/upload", {
+      const response = await fetch(`${config.apiBaseUrl}/api/upload`, {
         method: "POST",
         body: formData,
       });
+
 
       const result = await response.json();
       if (result.status === "success") {
         setSuccessMessage("File uploaded successfully!");
         if (result.file_id) {
-          setDownloadLink(`http://localhost:5001/api/download_csv/${result.file_id}`);
+          setDownloadLink(`${config.apiBaseUrl}/api/download_csv/${result.file_id}`);
           setFileId(result.file_id);
+
         }
       } else if (result.status === "custom_sheet") {
         setSuccessMessage("Custom sheets are not yet supported.");
@@ -69,6 +72,7 @@ function FileUploadComponent() {
       setLoading(false);
     }
   };
+
 
   return (
     <div>

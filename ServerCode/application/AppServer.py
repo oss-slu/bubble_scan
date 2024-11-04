@@ -12,6 +12,7 @@ from Scantron import Scantron95945
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
+CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5001"}})
 
 class AppServer:
     """

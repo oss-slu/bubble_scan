@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import FileUploadComponent from "./components/FileUploadComponent";
 import CustomExamSheetComponent from "./components/CustomExamSheetComponent";
+import config from "./utils/config";
+
 import "./App.css";
+
 
 function App() {
   const [data, setData] = useState<string>("");
@@ -15,7 +18,7 @@ function App() {
 
   // Fetch initial data from Flask
   useEffect(() => {
-    fetch("http://localhost:5001/api/data")
+    fetch(`${config.apiBaseUrl}/api/data`)
       .then((response) => response.json())
       .then((data) => setData(data.message))
       .catch((error) => console.error("Error fetching data:", error));
@@ -26,7 +29,7 @@ function App() {
   const sendMessage = async () => {
     console.log("Sending message to Flask...");
     try {
-      const res = await fetch("http://localhost:5001/api/message", {
+      const res = await fetch(`${config.apiBaseUrl}/api/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
