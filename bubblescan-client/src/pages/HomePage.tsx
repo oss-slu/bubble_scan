@@ -14,20 +14,20 @@ function HomePage() {
 
   return (
     <div className="home-page">
-      <h1>Bubble Scan</h1>
-      <p>Grading Made Easy</p>
-      <div className="button-group">
-        <button onClick={handleScanClick} className="scan-button">
-          Scan
-        </button>
-        <button
-          onClick={handleCustomSheetsClick}
-          className="custom-sheets-button"
-        >
-          Custom Sheet
-        </button>
-      </div>
+    <h1>Bubble Scan</h1>
+    <p>Grading Made Easy</p>
+    <div className="home-button-group">
+      <button onClick={handleScanClick} className="home-button">
+        Scan
+      </button>
+      <button
+        onClick={handleCustomSheetsClick}
+        className="home-button"
+      >
+        Custom Sheet
+      </button>
     </div>
+  </div>
   );
 }
 

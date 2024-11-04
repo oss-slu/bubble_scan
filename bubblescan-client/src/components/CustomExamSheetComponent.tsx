@@ -321,43 +321,49 @@ function CustomExamSheetComponent()	{
 	
 	
 	  return (
-		<div>
-		<h1>You can create Custom Sheets here</h1>
-      <form onSubmit={generateExam}>
-        <label>
-          Exam Title: {/* New input field for the exam title */}
+		<div className="container">
+      <form onSubmit={generateExam} className="exam-form">
+        <div className="form-group">
+          <label htmlFor="examTitle">Exam Title:</label>
           <input
+            id="examTitle"
             type="text"
             value={examTitle}
             onChange={(e) => setExamTitle(e.target.value)}
             placeholder="Enter exam title"
             required
           />
-        </label>
-        <label>
-          Number of Questions:
+        </div>
+        <div className="form-group">
+          <label htmlFor="numQuestions">Number of Questions:</label>
           <input
+            id="numQuestions"
             type="number"
             value={numQuestions}
             onChange={(e) => setNumQuestions(parseInt(e.target.value))}
             min="1"
             required
           />
-        </label>
-        <label>
-          Number of Answer Options:
+        </div>
+        <div className="form-group">
+          <label htmlFor="numOptions">Number of Answer Options:</label>
           <input
+            id="numOptions"
             type="number"
             value={numOptions}
             onChange={(e) => setNumOptions(parseInt(e.target.value))}
             min="2"
-            max="26" // Limit to 26 options (A-Z)
+            max="26"
             required
           />
-        </label>
-        <button type="submit">Generate Exam Sheet</button>
+        </div>
+        <div className="button-group">
+          <button type="submit">Generate Exam Sheet</button>
+          <button type="button" onClick={printStoredExam}>
+            Print Stored Exam
+          </button>
+        </div>
       </form>
-      <button onClick={printStoredExam}>Print Stored Exam</button>
     </div>
 	  );
 

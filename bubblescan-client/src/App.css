@@ -8,31 +8,58 @@ body {
 }
 
 /* Updated Navbar Styles - Right Aligned */
-nav ul {
-  list-style-type: none;
-  padding: 0;
+/* Navigation Bar */
+nav {
   display: flex;
-  justify-content: flex-end; /* Right-align the navbar */
-  background-color: white;
-  padding: 20px;
+  align-items: center;
+  justify-content: space-between; /* Space between left and right sections */
+  background-color: #333;
+  padding: 0 20px;
+  height: 60px;
 }
 
-nav ul li {
+/* Left side of the navbar (logo) */
+.nav-left .logo {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Right side of the navbar (navigation links) */
+.nav-right ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-right ul li {
   margin: 0 15px;
 }
 
-nav ul li a {
+.nav-right ul li a {
   text-decoration: none;
-  color: black;
+  color: #fff;
   font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  transition: background-color 0.3s;
 }
 
-nav ul li a:hover {
-  color: #f0f0f0;
-  background-color: #555;
-  padding: 5px;
-  border-radius: 8px;
+.nav-right ul li a:hover {
+  background-color: #575757;
 }
+
+/* Active Link Styling */
+.nav-right ul li a.active {
+  background-color: #444;
+}
+nav ul li a:hover {
+  background-color: #575757; 
+  color: #fff; 
+}
+
 
 /* Home Page Styles */
 .home-page {
@@ -56,6 +83,26 @@ p {
   color: #666;
 }
 
+
+.home-button-group {
+  margin-top: 20px;
+}
+
+.home-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  border-radius: 20px;
+  
+}
+
+.home-button:hover {
+  background-color: #6b6868;
+}
+
 /* Button Group to align buttons horizontally */
 .button-group {
   display: flex;
@@ -69,7 +116,7 @@ p {
   background-color: #333;
   color: white;
   padding: 10px 15px;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -134,7 +181,7 @@ p {
   font-size: 18px;
   cursor: pointer;
   border: none;
-  border-radius: 50px;
+  border-radius: 20px;
   margin: 10px;
   transition: background-color 0.3s ease;
 }
@@ -171,6 +218,47 @@ p {
   max-width: 800px;
   margin: 0 auto;
 }
+/*Form**/
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.exam-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  width: 200px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.form-group input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
 
 /* Footer */
 footer {

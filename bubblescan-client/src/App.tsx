@@ -11,22 +11,33 @@ function App() {
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/scan">Scan</Link>
-            </li>
-            <li>
-              <Link to="/custom-sheets">Custom Sheets</Link>
-            </li>
-            <li>
-              <Link to="/about-us">About Us</Link> {/* Added About Us link */}
-            </li>
-          </ul>
+          {/* Left side of the navbar (logo) */}
+          <div className="nav-left">
+            <Link to="/" className="logo">
+              Bubble Scan
+            </Link>
+          </div>
+
+          {/* Right side of the navbar (navigation links) */}
+          <div className="nav-right">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/scan">Scan</Link>
+              </li>
+              <li>
+                <Link to="/custom-sheets">Custom Sheets</Link>
+              </li>
+              <li>
+                <Link to="/about-us">About Us</Link> {/* Added About Us link */}
+              </li>
+            </ul>
+          </div>
         </nav>
 
+        {/* Your routes */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/scan" element={<ScanPage />} />
