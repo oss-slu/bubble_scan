@@ -138,8 +138,19 @@ docker build -t bscan .
 // Run the docker container
 docker run -p 5001:5001 -p 5173:5173 bscan
 ```
-
 Your bubble scan application will be accessible at `http://127.0.0.1:5001/`.
+
+## How to run the Excecutable
+
+**How to run the script**
+
+```bash
+
+chmod +x Bubblescan.sh
+./Bubblescan.sh
+
+```
+**Bubblescan.exe will be in the dist folder in BubbleScan/ServerCode/dist**
 
 ## Upcoming Features: Custom Sheet Processing
 **Description**

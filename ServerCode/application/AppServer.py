@@ -4,6 +4,7 @@ Convert JSON to CSV and allow dowloading the CSV.
 """
 import os
 import logging
+import webbrowser
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
@@ -58,6 +59,7 @@ class AppServer:
         Returns:
             Response: The HTML content of the 'index.html' file located in the 'static' directory.
         """
+        print("Serving index.html from static folder")
         return send_from_directory('static', 'index.html')
 
     def serve_static(self,path):
@@ -287,4 +289,10 @@ class AppServer:
 app_server = AppServer(app)
 
 if __name__ == '__main__':
-    app_server.app.run(host='0.0.0.0', port=5001, debug=True)
+
+    # Open the browser
+    webbrowser.open('http://127.0.0.1:5001')
+
+    # Start the server
+    app_server.app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
+

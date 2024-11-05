@@ -24,7 +24,6 @@ numpy==1.26.4
 opencv-python==4.9.0.80
 packaging==24.0
 pandas==2.2.2
-pathlib==1.0.1
 pdf2image==1.17.0
 prov==2.0.0
 pydot==2.0.0
@@ -43,3 +42,4 @@ traits==6.3.2
 tzdata==2024.1
 urllib3==2.2.1
 Werkzeug==3.0.2
+pyinstaller
