@@ -10,6 +10,7 @@ from flask import Flask, request, jsonify, send_from_directory, redirect, url_fo
 from flask_cors import CORS
 from config import CORS_ORIGINS
 from Scantron import Scantron95945
+from ...BubbleScan_AI.Custom import CustomProcessor
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
@@ -131,13 +132,6 @@ class AppServer:
             return jsonify({"status": "error", "message": "No selected file"})
 
         if file and file.filename.lower().endswith('.pdf'):
-            if sheet_type == "custom":
-                # If it's a custom sheet, return "Not yet supported"
-                return jsonify({
-                    "status": "custom_sheet",
-                    "message": "Custom sheets are not yet supported"
-                })
-
             try:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(self.uploads_dir, filename)
@@ -150,7 +144,7 @@ class AppServer:
                     'processed': False
                 }
 
-                response_data = self.process_pdf(file_path, file_id)
+                response_data = self.process_pdf(file_path, file_id, sheet_type)
                 os.remove(file_path)
 
                 return jsonify({"status": "success", "message": "PDF processed successfully", "file_id": file_id, "data": response_data})
@@ -161,31 +155,40 @@ class AppServer:
         else:
             return jsonify({"status": "error", "message": "Only PDF files are allowed"})
 
-    def process_pdf(self, pdf_file, file_id):
+
+    def process_pdf(self, pdf_file, file_id, sheet_type):
         """
         Processes a PDF file to extract responses and convert them to CSV.
 
         Parameters:
             pdf_file (str): Path to the PDF file.
             file_id (str): Unique identifier for the file.
+            sheet_type (str): Type of sheet (e.g., 'standard' or 'custom').
 
         Returns:
             str: Name of the generated CSV file.
         """
         try:
-            scantron = Scantron95945(pdf_file)
-            data = scantron.extract_responses()
-            #print("Received the JSON data as: ", data)
+            # Choose the correct processor based on sheet type
+            if sheet_type == "custom":
+                processor = CustomProcessor(pdf_file)
+            else:
+                processor = Scantron95945(pdf_file)
 
+            # Extract data in JSON format
+            data = processor.extract_responses()
+
+            # Transform JSON data to CSV format
             csv_data = self.transform_json_to_csv(data)
             csv_filename = f'output_{file_id}.csv'
             csv_file_path = os.path.join(self.uploads_dir, csv_filename)
 
+            # Write CSV data to file
             with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 csv_file.write(csv_data)
 
+            # Save CSV file path for download
             self.csv_files[file_id] = {'filename': csv_filename, 'path': csv_file_path}
-
             self.file_info[file_id]['processed'] = True
 
             return csv_filename
