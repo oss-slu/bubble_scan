@@ -8,9 +8,9 @@ import webbrowser
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
-from config import CORS_ORIGINS
-from Scantron import Scantron95945
-from ...BubbleScan_AI.Custom import CustomProcessor
+from application.config import CORS_ORIGINS
+from application.Scantron import Scantron95945
+from BubbleScan_AI.Custom import CustomProcessor
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})

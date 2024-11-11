@@ -3,9 +3,9 @@
 
 a = Analysis(
     ['application/AppServer.py'],
-    pathex=[],
+    pathex=['./'],
     binaries=[],
-    datas=[('application/static', 'static')],
+    datas=[('BubbleScan_AI', 'BubbleScan_AI'), ('application', 'application'), ('application/static', 'static')],
     hiddenimports=['fitz'],
     hookspath=[],
     hooksconfig={},

@@ -12,7 +12,7 @@ cp -r dist/* ../ServerCode/application/static/
 # Go back to main directory, activate Python environment, and install dependencies
 cd ..
 cd ServerCode
-python -m venv venv  # Use python3 for virtual environment creation in bash
+python3 -m venv venv  # Use python3 for virtual environment creation in bash
 
 # Check if running on Windows or Linux/macOS and activate environment accordingly
 if [[ -f "venv/bin/activate" ]]; then
@@ -37,7 +37,13 @@ pip install --no-cache-dir -r requirements.txt
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 # Run PyInstaller
-pyinstaller --onefile --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+pyinstaller --onefile \
+    --paths=./ \
+    --add-data "BubbleScan_AI:BubbleScan_AI" \
+    --add-data "application:application" \
+    --add-data "application/static:static" \
+    --hidden-import=fitz \
+    application/AppServer.py
 
 
 # Deactivate the virtual environment
