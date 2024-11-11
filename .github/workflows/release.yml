@@ -1,0 +1,30 @@
+name: BubbleScan Release
+
+on:
+  push:
+    branches:
+      - AutomateWorkflow109 #change branch to main after testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Make script executable
+        run: chmod +x Bubblescan.sh
+
+      - name: Run BubbleScan script
+        run: ./Bubblescan.sh
+
+      - name: Archive executable and static files
+        run: zip -r ServerCode/dist/Bubblescan.zip ServerCode/dist/Bubblescan.exe ServerCode/dist/static
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ServerCode/dist/Bubblescan.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
