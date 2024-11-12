@@ -45,9 +45,11 @@ jobs:
         
       - name: Create a new Git tag
         id: create_tag
+        shell: powershell
         run: |
-          TAG="v$(date +'%Y%m%d%H%M%S')"
-          echo "TAG=$TAG" >> $GITHUB_ENV
+          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss')"
+          echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "::set-output name=TAG::$TAG"
           git tag $TAG
           git push origin $TAG
         env:
@@ -57,6 +59,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ServerCode/dist/Bubblescan.zip
-          tag_name: ${{ env.TAG }}
+          tag_name: ${{ steps.create_tag.outputs.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
