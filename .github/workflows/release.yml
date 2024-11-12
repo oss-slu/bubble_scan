@@ -16,6 +16,16 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller
+
+
       - name: Run BubbleScan script
         shell: bash
         run: ./BubbleScan.sh
@@ -24,6 +34,7 @@ jobs:
         run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
 
       - name: Verify BubbleScan exists
+        shell: bash
         run: |
           if [ -f "ServerCode/dist/BubbleScan.exe" ]; then
               echo "BubbleScan found in ServerCode/dist."
