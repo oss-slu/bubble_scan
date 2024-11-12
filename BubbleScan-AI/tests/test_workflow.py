@@ -17,16 +17,16 @@ class TestIntegration:
 
         # Mock the methods that interact with external systems or files
         with patch.object(Scantron95945, 'extractImagesFromPdf'), \
-            patch.object(Scantron95945, 'template_matching'), \
-            patch.object(Scantron95945, 'extractROIs'), \
-            patch.object(Scantron95945, 'extract_responses', return_value={'students': [{'studentID': '12345', 'answers': {'Q1': 'A'}}]}):
+        patch.object(Scantron95945, 'template_matching'), \
+        patch.object(Scantron95945, 'extractROIs'), \
+        patch.object(Scantron95945, 'extract_responses', return_value={'students': [{'studentID': '12345', 'answers': {'Q1': 'A'}}]}):
                 
                 
                 # Instantiate the Scantron95945 class with the path to the mock PDF
-                scantron = Scantron95945(str(pdf_path))
+            scantron = Scantron95945(str(pdf_path))
 
                 # Call extract_responses to get the results
-                results = scantron.extract_responses()
+            results = scantron.extract_responses()
 
                 # Assert that the results match the expected output
-                assert results == {'students': [{'studentID': '12345', 'answers': {'Q1': 'A'}}]}
+            assert results == {'students': [{'studentID': '12345', 'answers': {'Q1': 'A'}}]}
