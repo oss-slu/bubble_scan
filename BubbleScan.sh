@@ -36,14 +36,15 @@ pip install --no-cache-dir -r requirements.txt
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
-# Run PyInstaller
-pyinstaller --onefile --name BubbleScan --distpath ServerCode/dist --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+echo "Current working directory: $PWD"
+echo "Environment details:"
+env
 
-if [ $? -ne 0 ]; then
-    echo "PyInstaller failed to create BubbleScan.exe."
-    exit 1
-fi
-echo "PyInstaller completed."
+# Run PyInstaller
+pyinstaller --onefile --name BubbleScan --distpath "$PWD/ServerCode/dist" --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+
+echo "Searching for all dist directories and listing contents..."
+find . -type d -name "dist" -exec ls -R {} \;
 
 # Deactivate the virtual environment
 deactivate
