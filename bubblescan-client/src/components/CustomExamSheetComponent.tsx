@@ -89,12 +89,13 @@ function CustomExamSheetComponent() {
               margin: 0;
             }
             .questions-container {
-              column-count: 4;
-              -webkit-column-count: 4;
+              column-count: 2;
+              -webkit-column-count: 2;
               column-gap: 12px;
               -webkit-column-gap: 12px;
-              column-fill: auto;
-              -webkit-column-fill: auto;
+              column-fill: balance;
+              -webkit-column-fill: balance;
+              width: 400px;
               min-height: 200px;
             }
             .question:nth-child(25) {
@@ -102,12 +103,12 @@ function CustomExamSheetComponent() {
               -webkit-column-break-after: column;
             }
             .question {
+              break-inside: avoid-column;
+              -webkit-column-break-inside: avoid; /* Chrome, Safari, newer Opera */
+              page-break-inside: avoid; /* For printing */
+              -moz-column-break-inside: avoid; /* Firefox */
               display: flex;
               align-items: center;
-              padding: 3px;
-              margin-bottom: 2px;
-              font-size: 9px;
-              box-sizing: border-box;
             }
             .question-label {
               font-weight: bold;
