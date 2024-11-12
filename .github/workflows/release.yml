@@ -21,11 +21,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          pip install pyinstaller
-
-
       - name: Run BubbleScan script
         shell: bash
         run: ./BubbleScan.sh

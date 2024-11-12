@@ -32,6 +32,7 @@ pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not found, skipping."
 
 # Install dependencies from requirements.txt while ensuring pathlib is not reinstalled
 pip install --no-cache-dir -r requirements.txt
+pip install pyinstaller
 
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
