@@ -22,13 +22,16 @@ jobs:
       - name: Run BubbleScan script
         run: ./BubbleScan.sh
 
-      - name: Verify BubbleScan.exe exists
+      - name: List files in ServerCode/dist after running BubbleScan.sh
+        run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
+
+      - name: Verify BubbleScan exists
         run: |
           if [ -f "ServerCode/dist/BubbleScan" ]; then
-            echo "BubbleScan.exe found."
+              echo "BubbleScan found in ServerCode/dist."
           else
-            echo "BubbleScan.exe not found in the expected directory."
-            exit 1
+              echo "BubbleScan not found in ServerCode/dist."
+              exit 1
           fi
 
       - name: Archive executable and static files

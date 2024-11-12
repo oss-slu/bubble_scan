@@ -41,10 +41,7 @@ echo "Environment details:"
 env
 
 # Run PyInstaller
-pyinstaller --onefile --name BubbleScan --distpath "$PWD/ServerCode/dist" --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
-
-echo "Searching for all dist directories and listing contents..."
-find . -type d -name "dist" -exec ls -R {} \;
+pyinstaller --onefile --name BubbleScan --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
 
 # Deactivate the virtual environment
 deactivate
@@ -54,9 +51,4 @@ cd ..
 mkdir -p ServerCode/dist  # Ensure dist directory exists
 cp -r ServerCode/application/static ServerCode/dist
 
-if [ -f "ServerCode/dist/BubbleScan" ]; then
-    echo "BubbleScan.exe successfully created in ServerCode/dist."
-else
-    echo "Error: BubbleScan.exe not found in ServerCode/dist."
-    exit 1  # Exit with an error if the file is missing
-fi
+
