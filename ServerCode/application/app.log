@@ -1,0 +1,12 @@
+2024-11-11 18:57:14,518 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.10:5001
+2024-11-11 18:57:14,519 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-11 18:57:15,913 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:15] "[33mGET / HTTP/1.1[0m" 404 -
+2024-11-11 18:57:16,821 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-11-11 18:57:58,665 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:58] "GET /api/data HTTP/1.1" 200 -
+2024-11-11 18:57:58,668 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:58] "GET /api/data HTTP/1.1" 200 -
+2024-11-11 18:58:21,158 - appServerLogger - INFO - PDF processed successfully for file_id: 039a30355d15071a223890348093d5f1
+2024-11-11 18:58:21,158 - appServerLogger - INFO - PDF processed successfully for file_id: 039a30355d15071a223890348093d5f1
+2024-11-11 18:58:21,159 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:58:21] "POST /api/upload HTTP/1.1" 200 -

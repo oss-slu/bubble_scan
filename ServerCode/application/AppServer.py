@@ -10,6 +10,13 @@ from flask import Flask, request, jsonify, send_from_directory, redirect, url_fo
 from flask_cors import CORS
 from config import CORS_ORIGINS
 from Scantron import Scantron95945
+import logging.config
+import os
+
+# Load logging configuration
+logging.config.fileConfig(os.path.join(os.path.dirname(__file__), 'logging.conf'))
+logger = logging.getLogger("appServerLogger")
+
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
@@ -113,7 +120,7 @@ class AppServer:
         """
         message_data = request.json
         message = message_data.get('message', '')
-        print(f"Received message: {message}")
+        logger.info("Received message: %s", message)
         return jsonify({"status": "success", "message": "Message received successfully!"})
 
     def file_upload(self):
@@ -122,17 +129,20 @@ class AppServer:
         Allows the user to specify whether the sheet is a standard Scantron or a custom sheet.
         """
         if 'file' not in request.files or 'sheetType' not in request.form:
+            logger.error("No file or sheet type in the request")
             return jsonify({"status": "error", "message": "No file or sheet type in the request"})
 
         file = request.files['file']
         sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
+            logger.warning("No selected file")
             return jsonify({"status": "error", "message": "No selected file"})
 
         if file and file.filename.lower().endswith('.pdf'):
             if sheet_type == "custom":
                 # If it's a custom sheet, return "Not yet supported"
+                logger.info("Custom sheets are not yet supported")
                 return jsonify({
                     "status": "custom_sheet",
                     "message": "Custom sheets are not yet supported"
@@ -153,12 +163,15 @@ class AppServer:
                 response_data = self.process_pdf(file_path, file_id)
                 os.remove(file_path)
 
+                logger.info("PDF processed successfully for file_id: %s", file_id)
                 return jsonify({"status": "success", "message": "PDF processed successfully", "file_id": file_id, "data": response_data})
 
             except Exception as e:
+                logger.error("Error processing PDF: %s", e, exc_info=True)
                 return jsonify({"status": "error", "message": f"Error processing PDF: {e}"})
 
         else:
+            logger.warning("Only PDF files are allowed")
             return jsonify({"status": "error", "message": "Only PDF files are allowed"})
 
     def process_pdf(self, pdf_file, file_id):
