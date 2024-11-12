@@ -1,13 +1,17 @@
+"""Testing Scantron Sheet Processing"""
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 import sys
 import os
 import cv2
 import numpy as np
 # Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 
 class Scantron95945TestHelper(Scantron95945):
+    """Testing Scantron Sheet Processing"""
     def get_responses_bubble_row(self, image, num_choices=5):
+        """Testing Scantron Sheet Processing"""
         bubble_width = image.shape[1] // num_choices
         filled_bubbles = []
 

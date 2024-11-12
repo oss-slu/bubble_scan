@@ -1,12 +1,13 @@
 """Tesing the bubble detection"""
-import sys
-import os
-import cv2
-import pytest
 # Adding the parent directory to the system path to import Scantron95945
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 from TestScantron import Scantron95945TestHelper
+import sys
+import os
+import cv2
+
+
 
 class TestBubbleDetection:
     """Create a synthetic image representing a row with one bubble filled ('A')"""

@@ -1,12 +1,11 @@
 """Test the Error Handling."""
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 import sys
 import os
 import pytest
 from unittest.mock import patch
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 
 class TestErrorHandling:
     """Test how the system handles a corrupted PDF file."""

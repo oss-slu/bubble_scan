@@ -1,12 +1,12 @@
 """Testing the alignment"""
-import sys
-import os
-import pytest
-import cv2
-import numpy as np
 # Adding the parent directory to the system path to import Scantron95945
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
+import sys
+import os
+import cv2
+import numpy as np
+
 
 class TestAlignImage:
     def test_correct_alignment(self):
