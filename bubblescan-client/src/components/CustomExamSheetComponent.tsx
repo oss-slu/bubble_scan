@@ -46,7 +46,7 @@ function CustomExamSheetComponent() {
               display: flex;
               align-items: center;
               margin-bottom: 20px;
-			  marign-top: 50px;
+			        marign-top: 50px;
             }
             .key-id-container {
               flex: 0 0 auto; /* Do not grow */
@@ -56,7 +56,7 @@ function CustomExamSheetComponent() {
               text-align: center;
               border-radius: 5px;
               width: 140px;
-			  margin-right: 70px;
+			        margin-right: 70px;
             }
             .key-id-header {
               font-weight: bold;
@@ -95,7 +95,7 @@ function CustomExamSheetComponent() {
               -webkit-column-gap: 12px;
               column-fill: balance;
               -webkit-column-fill: balance;
-              width: 400px;
+              width: 230px;
               min-height: 200px;
             }
             .question:nth-child(25) {
@@ -136,7 +136,7 @@ function CustomExamSheetComponent() {
             }
             .student-id-container {
               position: absolute;
-              top: 70%;
+              top: 60%;
               left: 8%;
               transform: translateX(-25%);
               z-index: 1000;
@@ -144,7 +144,7 @@ function CustomExamSheetComponent() {
               padding: 10px;
               background-color: white;
               border-radius: 8px;
-              width: 200px;
+              width: 220px;
               text-align: center;
             }
             .id-header {
@@ -193,12 +193,12 @@ function CustomExamSheetComponent() {
               flex-direction: column;
               margin-top: 15px;
               border: 1px solid green;
-              width: 350px;
+              width: 250px;
               padding: 5px;
               text-align: left;
               position: absolute;
               top: 8%;
-              left: 48%;
+              left: 58%;
             }
             .info-item {
               border-bottom: 1px solid green;
