@@ -1,3 +1,4 @@
+"""Tests for the Flask application."""
 import pytest
 from io import BytesIO
 from AppServer import app
@@ -5,6 +6,7 @@ from AppServer import app
 # Fixture to initialize the Flask test client
 @pytest.fixture
 def client():
+    """Set up test client for the Flask app."""
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
@@ -12,6 +14,7 @@ def client():
 # Test case for uploading a Scantron sheet
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_upload_scantron(client):
+    """Test upload funtion."""
     # Create a mock PDF file
     data = {
         'file': (BytesIO(b'PDF file content'), 'test_scantron.pdf'),
@@ -30,7 +33,7 @@ def test_upload_scantron(client):
 # Test case for uploading a custom sheet
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_upload_custom(client):
-    # Create a mock PDF file
+    """Test Custom Sheet upload."""
     data = {
         'file': (BytesIO(b'PDF file content'), 'test_custom.pdf'),
         'sheetType': 'custom'

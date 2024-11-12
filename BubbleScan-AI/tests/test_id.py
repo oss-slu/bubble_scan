@@ -1,15 +1,15 @@
-import pytest
+"""Module for testing ID extraction functionality."""
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import cv2
 import numpy as np
+# Adding the parent directory to the system path to import Scantron95945
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class TestStudentID:
     def test_complete_student_id(self):
-        # Test the student_id function with a complete ID (all digits filled).
+        """Tests for the ID extraction functionality."""# Test the student_id function with a complete ID (all digits filled).
 
         # Create a synthetic ROI with all digits filled correctly
         roi = np.full((1000, 1000), 255, dtype=np.uint8)  # White background
@@ -40,7 +40,7 @@ class TestStudentID:
         assert student_id == '0123456789'
 
     def test_incomplete_student_id(self):
-        # Test the student_id function with some digits missing.
+        """Test the student_id function with some digits missing.."""# Test the student_id function with some digits missing.
 
         # Create a synthetic ROI with some digits missing
         roi = np.full((1000, 1000), 255, dtype=np.uint8)  # White background

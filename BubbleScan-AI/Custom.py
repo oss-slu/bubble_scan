@@ -1,3 +1,4 @@
+"""Custom Sheet Processing Logic."""
 import os
 import cv2
 import fitz  # PyMuPDF for PDF processing
