@@ -34,3 +34,4 @@ class Scantron95945TestHelper(Scantron95945):
             return chr(ord('A') + filled_bubbles[0])
 
         return [chr(ord('A') + index) for index in filled_bubbles]
+    

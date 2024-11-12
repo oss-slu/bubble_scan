@@ -128,4 +128,3 @@ class CustomProcessor(SheetProcessor):
         cv2.imwrite(student_id_path, student_id_roi)
 
         return first_column_path, second_column_path, key_id_path, student_id_path
-

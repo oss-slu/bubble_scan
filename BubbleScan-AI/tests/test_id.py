@@ -69,3 +69,4 @@ class TestStudentID:
 
         # Assert that the student ID contains 'X' for missing digits
         assert student_id == '0X2X4X6X8X'
+        
