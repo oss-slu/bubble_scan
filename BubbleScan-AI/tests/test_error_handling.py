@@ -1,15 +1,18 @@
-import pytest
+"""Test the Error Handling."""
+
 import sys
 import os
+import pytest
+from unittest.mock import patch
 # Adding the parent directory to the system path to import Scantron95945
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from unittest.mock import patch
 from Scantron import Scantron95945
 
 class TestErrorHandling:
+    """Test how the system handles a corrupted PDF file."""
     @patch('fitz.open')
     def test_corrupted_pdf_handling(self, mock_fitz_open):
-        # Test how the system handles a corrupted PDF file.
+        """Test how the system handles a corrupted PDF file."""
 
         # Simulate an exception when trying to open the PDF
         mock_fitz_open.side_effect = Exception('Corrupted PDF')
@@ -19,7 +22,7 @@ class TestErrorHandling:
             Scantron95945('corrupted.pdf')
 
     def test_missing_image_files(self):
-        # Test how the system handles missing image files during template matching.
+        """Test how the system handles missing image files during template matching."""
 
         # Instantiate the Scantron95945 class
         scantron = Scantron95945('PDF/Scans-4-2-24.pdf')

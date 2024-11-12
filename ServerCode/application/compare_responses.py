@@ -1,4 +1,4 @@
-# compare_responses.py
+"""compare_responses.py"""
 import csv
 import os
 import logging
@@ -43,7 +43,7 @@ def compare_csv_files(student_responses_path, correct_answers_path, output_dir):
             writer.writeheader()
             writer.writerows(result_data)
 
-        logging.info(f"Comparison results saved to {result_csv_path}")
+        logging.info("Comparison results saved to %s", result_csv_path)
         return result_csv_path
 
     except Exception as e:

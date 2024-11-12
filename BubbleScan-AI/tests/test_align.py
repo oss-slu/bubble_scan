@@ -1,15 +1,16 @@
-import pytest
+"""Testing the alignment"""
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import pytest
 import cv2
 import numpy as np
+# Adding the parent directory to the system path to import Scantron95945
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class TestAlignImage:
     def test_correct_alignment(self):
-        # Test that the align_image function correctly aligns an image when keypoints are present.
+        """Test that the align_image function correctly aligns an image when keypoints are present."""
 
         # Create synthetic images with features (a white circle in the center)
         image = np.zeros((1000, 1000, 3), dtype=np.uint8)

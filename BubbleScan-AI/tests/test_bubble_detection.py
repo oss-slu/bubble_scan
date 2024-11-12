@@ -1,16 +1,17 @@
-import pytest
+"""Tesing the bubble detection"""
 import sys
 import os
+import cv2
+import pytest
 # Adding the parent directory to the system path to import Scantron95945
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import cv2
-import numpy as np
 from Scantron import Scantron95945
 from TestScantron import Scantron95945TestHelper
 
 class TestBubbleDetection:
+    """Create a synthetic image representing a row with one bubble filled ('A')"""
     def test_get_responses_bubble_row_single_fill(self):
-        # Create a synthetic image representing a row with one bubble filled ('A')
+        """Create a synthetic image representing a row with one bubble filled ('A')"""
         image = np.full((100, 500, 3), 255, dtype=np.uint8)  # White background
         bubble_width = 500 // 5  # 100 pixels per bubble
 
@@ -28,7 +29,7 @@ class TestBubbleDetection:
         assert response == 'A'
 
     def test_get_responses_bubble_row_multiple_fills(self):
-        # Create a synthetic image representing a row with multiple bubbles filled ('A' and 'B')
+        """Create a synthetic image representing a row with multiple bubbles filled ('A' and 'B')"""
         image = np.full((100, 500, 3), 255, dtype=np.uint8)  # White background
         bubble_width = 500 // 5  # 100 pixels per bubble
 
@@ -50,7 +51,7 @@ class TestBubbleDetection:
 
 
     def test_bubble_column_single_fill(self):
-        # Test bubble_column with a single bubble filled.
+        """Test bubble_column with a single bubble filled."""
 
         # Create a synthetic column image with one bubble filled (index 4)
         column = np.zeros((1000, 100, 1), dtype=np.uint8)
@@ -66,7 +67,7 @@ class TestBubbleDetection:
         assert index == 4
 
     def test_bubble_column_no_fill(self):
-        # Test bubble_column when no bubbles are filled.
+        """Test bubble_column when no bubbles are filled."""
 
         # Create a synthetic empty column image
         column = np.zeros((1000, 100, 1), dtype=np.uint8)

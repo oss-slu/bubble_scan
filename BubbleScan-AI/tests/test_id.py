@@ -8,6 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class TestStudentID:
+    """Tests for the ID extraction functionality."""
     def test_complete_student_id(self):
         """Tests for the ID extraction functionality."""# Test the student_id function with a complete ID (all digits filled).
 
@@ -69,4 +70,3 @@ class TestStudentID:
 
         # Assert that the student ID contains 'X' for missing digits
         assert student_id == '0X2X4X6X8X'
-        

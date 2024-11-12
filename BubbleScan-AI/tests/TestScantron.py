@@ -1,9 +1,9 @@
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import cv2
 import numpy as np
+# Adding the parent directory to the system path to import Scantron95945
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class Scantron95945TestHelper(Scantron95945):

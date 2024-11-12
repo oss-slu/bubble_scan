@@ -1,14 +1,16 @@
-import pytest
+"""Testing the ROI after Croping"""
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import cv2
 import numpy as np
 from unittest.mock import patch
+import pytest
+# Adding the parent directory to the system path to import Scantron95945
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class TestCropROI:
+    """Test that crop_roi correctly crops the ROIs when valid markers are present."""
     @patch('cv2.imwrite', return_value=True)
     @patch('os.makedirs')
     @patch('cv2.imread')
@@ -17,7 +19,7 @@ class TestCropROI:
     @patch.object(Scantron95945, 'template_matching')
     @patch.object(Scantron95945, 'extractImagesFromPdf')
     def test_valid_crop(self, mock_extractImagesFromPdf, mock_template_matching, mock_extractROIs, mock_align_image, mock_imread, mock_makedirs, mock_imwrite):
-        # Test that crop_roi correctly crops the ROIs when valid markers are present.
+        """Test that crop_roi correctly crops the ROIs when valid markers are present."""
 
         # Create a synthetic image with the necessary markers
         image = np.full((2186, 1689, 3), 255, dtype=np.uint8)  # White background
