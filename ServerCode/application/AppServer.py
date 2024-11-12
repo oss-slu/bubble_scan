@@ -217,25 +217,26 @@ class AppServer:
         Returns:
             str: CSV data as a string.
         """
+
+        logger.debug("Starting transformation of JSON data to CSV")
         csv_data = ''
-        print("The JSON data received is:", json_data)
 
         if not isinstance(json_data, dict) or 'students' not in json_data:
-            print("Invalid JSON data format")
+            logger.warning("Invalid JSON data format: %s", json_data)
             return csv_data
 
         students = json_data['students']
         if not students:
-            print("No student data found")
+            logger.warning("No student data found in JSON")
             return csv_data
 
         student_data = students[0]
         if 'answers' not in student_data:
-            print("No 'answers' key found in student data")
+            logger.warning("No 'answers' key found in student data")
             return csv_data
 
         keys = student_data['answers'].keys()
-        print("Keys:", keys)
+        logger.debug("Keys found for CSV: %s", keys)
         csv_data += ','.join(['studentID'] + list(keys)) + '\n'
 
         for student in students:
@@ -248,11 +249,10 @@ class AppServer:
                 elif answer is None:
                     answer = ''
                 answers.append(answer)
-            print("Student ID:", student_id)
-            print("Answers:", answers)
+            logger.debug("Processed student ID: %s with answers: %s", student_id, answers)
             csv_data += ','.join([student_id] + answers) + '\n'
 
-        print("The CSV data converted is: ", csv_data)
+        logger.info("Completed transformation of JSON to CSV")
         return csv_data
 
     def download_csv(self, file_id):
@@ -265,22 +265,27 @@ class AppServer:
         Returns:
             Response: Flask response object containing the CSV file.
         """
+        logger.info("Download request received for CSV file_id: %s", file_id)
         try:
             if file_id not in self.csv_files:
+                logger.warning("CSV file_id %s not found in records", file_id)
                 return jsonify({"status": "error", "message": "CSV file not found"})
 
             csv_file_data = self.csv_files[file_id]
             file_path = csv_file_data['path']
             
             if os.path.exists(file_path):
+                logger.info("Serving CSV file for download: %s", file_path)
                 with open(file_path, 'r', encoding='utf-8') as csv_file:
                     csv_data = csv_file.read()
                     print("CSV Data:\n", csv_data)
                 return send_from_directory(self.uploads_dir, os.path.basename(file_path), as_attachment=True)
             
+            logger.warning("CSV file path does not exist for file_id: %s", file_id)
             return jsonify({"status": "error", "message": "CSV file not found"})
 
         except Exception as e:
+            logger.error("Error downloading CSV for file_id %s: %s", file_id, e, exc_info=True)
             return jsonify({"status": "error", "message": f"Error downloading CSV: {e}"}), 500
 
     def csv_acknowledgment(self, file_id):
@@ -295,8 +300,10 @@ class AppServer:
         """
         if file_id in self.file_info:
             self.file_info[file_id]['csv_sent'] = True
+            logger.info("CSV acknowledgment received for file_id: %s", file_id)
             return jsonify({"status": "success", "message": "CSV is sent to the React successfully"})
         
+        logger.warning("CSV acknowledgment failed: file_id %s not found", file_id)
         return jsonify({"status": "error", "message": "File ID not found"})
 
 app_server = AppServer(app)
