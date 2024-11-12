@@ -35,7 +35,7 @@ jobs:
           fi
 
       - name: Archive executable and static files
-        run: zip -r ServerCode/dist/Bubblescan.zip ServerCode/dist/BubbleScan ServerCode/dist/static
+        run: zip -r ServerCode/dist/Bubblescan.zip ServerCode/dist/BubbleScan.exe ServerCode/dist/static
 
       - name: Create a new Git tag
         id: create_tag
