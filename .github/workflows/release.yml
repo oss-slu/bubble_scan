@@ -27,7 +27,7 @@ jobs:
 
       - name: Verify BubbleScan exists
         run: |
-          if [ -f "ServerCode/dist/BubbleScan" ]; then
+          if [ -f "ServerCode/dist/BubbleScan.exe" ]; then
               echo "BubbleScan found in ServerCode/dist."
           else
               echo "BubbleScan not found in ServerCode/dist."

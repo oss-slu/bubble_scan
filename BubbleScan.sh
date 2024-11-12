@@ -51,4 +51,9 @@ cd ..
 mkdir -p ServerCode/dist  # Ensure dist directory exists
 cp -r ServerCode/application/static ServerCode/dist
 
+# Rename BubbleScan to BubbleScan.exe if no extension exists
+if [ -f "ServerCode/dist/BubbleScan" ]; then
+    mv ServerCode/dist/BubbleScan ServerCode/dist/BubbleScan.exe
+    echo "Renamed BubbleScan to BubbleScan.exe."
+fi
 
