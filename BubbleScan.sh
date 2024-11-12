@@ -37,8 +37,13 @@ pip install --no-cache-dir -r requirements.txt
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 # Run PyInstaller
-pyinstaller --onefile --name BubbleScan --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+pyinstaller --onefile --name BubbleScan --distpath ServerCode/dist --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
 
+if [ $? -ne 0 ]; then
+    echo "PyInstaller failed to create BubbleScan.exe."
+    exit 1
+fi
+echo "PyInstaller completed."
 
 # Deactivate the virtual environment
 deactivate
