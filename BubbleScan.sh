@@ -54,7 +54,7 @@ cd ..
 mkdir -p ServerCode/dist  # Ensure dist directory exists
 cp -r ServerCode/application/static ServerCode/dist
 
-if [ -f "ServerCode/dist/BubbleScan.exe" ]; then
+if [ -f "ServerCode/dist/BubbleScan" ]; then
     echo "BubbleScan.exe successfully created in ServerCode/dist."
 else
     echo "Error: BubbleScan.exe not found in ServerCode/dist."
