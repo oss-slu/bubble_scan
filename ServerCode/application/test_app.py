@@ -8,8 +8,8 @@ from AppServer import app
 def client():
     """Set up test client for the Flask app."""
     app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+    with app.test_client() as test_client:  # Renamed from 'client' to 'test_client'
+        yield test_client
 
 # Test case for uploading a Scantron sheet
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
@@ -22,8 +22,7 @@ def test_upload_scantron(client):
     }
     
     # Perform POST request to /api/upload
-    with client:
-        response = client.post('/api/upload', data=data, content_type='multipart/form-data')
+    response = client.post('/api/upload', data=data, content_type='multipart/form-data')
 
     # Assert response status and message
     assert response.status_code == 200
@@ -35,15 +34,13 @@ def test_upload_scantron(client):
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_upload_custom(client):
     """Test Custom Sheet upload."""
-    # Create a mock PDF file
     data = {
         'file': (BytesIO(b'PDF file content'), 'test_custom.pdf'),
         'sheetType': 'custom'
     }
     
     # Perform POST request to /api/upload
-    with client:
-        response = client.post('/api/upload', data=data, content_type='multipart/form-data')
+    response = client.post('/api/upload', data=data, content_type='multipart/form-data')
 
     # Assert that the response indicates custom sheets are not supported
     assert response.status_code == 200
