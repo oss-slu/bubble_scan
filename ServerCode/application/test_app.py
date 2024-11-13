@@ -5,15 +5,15 @@ from AppServer import app
 
 # Fixture to initialize the Flask test client
 @pytest.fixture
-def client():
+def flask_test_client():
     """Set up test client for the Flask app."""
     app.config['TESTING'] = True
-    with app.test_client() as test_client:  # Renamed from 'client' to 'test_client'
+    with app.test_client() as test_client:  # Inner variable renamed
         yield test_client
 
 # Test case for uploading a Scantron sheet
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
-def test_upload_scantron(client):
+def test_upload_scantron(flask_test_client):
     """Test upload function."""
     # Create a mock PDF file
     data = {
@@ -22,7 +22,7 @@ def test_upload_scantron(client):
     }
     
     # Perform POST request to /api/upload
-    response = client.post('/api/upload', data=data, content_type='multipart/form-data')
+    response = flask_test_client.post('/api/upload', data=data, content_type='multipart/form-data')
 
     # Assert response status and message
     assert response.status_code == 200
@@ -32,7 +32,7 @@ def test_upload_scantron(client):
 
 # Test case for uploading a custom sheet
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
-def test_upload_custom(client):
+def test_upload_custom(flask_test_client):
     """Test Custom Sheet upload."""
     data = {
         'file': (BytesIO(b'PDF file content'), 'test_custom.pdf'),
@@ -40,7 +40,7 @@ def test_upload_custom(client):
     }
     
     # Perform POST request to /api/upload
-    response = client.post('/api/upload', data=data, content_type='multipart/form-data')
+    response = flask_test_client.post('/api/upload', data=data, content_type='multipart/form-data')
 
     # Assert that the response indicates custom sheets are not supported
     assert response.status_code == 200
