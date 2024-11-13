@@ -24,7 +24,6 @@ class Scantron95945(SheetProcessor):
         Returns:
             None
         """
-        super().__init__()  
         self.pdf_name = None
         self.pdf_path = pdf_path
         self.source_folder = "data"
