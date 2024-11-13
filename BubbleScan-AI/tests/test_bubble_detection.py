@@ -6,6 +6,7 @@ from TestScantron import Scantron95945TestHelper
 import sys
 import os
 import cv2
+import numpy as np
 
 
 

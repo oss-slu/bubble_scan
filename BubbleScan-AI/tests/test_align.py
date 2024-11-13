@@ -9,6 +9,7 @@ import numpy as np
 
 
 class TestAlignImage:
+    """Testing the alignment"""
     def test_correct_alignment(self):
         """Test that the align_image function correctly aligns an image when keypoints are present."""
 
@@ -28,7 +29,7 @@ class TestAlignImage:
         assert aligned.shape == template.shape
 
     def test_missing_keypoints(self):
-        # Test that the align_image function returns the original image when no keypoints are found.
+        """Test that the align_image function returns the original image when no keypoints are found."""
 
         # Create synthetic images without features (completely black)
         image = np.zeros((1000, 1000, 3), dtype=np.uint8)

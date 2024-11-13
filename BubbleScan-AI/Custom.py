@@ -2,9 +2,8 @@
 import os
 import cv2
 import fitz  # PyMuPDF for PDF processing
-import numpy as np
 from SheetProcessor import SheetProcessor
-import matplotlib.pyplot as plt
+
 
 class CustomProcessor(SheetProcessor):
     """Class for processing custom answer sheets with dynamic ROI detection."""

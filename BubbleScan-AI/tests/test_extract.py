@@ -12,7 +12,7 @@ class TestExtractImagesFromPdf:
     @patch('os.makedirs')
     @patch('os.path.exists')
     @patch('os.listdir')
-    def test_valid_pdf_extraction(self, mock_listdir, mock_exists, mock_makedirs, mock_fitz_open):
+    def test_valid_pdf_extraction(self, mock_listdir, mock_exists, mock_fitz_open):
         """Test that images are extracted correctly from a valid PDF."""
 
         # Mock the PDF document and its pages
