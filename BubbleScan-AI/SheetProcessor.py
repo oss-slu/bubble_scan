@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 import os
 import cv2
-import numpy as np
+
 
 class SheetProcessor(ABC):
     """This is parent class for all types of sheet processing"""

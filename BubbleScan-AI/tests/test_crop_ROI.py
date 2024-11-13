@@ -6,7 +6,7 @@ import os
 import cv2
 import numpy as np
 from unittest.mock import patch
-import pytest
+
 
 
 class TestCropROI:
