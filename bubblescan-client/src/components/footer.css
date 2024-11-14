@@ -1,0 +1,54 @@
+.footer {
+  background-color: #ffffff;
+  padding: 1rem;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  color: #333;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo link styling */
+.navbar-logo {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  font-size: larger;
+}
+
+/* Footer text styling */
+.container p {
+  color: #555;
+  font-size: 0.9em;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.logo-div-footer {
+  display: flex;
+  width: 75%;
+}
+
+.p-div-footer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}

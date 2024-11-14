@@ -316,49 +316,73 @@ function CustomExamSheetComponent() {
   };
 
   return (
-    <div>
-      <h1>You can create Custom Sheets here</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          generateExam();
-        }}
-      >
-        <label>
-          Exam Title:
-          <input
-            type="text"
-            value={examTitle}
-            onChange={(e) => setExamTitle(e.target.value)}
-            placeholder="Enter exam title"
-            required
-          />
-        </label>
-        <label>
-          Number of Questions:
-          <input
-            type="number"
-            value={numQuestions}
-            onChange={(e) => setNumQuestions(parseInt(e.target.value))}
-            min="1"
-            required
-          />
-        </label>
-        <label>
-          Number of Answer Options:
-          <input
-            type="number"
-            value={numOptions}
-            onChange={(e) => setNumOptions(parseInt(e.target.value))}
-            min="2"
-            max="26"
-            required
-          />
-        </label>
-        <button type="submit">Generate Exam Sheet</button>
-      </form>
-      <button onClick={printStoredExam}>Print Stored Exam</button>
+  <>
+    <div className="scanComponent">
+      <h2>You Can Create Custom Sheets Here</h2>
+      <div className="formComponent">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            generateExam();
+          }}
+        >
+          <label>
+            Exam Title:
+            <input
+              type="text"
+              value={examTitle}
+              onChange={(e) => setExamTitle(e.target.value)}
+              placeholder="Enter exam title"
+              required
+            />
+          </label>
+          <label>
+            Number of Questions: 
+            <input
+              type="number"
+              value={numQuestions}
+              onChange={(e) => setNumQuestions(parseInt(e.target.value))}
+              min="1"
+              required
+            />
+          </label>
+          <label>
+            Number of Answer Options: 
+            <input
+              type="number"
+              value={numOptions}
+              onChange={(e) => setNumOptions(parseInt(e.target.value))}
+              min="2"
+              max="26"
+              required
+            /> 
+          </label><br />
+          <br />
+          <button type="submit">Generate Exam Sheet</button>
+        </form>
+        <br />
+        <button onClick={printStoredExam}>Print Stored Exam</button>
+      </div>
+
+    
     </div>
+
+    <div className="componentContent">
+          <h3>Scan Your Scranton or Your Custom Sheets</h3>
+          <p>
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Ultrices ex
+            adipiscing mauris posuere quis felis. Consectetur posuere lobortis
+            primis est sagittis. Ultrices gravida penatibus magnis primis
+            rhoncus per varius nisl. Congue malesuada integer euismod dignissim
+            purus. Ad velit fermentum vulputate gravida aptent. Morbi est tempus
+            efficitur turpis blandit rutrum. In nulla nullam phasellus convallis
+            ut natoque metus. Ex placerat nunc iaculis consectetur vehicula
+            pharetra porttitor. Integer potenti massa tortor luctus pellentesque
+            pellentesque litora aliquet egestas.
+          </p>
+        </div>
+    </>
+
   );
 }
 

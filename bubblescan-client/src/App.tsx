@@ -2,8 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import FileUploadComponent from "./components/FileUploadComponent";
 import CustomExamSheetComponent from "./components/CustomExamSheetComponent";
 import config from "./utils/config";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Footer from "./components/Footer"; 
 
 
 function App() {
@@ -11,10 +14,9 @@ function App() {
   const [message, setMessage] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [isFormVisible, setFormVisible] = useState(false);
-  const [numQuestions, setNumQuestions] = useState<number>(5);  
-  const [numOptions, setNumOptions] = useState<number>(4); 
-  const [examTitle, setExamTitle] = useState('');
-  
+  const [numQuestions, setNumQuestions] = useState<number>(5);
+  const [numOptions, setNumOptions] = useState<number>(4);
+  const [examTitle, setExamTitle] = useState("");
 
   // Fetch initial data from Flask
   useEffect(() => {
@@ -24,7 +26,6 @@ function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  
   // Function to send message to Flask
   const sendMessage = async () => {
     console.log("Sending message to Flask...");
@@ -45,17 +46,36 @@ function App() {
     }
   };
 
-
   return (
-    <div className="welcome">
-      <h1>Welcome to Bubble Scan</h1>
-      <h4>You can upload your files below</h4>
-      <FileUploadComponent />
+    // <>
+    // <Header />
+    //   <div className="welcome">
 
-      
-      <CustomExamSheetComponent />
-    </div>
+    //     <h1>Welcome to Bubble Scan</h1>
+    //     <h4>You can upload your files below</h4>
+    //     <FileUploadComponent />
+
+    //     <CustomExamSheetComponent />
+    //   </div>
+    //   </>
+    <Router>
+      <div className="main-container">
+        <Header />
+        <div className="main-content">
+          <div className="appContent">
+            <div>
+              <Routes>
+                <Route path = "/" element = {<Home />}/>
+                <Route path = "/custom-sheets" element = {<CustomExamSheetComponent />}/>
+                <Route path = "/scan-sheets" element = {<FileUploadComponent />}/>
+              </Routes>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
