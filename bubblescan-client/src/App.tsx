@@ -3,7 +3,15 @@ import FileUploadComponent from "./components/FileUploadComponent";
 import CustomExamSheetComponent from "./components/CustomExamSheetComponent";
 import config from "./utils/config";
 
-import "./App.css";
+import "./styles/App.css";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Customsheets from "./pages/Customsheets";
+import Scan from "./pages/Scan";
+import Aboutus from "./pages/AboutUs";
 
 
 function App() {
@@ -11,10 +19,10 @@ function App() {
   const [message, setMessage] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [isFormVisible, setFormVisible] = useState(false);
-  const [numQuestions, setNumQuestions] = useState<number>(5);  
-  const [numOptions, setNumOptions] = useState<number>(4); 
+  const [numQuestions, setNumQuestions] = useState<number>(5);
+  const [numOptions, setNumOptions] = useState<number>(4);
   const [examTitle, setExamTitle] = useState('');
-  
+
 
   // Fetch initial data from Flask
   useEffect(() => {
@@ -24,7 +32,7 @@ function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  
+
   // Function to send message to Flask
   const sendMessage = async () => {
     console.log("Sending message to Flask...");
@@ -47,14 +55,18 @@ function App() {
 
 
   return (
-    <div className="welcome">
-      <h1>Welcome to Bubble Scan</h1>
-      <h4>You can upload your files below</h4>
-      <FileUploadComponent />
-
-      
-      <CustomExamSheetComponent />
-    </div>
+    <Router>
+      <Header />
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Scan" element={<Scan />} />
+          <Route path="/customsheets" element={<Customsheets />} />
+          <Route path="/AboutUs" element={<Aboutus />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
   );
 };
 
