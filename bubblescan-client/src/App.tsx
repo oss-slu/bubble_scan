@@ -6,9 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Footer from "./components/Footer"; 
-import AboutUs from "./components/AboutUs"; 
-
+import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const [data, setData] = useState<string>("");
@@ -48,17 +47,6 @@ function App() {
   };
 
   return (
-    // <>
-    // <Header />
-    //   <div className="welcome">
-
-    //     <h1>Welcome to Bubble Scan</h1>
-    //     <h4>You can upload your files below</h4>
-    //     <FileUploadComponent />
-
-    //     <CustomExamSheetComponent />
-    //   </div>
-    //   </>
     <Router>
       <div className="main-container">
         <Header />
@@ -66,10 +54,13 @@ function App() {
           <div className="appContent">
             <div>
               <Routes>
-                <Route path = "/" element = {<Home />}/>
-                <Route path = "/custom-sheets" element = {<CustomExamSheetComponent />}/>
-                <Route path = "/scan-sheets" element = {<FileUploadComponent />}/>
-                <Route path = "/about-us" element = {<AboutUs />}/>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/custom-sheets"
+                  element={<CustomExamSheetComponent />}
+                />
+                <Route path="/scan-sheets" element={<FileUploadComponent />} />
+                <Route path="/about-us" element={<AboutUs />} />
               </Routes>
             </div>
           </div>
