@@ -186,6 +186,7 @@ class AppServer:
             # Write CSV data to file
             with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 csv_file.write(csv_data)
+                print(f"CSV Data written successfully to {csv_file_path}")
 
             # Save CSV file path for download
             self.csv_files[file_id] = {'filename': csv_filename, 'path': csv_file_path}
@@ -202,7 +203,7 @@ class AppServer:
         Transforms JSON data to CSV format.
 
         Parameters:
-            json_data (dict): JSON data to be converted to CSV.
+            json_data (list or dict): JSON data to be converted to CSV.
 
         Returns:
             str: CSV data as a string.
@@ -210,40 +211,44 @@ class AppServer:
         csv_data = ''
         print("The JSON data received is:", json_data)
 
-        if not isinstance(json_data, dict) or 'students' not in json_data:
+        # Check if json_data is a list (for custom sheets) or a dict with a 'students' key (for standard sheets)
+        if isinstance(json_data, list):  # If it's a list, assume it's the custom sheet data
+            students = json_data
+        elif isinstance(json_data, dict) and 'students' in json_data:
+            students = json_data['students']
+        else:
             print("Invalid JSON data format")
             return csv_data
 
-        students = json_data['students']
         if not students:
             print("No student data found")
             return csv_data
 
-        student_data = students[0]
-        if 'answers' not in student_data:
-            print("No 'answers' key found in student data")
-            return csv_data
+        # Get question headers from the first student's answers
+        first_student = students[0]
+        keys = [f"Q{i}" for i in range(1, 51)]
+        csv_data += ','.join(['studentID'] + keys) + '\n'
 
-        keys = student_data['answers'].keys()
-        print("Keys:", keys)
-        csv_data += ','.join(['studentID'] + list(keys)) + '\n'
-
+        # Process each student's data
         for student in students:
             student_id = student.get('studentID', '')
             answers = []
+            
+            # Gather answers for each question, handling None and multiple answers
             for key in keys:
-                answer = student['answers'].get(key, '')
+                answer = student.get(key, '')
                 if isinstance(answer, list):
-                    answer = '|'.join(answer)
+                    answer = '|'.join(answer)  # Join multiple answers with '|'
                 elif answer is None:
-                    answer = ''
+                    answer = ''  # Convert None to empty string
                 answers.append(answer)
-            print("Student ID:", student_id)
-            print("Answers:", answers)
+            
+            # Add the student data as a new row in CSV
             csv_data += ','.join([student_id] + answers) + '\n'
 
-        print("The CSV data converted is: ", csv_data)
+        print("Final CSV data:\n", csv_data)
         return csv_data
+
 
     def download_csv(self, file_id):
         """
