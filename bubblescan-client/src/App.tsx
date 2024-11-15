@@ -7,6 +7,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Footer from "./components/Footer"; 
+import AboutUs from "./components/AboutUs"; 
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                 <Route path = "/" element = {<Home />}/>
                 <Route path = "/custom-sheets" element = {<CustomExamSheetComponent />}/>
                 <Route path = "/scan-sheets" element = {<FileUploadComponent />}/>
+                <Route path = "/about-us" element = {<AboutUs />}/>
               </Routes>
             </div>
           </div>

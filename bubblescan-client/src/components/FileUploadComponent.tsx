@@ -74,6 +74,7 @@ function FileUploadComponent() {
   };
 
   return (
+    <>
     <div className="scanComponent">
      <h2>Scan Your Files Here</h2>
       <div className="formComponent">
@@ -130,6 +131,21 @@ function FileUploadComponent() {
         )}
       </div>
     </div>
+
+<div className="componentContent">
+<h3>Scan Your Scranton or Your Custom Sheets</h3>
+<p>
+  Lorem ipsum odor amet, consectetuer adipiscing elit. Ultrices ex
+  adipiscing mauris posuere quis felis. Consectetur posuere lobortis
+  primis est sagittis. Ultrices gravida penatibus magnis primis
+  rhoncus per varius nisl. Congue malesuada integer euismod dignissim
+  purus. Ad velit fermentum vulputate gravida aptent. Morbi est tempus
+  efficitur turpis blandit rutrum. In nulla nullam phasellus convallis
+  ut natoque metus. Ex placerat nunc iaculis consectetur vehicula
+  pharetra porttitor. Integer potenti massa tortor luctus pellentesque
+  pellentesque litora aliquet egestas.
+</p>
+</div></>
   );
 }
 

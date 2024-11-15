@@ -368,7 +368,7 @@ function CustomExamSheetComponent() {
     </div>
 
     <div className="componentContent">
-          <h3>Scan Your Scranton or Your Custom Sheets</h3>
+          <h3>Creating Your Custom Exam Sheets</h3>
           <p>
             Lorem ipsum odor amet, consectetuer adipiscing elit. Ultrices ex
             adipiscing mauris posuere quis felis. Consectetur posuere lobortis
@@ -380,7 +380,7 @@ function CustomExamSheetComponent() {
             pharetra porttitor. Integer potenti massa tortor luctus pellentesque
             pellentesque litora aliquet egestas.
           </p>
-        </div>
+    </div>
     </>
 
   );
