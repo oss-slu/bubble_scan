@@ -2,6 +2,7 @@ import os
 import csv
 import cv2
 import fitz  # PyMuPDF for PDF processing
+import shutil
 import numpy as np
 from BubbleScan_AI.SheetProcessor import SheetProcessor
 import matplotlib.pyplot as plt
@@ -14,22 +15,32 @@ class CustomProcessor(SheetProcessor):
         self.template_path = template_path
         self.output_folder = "data"
         self.extractImagesFromPdf()
-        # Uncomment if template matching is necessary for alignment
-        # self.template_matching()
         self.extractROIs()
 
     def extractImagesFromPdf(self):
         """
         Separate the custom sheet PDF into individual pages and save them as images.
+        Clears old data before processing.
         """
+        # Paths for aligned and ROI directories
+        aligned_folder = os.path.join(self.output_folder, "customAligned")
+        roi_folder_base = os.path.join(self.output_folder, "customROIs")
+
+        # Clear existing files in the aligned and ROI folders
+        if os.path.exists(aligned_folder):
+            shutil.rmtree(aligned_folder)  # Deletes the folder and its contents
+        if os.path.exists(roi_folder_base):
+            shutil.rmtree(roi_folder_base)
+
+        os.makedirs(aligned_folder, exist_ok=True)  # Recreate an empty directory
+        os.makedirs(roi_folder_base, exist_ok=True)
+
+        # Extract images from PDF
         pdf_document = fitz.open(self.pdf_path)
         print("------Extracting all Images from Custom PDF------")
 
-        aligned_folder = os.path.join(self.output_folder, "customAligned")
-        os.makedirs(aligned_folder, exist_ok=True)
-
         for page_number, page in enumerate(pdf_document):
-            image_filename = f"CustomImage_{page_number + 1}.jpg"
+            image_filename = f"CustomImage_{page_number + 1:03}.jpg"  # Zero-padded filename
             image_path = os.path.join(aligned_folder, image_filename)
 
             # Convert each page to an image and save
@@ -41,31 +52,8 @@ class CustomProcessor(SheetProcessor):
             pix.save(image_path)
             print(f"Extracted {image_filename}")
 
+
         pdf_document.close()
-
-    def template_matching(self):
-        """
-        Align each page with the template for consistency in ROI extraction.
-        """
-        print("------Template Matching for Custom Sheets------")
-        template = cv2.imread(self.template_path)
-        aligned_folder = os.path.join(self.output_folder, "customAligned")
-        output_folder = os.path.join(self.output_folder, "customROIs")
-
-        image_files = [f for f in os.listdir(aligned_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
-
-        for image_file in sorted(image_files):
-            image_path = os.path.join(aligned_folder, image_file)
-            image = cv2.imread(image_path)
-
-            # Implement custom alignment here if necessary
-            aligned_image = self.align_image(image, template)
-
-            # Save aligned image if alignment is done
-            if aligned_image is not None:
-                aligned_path = os.path.join(output_folder, image_file)
-                cv2.imwrite(aligned_path, aligned_image)
-                print(f"Aligned and saved {image_file}")
 
     def extractROIs(self):
         """Extract regions of interest for each custom sheet image."""
@@ -78,6 +66,7 @@ class CustomProcessor(SheetProcessor):
         # List all images in the customAligned folder
         image_files = [f for f in os.listdir(aligned_images_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
+        # Ensure consistent ordering by sorting filenames
         for image_file in sorted(image_files):
             image_path = os.path.join(aligned_images_folder, image_file)
             print(f"Processing file: {image_file} for ROI extraction")
@@ -159,7 +148,7 @@ class CustomProcessor(SheetProcessor):
             filled_digit = self.bubble_column(binary, num_bubbles)
 
             # Append the detected digit to the student ID, or 'X' if not detected
-            student_id += str(filled_digit) if filled_digit is not None else 'X'
+            student_id += str(filled_digit) if filled_digit is not None else ''
 
         return student_id
     
@@ -342,11 +331,25 @@ class CustomProcessor(SheetProcessor):
             print("No data to save.")
             return
 
-        headers = ["studentID"] + [f"Q{i}" for i in range(1, 51)]
+        # Define standard headers for 50 questions
+        expected_headers = ["studentID"] + [f"Q{i}" for i in range(1, 51)]
+
+        # Check for unexpected keys
+        all_keys = set(expected_headers)
+        for student_data in students_results:
+            all_keys.update(student_data.keys())
+
+        # adding new headers dynamically
+        if all_keys != set(expected_headers):
+            print("Warning: Unexpected keys detected in responses. Adjusting headers dynamically.")
+            expected_headers = sorted(all_keys)  # consistent order
+
         with open(csv_path, mode='w', newline='') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=headers)
+            writer = csv.DictWriter(csv_file, fieldnames=expected_headers)
             writer.writeheader()
             for student_data in students_results:
-                writer.writerow(student_data)
+                # Fill missing keys with empty strings
+                row = {key: student_data.get(key, '') for key in expected_headers}
+                writer.writerow(row)
 
         print(f"Results saved to {csv_path}")
