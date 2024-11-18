@@ -43,46 +43,43 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-      - name: Create a new Git tag with daily versioning for Windows
+      - name: Create a new Git tag with incremental versioning for Windows
         id: create_tag
         shell: powershell
         run: |
-          # Set the version file location
-          $VersionFile = ".version_tracker"
+          # Fetch the latest tags from the repository
+          git fetch --tags
 
-          # Get the current date (e.g., "20241118")
-          $Today = Get-Date -Format "yyyyMMdd"
-
-          # Initialize or increment the version number
-          if (Test-Path $VersionFile) {
-              $Content = Get-Content $VersionFile
-              $LastDate, $LastVersion = $Content -split " "
-
-              if ($LastDate -eq $Today) {
-                  # Same day, increment version
-                  $Version = [int]$LastVersion + 1
-              } else {
-                  # New day, reset version to 1
-                  $Version = 1
-              }
+          # Get the latest tag
+          $LatestTag = git describe --tags --abbrev=0 2>$null
+          if (-not $LatestTag) {
+              # If no tags exist, start with v1.0.0
+              $NewTag = "v1.0.0-Windows"
           } else {
-              # No version file, start at version 1
-              $Version = 1
+              # Extract the version numbers
+              if ($LatestTag -match "v(\d+)\.(\d+)\.(\d+)-Windows") {
+                  $Major = [int]$matches[1]
+                  $Minor = [int]$matches[2]
+                  $Patch = [int]$matches[3]
+                  # Increment the patch version
+                  $Patch++
+                  $NewTag = "v$Major.$Minor.$Patch-Windows"
+              } else {
+                  throw "Unable to parse version from latest tag: $LatestTag"
+              }
           }
 
-          # Save the current date and version
-          "$Today $Version" | Set-Content $VersionFile
+          # Output the new tag
+          echo "New tag: $NewTag"
+          echo "TAG=$NewTag" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "::set-output name=TAG::$NewTag"
 
-          # Create the tag (e.g., "v20241118-1-Windows")
-          $Tag = "v$Today-$Version-Windows"
-          echo "TAG=$Tag" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "::set-output name=TAG::$Tag"
-
-          # Push the tag
-          git tag $Tag
-          git push origin $Tag
+          # Create and push the new tag
+          git tag $NewTag
+          git push origin $NewTag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
       - name: Upload to GitHub Release
@@ -133,45 +130,40 @@ jobs:
         run: |
           zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
-      - name: Create a new Git tag with daily versioning for macOS
+      - name: Create a new Git tag with incremental versioning for macOS
         id: create_tag
         shell: bash
         run: |
-          # Get the current date (e.g., "20241118")
-          TODAY=$(date +'%Y%m%d')
+          # Fetch the latest tags from the repository
+          git fetch --tags
 
-          # Path to the version file
-          VERSION_FILE=".version_tracker"
-
-          # Initialize or increment the version number
-          if [[ -f $VERSION_FILE ]]; then
-            # Read the last date and version
-            LAST_DATE=$(cut -d' ' -f1 $VERSION_FILE)
-            LAST_VERSION=$(cut -d' ' -f2 $VERSION_FILE)
-
-            if [[ "$LAST_DATE" == "$TODAY" ]]; then
-              # Same day, increment version
-              VERSION=$((LAST_VERSION + 1))
-            else
-              # New day, reset version to 1
-              VERSION=1
-            fi
+          # Get the latest tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null)
+          if [[ -z "$LATEST_TAG" ]]; then
+              # If no tags exist, start with v1.0.0
+              NEW_TAG="v1.0.0-macOS"
           else
-            # No version file, start at version 1
-            VERSION=1
+              # Extract the version numbers
+              MAJOR=$(echo "$LATEST_TAG" | sed -E 's/v([0-9]+)\..*/\1/')
+              MINOR=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.([0-9]+)\..*/\1/')
+              PATCH=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)-macOS/\1/')
+
+              # Increment the patch version
+              PATCH=$((PATCH + 1))
+
+              # Generate the new tag
+              NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}-macOS"
           fi
 
-          # Save the current date and version
-          echo "$TODAY $VERSION" > $VERSION_FILE
+          # Output the new tag
+          echo "New tag: $NEW_TAG"
+          echo "TAG=$NEW_TAG" >> $GITHUB_ENV
+          echo "::set-output name=TAG::$NEW_TAG"
 
-          # Create the tag (e.g., "v20241118-1-macOS")
-          TAG="v${TODAY}-${VERSION}-macOS"
-          echo "TAG=$TAG" >> $GITHUB_ENV
-          echo "::set-output name=TAG::$TAG"
+          # Create and push the new tag
+          git tag "$NEW_TAG"
+          git push origin "$NEW_TAG"
 
-          # Push the tag
-          git tag $TAG
-          git push origin $TAG
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
