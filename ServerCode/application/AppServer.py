@@ -2,16 +2,20 @@
 This module provides functionalities to upload files.
 Convert JSON to CSV and allow dowloading the CSV.
 """
-import os
 import logging
-import webbrowser
-from werkzeug.utils import secure_filename
-from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
-from flask_cors import CORS
-from config import CORS_ORIGINS
-from Scantron import Scantron95945
 import logging.config
 import os
+import webbrowser
+
+# Third-party imports
+from flask import Flask, jsonify, redirect, request, send_from_directory, url_for
+from flask_cors import CORS
+from werkzeug.utils import secure_filename
+
+# Local application imports
+from config import CORS_ORIGINS
+from Scantron import Scantron95945
+
 
 # Load logging configuration
 logging.config.fileConfig(os.path.join(os.path.dirname(__file__), 'logging.conf'))
