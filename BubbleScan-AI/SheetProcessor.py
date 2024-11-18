@@ -1,9 +1,11 @@
+"""This is parent for all types of sheet processing"""
 from abc import ABC, abstractmethod
 import os
 import cv2
-import numpy as np
+
 
 class SheetProcessor(ABC):
+    """This is parent class for all types of sheet processing"""
     def __init__(self, pdf_path, template_path, output_folder="data"):
         self.pdf_path = pdf_path
         self.template_path = template_path
@@ -11,9 +13,11 @@ class SheetProcessor(ABC):
 
     @abstractmethod
     def extractROIs(self):
+        """Getting gthe ROI"""
         pass
 
     def extractImagesFromPdf(self):
+        """Getting the Image form large PDF files"""
         pass
 
     def save_cropped_image(self, image, name):

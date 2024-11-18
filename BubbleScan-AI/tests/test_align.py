@@ -1,15 +1,17 @@
-import pytest
-import sys
-import os
+"""Testing the alignment"""
 # Adding the parent directory to the system path to import Scantron95945
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
+import sys
+import os
 import cv2
 import numpy as np
-from Scantron import Scantron95945
+
 
 class TestAlignImage:
+    """Testing the alignment"""
     def test_correct_alignment(self):
-        # Test that the align_image function correctly aligns an image when keypoints are present.
+        """Test that the align_image function correctly aligns an image when keypoints are present."""
 
         # Create synthetic images with features (a white circle in the center)
         image = np.zeros((1000, 1000, 3), dtype=np.uint8)
@@ -27,7 +29,7 @@ class TestAlignImage:
         assert aligned.shape == template.shape
 
     def test_missing_keypoints(self):
-        # Test that the align_image function returns the original image when no keypoints are found.
+        """Test that the align_image function returns the original image when no keypoints are found."""
 
         # Create synthetic images without features (completely black)
         image = np.zeros((1000, 1000, 3), dtype=np.uint8)
