@@ -140,17 +140,20 @@ jobs:
           # Fetch all tags from the repository
           git fetch --tags
 
-          # Get the latest tag, if it exists
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          # Initialize the base version
+          BASE_TAG="v1.0.0-macOS"
 
-          if [[ -z "$LATEST_TAG" ]]; then
-              # No tags exist; start with v1.0.0-macOS
-              NEW_TAG="v1.0.0-macOS"
+          # Get the highest existing tag for macOS
+          HIGHEST_TAG=$(git tag --list 'v*-macOS' | sort -V | tail -n 1)
+
+          if [[ -z "$HIGHEST_TAG" ]]; then
+              # If no tags exist, start with the base tag
+              NEW_TAG="$BASE_TAG"
           else
               # Extract the version numbers
-              MAJOR=$(echo "$LATEST_TAG" | sed -E 's/v([0-9]+)\..*/\1/')
-              MINOR=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.([0-9]+)\..*/\1/')
-              PATCH=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)-macOS/\1/')
+              MAJOR=$(echo "$HIGHEST_TAG" | sed -E 's/v([0-9]+)\..*/\1/')
+              MINOR=$(echo "$HIGHEST_TAG" | sed -E 's/v[0-9]+\.([0-9]+)\..*/\1/')
+              PATCH=$(echo "$HIGHEST_TAG" | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)-macOS/\1/')
 
               # Increment the patch version
               PATCH=$((PATCH + 1))
@@ -167,6 +170,7 @@ jobs:
           # Create and push the new tag
           git tag "$NEW_TAG"
           git push origin "$NEW_TAG"
+
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
