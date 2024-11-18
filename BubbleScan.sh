@@ -31,7 +31,7 @@ echo "Checking for and uninstalling pathlib package..."
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not found, skipping."
 
 # Install dependencies from requirements.txt while ensuring pathlib is not reinstalled
-pip freeze > requirements.txt
+pip install requirements.txt
 pip install pyinstaller
 pip list
 

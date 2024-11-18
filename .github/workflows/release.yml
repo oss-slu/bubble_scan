@@ -49,9 +49,6 @@ jobs:
         run: |
           # Generate a timestamp-based tag
           $Tag = "v$(Get-Date -Format 'yyyyMMddHHmmss')-Windows"
-
-          # Output the new tag
-          echo "New tag: $Tag"
           echo "TAG=$Tag" | Out-File -FilePath $env:GITHUB_ENV -Append
 
           # Create and push the new tag
@@ -59,6 +56,15 @@ jobs:
           git push origin $Tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ServerCode/dist/BubbleScan.zip
+          tag_name: ${{ env.TAG }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
   build-macos:
@@ -107,9 +113,6 @@ jobs:
         run: |
           # Generate a timestamp-based tag
           TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
-
-          # Output the new tag
-          echo "New tag: $TAG"
           echo "TAG=$TAG" >> $GITHUB_ENV
 
           # Create and push the new tag
@@ -117,8 +120,6 @@ jobs:
           git push origin "$TAG"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
