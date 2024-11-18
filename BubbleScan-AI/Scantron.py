@@ -24,6 +24,8 @@ class Scantron95945(SheetProcessor):
         Returns:
             None
         """
+        template_path = "template.jpg"
+        super().__init__(pdf_path=pdf_path, template_path=template_path)
         self.pdf_name = None
         self.pdf_path = pdf_path
         self.source_folder = "data"
