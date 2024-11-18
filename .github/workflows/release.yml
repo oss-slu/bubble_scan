@@ -43,17 +43,47 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-      - name: Create a new Git tag
+      - name: Create a new Git tag with daily versioning for Windows
         id: create_tag
         shell: powershell
         run: |
-          $TAG = "v$(Get-Date -Format 'yyyyMMdd')-Windows"
-          echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "::set-output name=TAG::$TAG"
-          git tag $TAG
-          git push origin $TAG
+          # Set the version file location
+          $VersionFile = ".version_tracker"
+
+          # Get the current date (e.g., "20241118")
+          $Today = Get-Date -Format "yyyyMMdd"
+
+          # Initialize or increment the version number
+          if (Test-Path $VersionFile) {
+              $Content = Get-Content $VersionFile
+              $LastDate, $LastVersion = $Content -split " "
+
+              if ($LastDate -eq $Today) {
+                  # Same day, increment version
+                  $Version = [int]$LastVersion + 1
+              } else {
+                  # New day, reset version to 1
+                  $Version = 1
+              }
+          } else {
+              # No version file, start at version 1
+              $Version = 1
+          }
+
+          # Save the current date and version
+          "$Today $Version" | Set-Content $VersionFile
+
+          # Create the tag (e.g., "v20241118-1-Windows")
+          $Tag = "v$Today-$Version-Windows"
+          echo "TAG=$Tag" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "::set-output name=TAG::$Tag"
+
+          # Push the tag
+          git tag $Tag
+          git push origin $Tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
@@ -103,17 +133,45 @@ jobs:
         run: |
           zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
-      - name: Create a new Git tag
+      - name: Create a new Git tag with daily versioning for macOS
         id: create_tag
         shell: bash
         run: |
-          TAG="v$(date +'%Y%m%d')-macOS"
+          # Get the current date (e.g., "20241118")
+          TODAY=$(date +'%Y%m%d')
+
+          # Path to the version file
+          VERSION_FILE=".version_tracker"
+
+          # Initialize or increment the version number
+          if [[ -f $VERSION_FILE ]]; then
+            # Read the last date and version
+            LAST_DATE=$(cut -d' ' -f1 $VERSION_FILE)
+            LAST_VERSION=$(cut -d' ' -f2 $VERSION_FILE)
+
+            if [[ "$LAST_DATE" == "$TODAY" ]]; then
+              # Same day, increment version
+              VERSION=$((LAST_VERSION + 1))
+            else
+              # New day, reset version to 1
+              VERSION=1
+            fi
+          else
+            # No version file, start at version 1
+            VERSION=1
+          fi
+
+          # Save the current date and version
+          echo "$TODAY $VERSION" > $VERSION_FILE
+
+          # Create the tag (e.g., "v20241118-1-macOS")
+          TAG="v${TODAY}-${VERSION}-macOS"
           echo "TAG=$TAG" >> $GITHUB_ENV
           echo "::set-output name=TAG::$TAG"
+
+          # Push the tag
           git tag $TAG
           git push origin $TAG
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
