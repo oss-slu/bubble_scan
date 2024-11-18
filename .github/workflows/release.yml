@@ -43,55 +43,23 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-      - name: Create a new Git tag with incremental versioning for Windows
+      - name: Create a new Git tag with date and time for Windows
         id: create_tag
         shell: powershell
         run: |
-          # Fetch all tags from the repository
-          git fetch --tags
-
-          # Get the latest tag, if it exists
-          try {
-              $LatestTag = git describe --tags --abbrev=0 2>$null
-          } catch {
-              $LatestTag = $null
-          }
-
-          if (-not $LatestTag) {
-              # No tags exist; start with v1.0.0
-              $NewTag = "v1.0.0-Windows"
-          } else {
-              # Extract the version numbers
-              if ($LatestTag -match "v(\d+)\.(\d+)\.(\d+)-Windows") {
-                  $Major = [int]$matches[1]
-                  $Minor = [int]$matches[2]
-                  $Patch = [int]$matches[3]
-                  # Increment the patch version
-                  $Patch++
-                  $NewTag = "v$Major.$Minor.$Patch-Windows"
-              } else {
-                  throw "Unable to parse version from latest tag: $LatestTag"
-              }
-          }
+          # Generate a timestamp-based tag
+          $Tag = "v$(Get-Date -Format 'yyyyMMddHHmmss')-Windows"
 
           # Output the new tag
-          echo "New tag: $NewTag"
-          echo "TAG=$NewTag" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "::set-output name=TAG::$NewTag"
+          echo "New tag: $Tag"
+          echo "TAG=$Tag" | Out-File -FilePath $env:GITHUB_ENV -Append
 
           # Create and push the new tag
-          git tag $NewTag
-          git push origin $NewTag
+          git tag $Tag
+          git push origin $Tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ServerCode/dist/Bubblescan.zip
-          tag_name: ${{ steps.create_tag.outputs.TAG }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-macos:
     runs-on: macos-latest
@@ -133,43 +101,23 @@ jobs:
         run: |
           zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
-      - name: Create a new Git tag with incremental versioning for macOS
+      - name: Create a new Git tag with date and time for macOS
         id: create_tag
         shell: bash
         run: |
-          # Fetch all tags from the repository
-          git fetch --tags
-
-          # Initialize the base version
-          BASE_TAG="v1.0.0-macOS"
-
-          # Get the highest existing tag for macOS
-          HIGHEST_TAG=$(git tag --list 'v*-macOS' | sort -V | tail -n 1)
-
-          if [[ -z "$HIGHEST_TAG" ]]; then
-              # If no tags exist, start with the base tag
-              NEW_TAG="$BASE_TAG"
-          else
-              # Extract the version numbers
-              MAJOR=$(echo "$HIGHEST_TAG" | sed -E 's/v([0-9]+)\..*/\1/')
-              MINOR=$(echo "$HIGHEST_TAG" | sed -E 's/v[0-9]+\.([0-9]+)\..*/\1/')
-              PATCH=$(echo "$HIGHEST_TAG" | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)-macOS/\1/')
-
-              # Increment the patch version
-              PATCH=$((PATCH + 1))
-
-              # Generate the new tag
-              NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}-macOS"
-          fi
+          # Generate a timestamp-based tag
+          TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
 
           # Output the new tag
-          echo "New tag: $NEW_TAG"
-          echo "TAG=$NEW_TAG" >> $GITHUB_ENV
-          echo "::set-output name=TAG::$NEW_TAG"
+          echo "New tag: $TAG"
+          echo "TAG=$TAG" >> $GITHUB_ENV
 
           # Create and push the new tag
-          git tag "$NEW_TAG"
-          git push origin "$NEW_TAG"
+          git tag "$TAG"
+          git push origin "$TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
       - name: Upload to GitHub Release
