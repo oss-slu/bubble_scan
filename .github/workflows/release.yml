@@ -31,7 +31,7 @@ jobs:
       - name: Verify BubbleScan exists
         shell: bash
         run: |
-          if [ -f "ServerCode/dist/BubbleScan.exe" ]; then
+          if [ -f "ServerCode/dist/BubbleScan-Windows.exe" ]; then
               echo "BubbleScan found in ServerCode/dist."
           else
               echo "BubbleScan not found in ServerCode/dist."
@@ -40,7 +40,7 @@ jobs:
 
       - name: Zip files for release
         run: |
-          Compress-Archive -Path ServerCode/dist/BubbleScan.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
+          Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
       - name: Create a new Git tag
@@ -91,7 +91,7 @@ jobs:
       - name: Verify BubbleScan exists
         shell: bash
         run: |
-          if [ -f "ServerCode/dist/BubbleScan.exe" ]; then
+          if [ -f "ServerCode/dist/BubbleScan-macOS" ]; then
               echo "BubbleScan found in ServerCode/dist."
           else
               echo "BubbleScan not found in ServerCode/dist."
@@ -101,7 +101,7 @@ jobs:
       - name: Zip files for release
         shell: bash
         run: |
-          zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan.exe ServerCode/dist/static
+          zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
       - name: Create a new Git tag
         id: create_tag

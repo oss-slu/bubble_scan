@@ -41,8 +41,27 @@ echo "Current working directory: $PWD"
 echo "Environment details:"
 env
 
-# Run PyInstaller
-pyinstaller --onefile --name BubbleScan --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+# Detect platform
+OS=$(uname)
+echo "Detected platform: $OS"
+
+# Platform-specific builds
+if [[ "$OS" == "Darwin" ]]; then
+    # macOS build
+    echo "Building macOS binary..."
+    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+elif [[ "$OS" == "Linux" ]]; then
+    # Cross-compilation for both macOS and Windows (requires Wine for Windows build)
+    echo "Building macOS binary..."
+    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+
+    echo "Building Windows binary..."
+    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --hidden-import=fitz application/AppServer.py
+else
+    # Windows build
+    echo "Building Windows binary..."
+    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --hidden-import=fitz application/AppServer.py
+fi
 
 # Deactivate the virtual environment
 deactivate
@@ -52,9 +71,6 @@ cd ..
 mkdir -p ServerCode/dist  # Ensure dist directory exists
 cp -r ServerCode/application/static ServerCode/dist
 
-# Rename BubbleScan to BubbleScan.exe if no extension exists
-if [ -f "ServerCode/dist/BubbleScan" ]; then
-    mv ServerCode/dist/BubbleScan ServerCode/dist/BubbleScan.exe
-    echo "Renamed BubbleScan to BubbleScan.exe."
-fi
-
+# Verify build outputs
+echo "Build outputs:"
+ls -l ServerCode/dist
