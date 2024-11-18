@@ -47,7 +47,7 @@ jobs:
         id: create_tag
         shell: powershell
         run: |
-          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss')"
+          $TAG = "v$(Get-Date -Format 'yyyyMMdd')-Windows"
           echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "::set-output name=TAG::$TAG"
           git tag $TAG
@@ -101,13 +101,13 @@ jobs:
       - name: Zip files for release
         shell: bash
         run: |
-          zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan ServerCode/dist/static
+          zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan.exe ServerCode/dist/static
 
       - name: Create a new Git tag
         id: create_tag
         shell: bash
         run: |
-          TAG="v$(date +'%Y%m%d%H%M%S')"
+          TAG="v$(date +'%Y%m%d')-macOS"
           echo "TAG=$TAG" >> $GITHUB_ENV
           echo "::set-output name=TAG::$TAG"
           git tag $TAG
