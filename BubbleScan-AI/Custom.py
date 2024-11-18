@@ -1,9 +1,9 @@
+"""Custom Sheet Processing Logic."""
 import os
 import cv2
 import fitz  # PyMuPDF for PDF processing
-import numpy as np
 from SheetProcessor import SheetProcessor
-import matplotlib.pyplot as plt
+
 
 class CustomProcessor(SheetProcessor):
     """Class for processing custom answer sheets with dynamic ROI detection."""
@@ -127,4 +127,3 @@ class CustomProcessor(SheetProcessor):
         cv2.imwrite(student_id_path, student_id_roi)
 
         return first_column_path, second_column_path, key_id_path, student_id_path
-

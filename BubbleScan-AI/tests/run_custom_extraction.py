@@ -1,7 +1,9 @@
-import sys
-import os
+"""Run Extraction"""
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Custom import CustomProcessor
+import sys
+import os
+
 
 # Path to your PDF file
 pdf_path = 'PDF/CustomSheets.pdf'

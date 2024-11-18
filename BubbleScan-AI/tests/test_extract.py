@@ -1,18 +1,19 @@
-import pytest
+"""Test the Data Extraction function"""
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from unittest.mock import patch, MagicMock
-from Scantron import Scantron95945
+
 
 class TestExtractImagesFromPdf:
+    """Test the Data Extraction function"""
     @patch('fitz.open')
     @patch('os.makedirs')
     @patch('os.path.exists')
     @patch('os.listdir')
-    def test_valid_pdf_extraction(self, mock_listdir, mock_exists, mock_makedirs, mock_fitz_open):
-        # Test that images are extracted correctly from a valid PDF.
+    def test_valid_pdf_extraction(self, mock_listdir, mock_exists, mock_fitz_open):
+        """Test that images are extracted correctly from a valid PDF."""
 
         # Mock the PDF document and its pages
         mock_pdf = MagicMock()
