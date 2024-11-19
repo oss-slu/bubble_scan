@@ -47,7 +47,7 @@ jobs:
         id: create_tag
         shell: powershell
         run: |
-          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss') - Windows"
+          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss')-Windows"
           echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "::set-output name=TAG::$TAG"
           git tag $TAG
@@ -103,17 +103,17 @@ jobs:
         run: |
           zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
-          - name: Create a new Git tag for macOS
-          id: create_tag
-          shell: bash
-          run: |
-            TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
-            echo "TAG=$TAG" >> $GITHUB_ENV
-            echo "::set-output name=TAG::$TAG"
-            git tag $TAG
-            git push origin $TAG
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a new Git tag for macOS
+        id: create_tag
+        shell: bash
+        run: |
+          TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "::set-output name=TAG::$TAG"
+          git tag $TAG
+          git push origin $TAG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Upload macOS binary to GitHub Release
         uses: softprops/action-gh-release@v1
