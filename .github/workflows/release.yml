@@ -43,7 +43,7 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-        - name: Create a new Git tag with date and time for Windows
+      - name: Create a new Git tag with date and time for Windows
         id: create_tag
         shell: powershell
         run: |
@@ -76,8 +76,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-
-
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
