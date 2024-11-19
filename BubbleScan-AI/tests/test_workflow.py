@@ -1,9 +1,10 @@
 """Module for testing the workflow of the application."""
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 import sys
 import os
 from unittest.mock import patch
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 # Adding the parent directory to the system path to import Scantron95945
 
 
