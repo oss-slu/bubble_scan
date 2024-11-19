@@ -6,6 +6,7 @@ import logging
 import logging.config
 import os
 import webbrowser
+import sys
 
 # Third-party imports
 from flask import Flask, jsonify, redirect, request, send_from_directory, url_for
@@ -16,11 +17,17 @@ from werkzeug.utils import secure_filename
 from config import CORS_ORIGINS
 from Scantron import Scantron95945
 
-
 # Load logging configuration
-logging.config.fileConfig(os.path.join(os.path.dirname(__file__), 'logging.conf'))
-logger = logging.getLogger("appServerLogger")
+if getattr(sys, 'frozen', False):
+    # If running as a PyInstaller bundle
+    base_path = sys._MEIPASS
+else:
+    # If running as a script
+    base_path = os.path.dirname(__file__)
 
+logging_conf_path = os.path.join(base_path, 'logging.conf')
+logging.config.fileConfig(logging_conf_path)
+logger = logging.getLogger("appServerLogger")
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})

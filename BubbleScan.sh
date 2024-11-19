@@ -37,8 +37,9 @@ pip install --no-cache-dir -r requirements.txt
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 # Run PyInstaller
-pyinstaller --onefile --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
-
+pyinstaller --onefile --add-data "application/static:static" \
+            --add-data "application/logging.conf:." \
+            --hidden-import=fitz application/AppServer.py
 
 # Deactivate the virtual environment
 deactivate

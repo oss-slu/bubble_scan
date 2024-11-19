@@ -5,7 +5,7 @@ a = Analysis(
     ['application/AppServer.py'],
     pathex=[],
     binaries=[],
-    datas=[('application/static', 'static')],
+    datas=[('application/static', 'static'), ('application/logging.conf', '.')],
     hiddenimports=['fitz'],
     hookspath=[],
     hooksconfig={},
