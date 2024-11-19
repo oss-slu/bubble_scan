@@ -43,7 +43,7 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-        - name: Create a new Git tag
+      - name: Create a new Git tag
         id: create_tag
         shell: powershell
         run: |
