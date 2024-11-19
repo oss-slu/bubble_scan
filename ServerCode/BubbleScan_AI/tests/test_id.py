@@ -1,11 +1,11 @@
 """Module for testing ID extraction functionality."""
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
 import sys
 import os
+# Adding the parent directory to the system path to import Scantron95945
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 import cv2
 import numpy as np
-
 
 class TestStudentID:
     """Tests for the ID extraction functionality."""
