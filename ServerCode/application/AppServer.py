@@ -25,6 +25,7 @@ def get_base_path():
     """
     if getattr(sys, 'frozen', False):
         # If running as a PyInstaller bundle
+        # pylint: disable=W0212
         return sys._MEIPASS
     return os.path.dirname(__file__)
 
