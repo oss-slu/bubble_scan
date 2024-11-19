@@ -115,11 +115,11 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-        - name: Upload macOS binary to GitHub Release
-          uses: softprops/action-gh-release@v1
-          with:
-            files: ServerCode/dist/BubbleScan.zip
-            tag_name: ${{ steps.create_tag.outputs.TAG }}
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload macOS binary to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ServerCode/dist/BubbleScan.zip
+          tag_name: ${{ steps.create_tag.outputs.TAG }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
