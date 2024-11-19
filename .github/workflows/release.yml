@@ -44,38 +44,40 @@ jobs:
         shell: powershell
         
         - name: Create a new Git tag with date and time for Windows
-            id: create_tag
-            shell: powershell
-            run: |
-              # Fetch all tags from the repository
-              git fetch --tags
-          
-              # Filter valid tags for Windows
-              $ValidTags = git tag --list 'v*-Windows' | Select-String -Pattern '^v[0-9]{8}-Windows$' | Sort-Object | Select-Object -Last 1
-          
-              if (-not $ValidTags) {
-                  # If no valid tags exist, start with v1.0.0-Windows
-                  $NewTag = "v1.0.0-Windows"
-              } else {
-                  # Extract the date and increment version
-                  if ($ValidTags -match "v([0-9]{8})-Windows") {
-                      $Date = $matches[1]
-                      $NewTag = "v$($Date)-Windows-$((Get-Random))"
-                  } else {
-                      throw "Unable to parse version from latest tag: $ValidTags"
-                  }
-              }
-          
-              # Output the new tag
-              echo "New tag: $NewTag"
-              echo "TAG=$NewTag" | Out-File -FilePath $env:GITHUB_ENV -Append
-          
-              # Create and push the new tag
-              git tag $NewTag
-              git push origin $NewTag
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: create_tag
+        shell: powershell
+        run: |
+          # Fetch all tags from the repository
+          git fetch --tags
       
+          # Filter valid tags for Windows
+          $ValidTags = git tag --list 'v*-Windows' | Select-String -Pattern '^v[0-9]{8}-Windows$' | Sort-Object | Select-Object -Last 1
+      
+          if (-not $ValidTags) {
+              # If no valid tags exist, start with v1.0.0-Windows
+              $NewTag = "v1.0.0-Windows"
+          } else {
+              # Extract the date and increment version
+              if ($ValidTags -match "v([0-9]{8})-Windows") {
+                  $Date = $matches[1]
+                  $NewTag = "v$($Date)-Windows-$((Get-Random))"
+              } else {
+                  throw "Unable to parse version from latest tag: $ValidTags"
+              }
+          }
+      
+          # Output the new tag
+          echo "New tag: $NewTag"
+          echo "TAG=$NewTag" | Out-File -FilePath $env:GITHUB_ENV -Append
+      
+          # Create and push the new tag
+          git tag $NewTag
+          git push origin $NewTag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+
+
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
