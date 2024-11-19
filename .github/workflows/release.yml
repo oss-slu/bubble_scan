@@ -43,36 +43,15 @@ jobs:
           Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
         shell: powershell
         
-      - name: Create a new Git tag with date and time for Windows
+        - name: Create a new Git tag
         id: create_tag
         shell: powershell
         run: |
-          # Fetch all tags from the repository
-          git fetch --tags
-      
-          # Filter valid tags for Windows
-          $ValidTags = git tag --list 'v*-Windows' | Select-String -Pattern '^v[0-9]{8}-Windows$' | Sort-Object | Select-Object -Last 1
-      
-          if (-not $ValidTags) {
-              # If no valid tags exist, start with v1.0.0-Windows
-              $NewTag = "v1.0.0-Windows"
-          } else {
-              # Extract the date and increment version
-              if ($ValidTags -match "v([0-9]{8})-Windows") {
-                  $Date = $matches[1]
-                  $NewTag = "v$($Date)-Windows-$((Get-Random))"
-              } else {
-                  throw "Unable to parse version from latest tag: $ValidTags"
-              }
-          }
-      
-          # Output the new tag
-          echo "New tag: $NewTag"
-          echo "TAG=$NewTag" | Out-File -FilePath $env:GITHUB_ENV -Append
-      
-          # Create and push the new tag
-          git tag $NewTag
-          git push origin $NewTag
+          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss') - Windows"
+          echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "::set-output name=TAG::$TAG"
+          git tag $TAG
+          git push origin $TAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
@@ -124,45 +103,23 @@ jobs:
         run: |
           zip -r ServerCode/dist/BubbleScan.zip ServerCode/dist/BubbleScan-macOS ServerCode/dist/static
 
-      - name: Create a new Git tag with date and time for macOS
-        id: create_tag
-        shell: bash
-        run: |
-          # Fetch all tags from the repository
-          git fetch --tags
-
-          # Filter and find valid macOS tags
-          LATEST_TAG=$(git tag --list 'v*-macOS' | grep -E '^v[0-9]+(\.[0-9]+)*-macOS$' | sort -V | tail -n 1)
-
-          if [[ -z "$LATEST_TAG" ]]; then
-              # If no valid tags exist, start with v1.0.0-macOS
-              NEW_TAG="v1.0.0-macOS"
-          else
-              # Extract the version numbers
-              MAJOR=$(echo "$LATEST_TAG" | sed -E 's/v([0-9]+)\..*/\1/')
-              MINOR=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.([0-9]+)\..*/\1/')
-              PATCH=$(echo "$LATEST_TAG" | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)-macOS/\1/')
-
-              # Increment the patch version
-              PATCH=$((PATCH + 1))
-
-              # Generate the new tag
-              NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}-macOS"
-          fi
-
-          # Output the new tag
-          echo "New tag: $NEW_TAG"
-          echo "TAG=$NEW_TAG" >> $GITHUB_ENV
-          echo "::set-output name=TAG::$NEW_TAG"
-
-          # Create and push the new tag
-          git tag "$NEW_TAG"
-          git push origin "$NEW_TAG"
-
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ServerCode/dist/BubbleScan.zip
-          tag_name: ${{ steps.create_tag.outputs.TAG }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          - name: Create a new Git tag for macOS
+          id: create_tag
+          shell: bash
+          run: |
+            TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
+            echo "TAG=$TAG" >> $GITHUB_ENV
+            echo "::set-output name=TAG::$TAG"
+            git tag $TAG
+            git push origin $TAG
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+        - name: Upload macOS binary to GitHub Release
+          uses: softprops/action-gh-release@v1
+          with:
+            files: ServerCode/dist/BubbleScan.zip
+            tag_name: ${{ steps.create_tag.outputs.TAG }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
