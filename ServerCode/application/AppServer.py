@@ -18,13 +18,18 @@ from config import CORS_ORIGINS
 from Scantron import Scantron95945
 
 # Load logging configuration
-if getattr(sys, 'frozen', False):
-    # If running as a PyInstaller bundle
-    base_path = sys._MEIPASS
-else:
-    # If running as a script
-    base_path = os.path.dirname(__file__)
+def get_base_path():
+    """
+    Returns the base path depending on whether the script is running
+    in a frozen PyInstaller bundle or as a standalone script.
+    """
+    if getattr(sys, 'frozen', False):
+        # If running as a PyInstaller bundle
+        return sys._MEIPASS
+    return os.path.dirname(__file__)
 
+# Load logging configuration
+base_path = get_base_path()
 logging_conf_path = os.path.join(base_path, 'logging.conf')
 logging.config.fileConfig(logging_conf_path)
 logger = logging.getLogger("appServerLogger")

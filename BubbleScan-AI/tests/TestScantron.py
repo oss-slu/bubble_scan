@@ -1,9 +1,10 @@
 """Testing Scantron Sheet Processing"""
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 import sys
 import os
 import cv2
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 # Adding the parent directory to the system path to import Scantron95945
 
 
