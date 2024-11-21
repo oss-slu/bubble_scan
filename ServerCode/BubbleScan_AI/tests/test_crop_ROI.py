@@ -1,12 +1,13 @@
 """Testing the ROI after Croping"""
+
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
 import cv2
 import numpy as np
 from unittest.mock import patch
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
+
 
 class TestCropROI:
     """Test that crop_roi correctly crops the ROIs when valid markers are present."""
@@ -39,7 +40,7 @@ class TestCropROI:
         mock_align_image.return_value = image
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
         image_path = 'aligned_images/Image_1.jpg'
 
         # Mock os.path.exists to return True

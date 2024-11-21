@@ -1,10 +1,10 @@
 """Test the Data Extraction function"""
+
 import sys
 import os
-# Adding the parent directory to the system path to import Scantron95945
+from unittest.mock import patch, MagicMock
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
-from unittest.mock import patch, MagicMock
 
 class TestExtractImagesFromPdf:
     """Test the Data Extraction function"""
@@ -12,7 +12,7 @@ class TestExtractImagesFromPdf:
     @patch('os.makedirs')
     @patch('os.path.exists')
     @patch('os.listdir')
-    def test_valid_pdf_extraction(self, mock_listdir, mock_exists, mock_fitz_open):
+    def test_valid_pdf_extraction(self, mock_listdir, mock_exists,mock_makedirs, mock_fitz_open):
         """Test that images are extracted correctly from a valid PDF."""
 
         # Mock the PDF document and its pages
@@ -34,7 +34,7 @@ class TestExtractImagesFromPdf:
         mock_listdir.return_value = ['Image_1.jpg']
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Check that the images are saved in the correct directory
         pdf_folder = os.path.join(scantron.output_folder, scantron.pdf_name)

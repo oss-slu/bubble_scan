@@ -1,0 +1,41 @@
+2024-11-11 18:57:14,518 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.10:5001
+2024-11-11 18:57:14,519 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-11 18:57:15,913 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:15] "[33mGET / HTTP/1.1[0m" 404 -
+2024-11-11 18:57:16,821 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-11-11 18:57:58,665 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:58] "GET /api/data HTTP/1.1" 200 -
+2024-11-11 18:57:58,668 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:57:58] "GET /api/data HTTP/1.1" 200 -
+2024-11-11 18:58:21,158 - appServerLogger - INFO - PDF processed successfully for file_id: 039a30355d15071a223890348093d5f1
+2024-11-11 18:58:21,158 - appServerLogger - INFO - PDF processed successfully for file_id: 039a30355d15071a223890348093d5f1
+2024-11-11 18:58:21,159 - werkzeug - INFO - 127.0.0.1 - - [11/Nov/2024 18:58:21] "POST /api/upload HTTP/1.1" 200 -
+2024-11-12 15:21:52,499 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.178.5.45:5001
+2024-11-12 15:21:52,499 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-12 15:21:52,749 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 15:21:52] "[33mGET / HTTP/1.1[0m" 404 -
+2024-11-12 15:23:23,413 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 15:23:23] "GET /api/data HTTP/1.1" 200 -
+2024-11-12 15:23:23,494 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 15:23:23] "GET /api/data HTTP/1.1" 200 -
+2024-11-12 15:23:53,893 - appServerLogger - DEBUG - Starting transformation of JSON data to CSV
+2024-11-12 15:23:53,893 - appServerLogger - DEBUG - Starting transformation of JSON data to CSV
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Keys found for CSV: dict_keys(['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22', 'Q23', 'Q24', 'Q25', 'Q26', 'Q27', 'Q28', 'Q29', 'Q30', 'Q31', 'Q32', 'Q33', 'Q34', 'Q35', 'Q36', 'Q37', 'Q38', 'Q39', 'Q40', 'Q41', 'Q42', 'Q43', 'Q44', 'Q45', 'Q46', 'Q47', 'Q48', 'Q49', 'Q50'])
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Keys found for CSV: dict_keys(['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22', 'Q23', 'Q24', 'Q25', 'Q26', 'Q27', 'Q28', 'Q29', 'Q30', 'Q31', 'Q32', 'Q33', 'Q34', 'Q35', 'Q36', 'Q37', 'Q38', 'Q39', 'Q40', 'Q41', 'Q42', 'Q43', 'Q44', 'Q45', 'Q46', 'Q47', 'Q48', 'Q49', 'Q50'])
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: XXXXXXXXXX with answers: ['A', 'B', 'C', 'D', 'C', 'B', 'A', 'E', 'A', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: XXXXXXXXXX with answers: ['A', 'B', 'C', 'D', 'C', 'B', 'A', 'E', 'A', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 1234567XXX with answers: ['B', 'A', 'C', 'D', 'E', 'B', 'A', 'E', 'E', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 1234567XXX with answers: ['B', 'A', 'C', 'D', 'E', 'B', 'A', 'E', 'E', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 000987XXXX with answers: ['B', 'B', 'C', 'B', 'A', 'B', 'C', 'D', 'E', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 000987XXXX with answers: ['B', 'B', 'C', 'B', 'A', 'B', 'C', 'D', 'E', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 0001734XXX with answers: ['D', 'C', 'B', 'B', 'A', 'B', 'D', 'E', 'C', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 0001734XXX with answers: ['D', 'C', 'B', 'B', 'A', 'B', 'D', 'E', 'C', 'C', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 56234XXXXX with answers: ['C', 'B', 'D', 'E', 'A', 'B', 'A', 'E', 'B', 'A', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 56234XXXXX with answers: ['C', 'B', 'D', 'E', 'A', 'B', 'A', 'E', 'B', 'A', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 0001X56XXX with answers: ['A', 'B|D', 'C', 'E', 'C', 'B', 'A', 'A|D', '', 'D', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - DEBUG - Processed student ID: 0001X56XXX with answers: ['A', 'B|D', 'C', 'E', 'C', 'B', 'A', 'A|D', '', 'D', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+2024-11-12 15:23:53,894 - appServerLogger - INFO - Completed transformation of JSON to CSV
+2024-11-12 15:23:53,894 - appServerLogger - INFO - Completed transformation of JSON to CSV
+2024-11-12 15:23:53,894 - appServerLogger - INFO - PDF processed successfully for file_id: dc923b9a802ed06f0815c7fd0d673cff
+2024-11-12 15:23:53,894 - appServerLogger - INFO - PDF processed successfully for file_id: dc923b9a802ed06f0815c7fd0d673cff
+2024-11-12 15:23:53,895 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 15:23:53] "POST /api/upload HTTP/1.1" 200 -
