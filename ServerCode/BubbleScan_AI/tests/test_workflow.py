@@ -14,7 +14,7 @@ class TestIntegration:
         """Test the full workflow from PDF upload to JSON generation."""
         # Create a temporary directory and a mock PDF file
         pdf_dir = tmpdir.mkdir('PDF')
-        pdf_path = pdf_dir.join('Scans-4-2-24.pdf')
+        pdf_path = pdf_dir.join('ServerCode/BubbleScan_AI/PDF/Scans-4-2-24.pdf')
         pdf_path.write('Mock PDF content')  # Writing mock content to simulate a PDF
 
         # Mock the methods that interact with external systems or files

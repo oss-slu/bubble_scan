@@ -22,7 +22,7 @@ class TestAlignImage:
         cv2.circle(template, (500, 500), 50, (255, 255, 255), -1)  # Circle in the template
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('ServerCode/BubbleScan_AI/PDF/Scans-4-2-24.pdf')
 
         # Align the image with the template
         aligned = scantron.align_image(image, template)
@@ -38,7 +38,7 @@ class TestAlignImage:
         template = np.zeros((1000, 1000, 3), dtype=np.uint8)
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('/Scans-4-2-24.pdf')
 
         # Attempt to align the image with the template
         aligned = scantron.align_image(image, template)

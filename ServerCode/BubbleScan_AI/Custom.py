@@ -1,11 +1,12 @@
+"""This is for processing Custom SHeets"""
 import os
 import csv
 import cv2
 import fitz  # PyMuPDF for PDF processing
 import shutil
 import numpy as np
-from BubbleScan_AI.SheetProcessor import SheetProcessor
-import matplotlib.pyplot as plt
+from SheetProcessor import SheetProcessor
+
 
 class CustomProcessor(SheetProcessor):
     """Class for processing custom answer sheets with dynamic ROI detection."""
@@ -271,7 +272,7 @@ class CustomProcessor(SheetProcessor):
 
         if len(filled_bubbles) == 0:
             return None
-        elif len(filled_bubbles) == 1:
+        if len(filled_bubbles) == 1:
             return chr(ord('A') + filled_bubbles[0])
 
         return [chr(ord('A') + index) for index in filled_bubbles]
@@ -344,7 +345,7 @@ class CustomProcessor(SheetProcessor):
             print("Warning: Unexpected keys detected in responses. Adjusting headers dynamically.")
             expected_headers = sorted(all_keys)  # consistent order
 
-        with open(csv_path, mode='w', newline='') as csv_file:
+        with open(csv_path, mode='w', newline='', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=expected_headers)
             writer.writeheader()
             for student_data in students_results:

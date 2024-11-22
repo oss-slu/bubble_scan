@@ -24,7 +24,7 @@ class TestBubbleDetection:
         cv2.circle(image, (x_center, 50), 30, (0, 0, 0), -1)  # Black filled circle
 
         # Instantiate the TestScantron95945 class
-        scantron = Scantron95945TestHelper('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945TestHelper('ServerCode/BubbleScan_AI/PDF/Scans-4-2-24.pdf')
 
         # Get the response from the image
         response = scantron.get_responses_bubble_row(image)

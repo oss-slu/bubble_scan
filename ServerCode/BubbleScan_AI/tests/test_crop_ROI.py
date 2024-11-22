@@ -40,7 +40,7 @@ class TestCropROI:
         mock_align_image.return_value = image
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('ServerCode/BubbleScan_AI/PDF/Scans-4-2-24.pdf')
         image_path = 'aligned_images/Image_1.jpg'
 
         # Mock os.path.exists to return True
