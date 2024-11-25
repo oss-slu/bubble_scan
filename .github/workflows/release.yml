@@ -87,9 +87,6 @@ jobs:
       - name: Upgrade pip, setuptools, and wheel
         run: pip install --upgrade pip setuptools wheel
 
-      - name: Install Python dependencies
-        run: pip install --no-cache-dir -r ServerCode/requirements.txt
-
       - name: Set executable permissions for BubbleScan.sh
         run: chmod +x BubbleScan.sh
 
