@@ -28,12 +28,21 @@ else
     exit 1
 fi
 
-# Step 5: Install dependencies
-echo "Installing dependencies..."
+# Step 5: Install dependencies with robust error handling
+echo "Installing dependencies with robust error handling..."
+
+# Upgrade pip and essential tools
 pip install --upgrade pip setuptools wheel
-pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not found, skipping."
-pip install --no-cache-dir -r requirements.txt
-pip install pyinstaller
+
+# Iterate over each package in requirements.txt and install it individually
+while read -r package || [[ -n "$package" ]]; do
+    echo "Installing $package..."
+    pip install "$package" --no-cache-dir || echo "Failed to install $package. Continuing with the next package..."
+done < requirements.txt
+
+# Install additional tools like PyInstaller
+echo "Installing PyInstaller and checking additional packages..."
+pip install pyinstaller --no-cache-dir
 
 # Step 6: Build macOS binary
 echo "Building macOS binary with PyInstaller..."
