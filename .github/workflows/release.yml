@@ -78,6 +78,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Set executable permissions for BubbleScan.sh
+        run: chmod +x BubbleScan.sh
+
       - name: Run BubbleScan script
         shell: bash
         run: ./BubbleScan.sh
