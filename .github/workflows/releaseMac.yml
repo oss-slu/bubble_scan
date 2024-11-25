@@ -1,71 +1,11 @@
-name: BubbleScan Release
+name: BubbleScan Mac Release
 
 on:
   push:
     branches:
-      - main
+      - issue124MacOS
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-
-    permissions:
-      contents: write  
-
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.x'
-
-      - name: Run BubbleScan script
-        shell: bash
-        run: ./BubbleScan.sh
-
-      - name: List installed Python packages
-        run: pip list
-
-      - name: List files in ServerCode/dist after running BubbleScan.sh
-        run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
-
-      - name: Verify BubbleScan exists
-        shell: bash
-        run: |
-          if [ -f "ServerCode/dist/BubbleScan-Windows.exe" ]; then
-              echo "BubbleScan found in ServerCode/dist."
-          else
-              echo "BubbleScan not found in ServerCode/dist."
-              exit 1
-          fi
-
-      - name: Zip files for release
-        run: |
-          Compress-Archive -Path ServerCode/dist/BubbleScan-Windows.exe, ServerCode/dist/static -DestinationPath ServerCode/dist/BubbleScan.zip
-        shell: powershell
-        
-      - name: Create a new Git tag
-        id: create_tag
-        shell: powershell
-        run: |
-          $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss')-Windows"
-          echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "::set-output name=TAG::$TAG"
-          git tag $TAG
-          git push origin $TAG
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ServerCode/dist/Bubblescan.zip
-          tag_name: ${{ steps.create_tag.outputs.TAG }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   build-macos:
     runs-on: macos-latest
 
@@ -131,4 +71,3 @@ jobs:
           tag_name: ${{ steps.create_tag.outputs.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
