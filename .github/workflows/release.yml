@@ -81,8 +81,14 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install build tools for scipy
+        run: brew install gcc openblas lapack
+
+      - name: Upgrade pip, setuptools, and wheel
+        run: pip install --upgrade pip setuptools wheel
+
       - name: Install Python dependencies
-        run: pip install -r ServerCode/requirements.txt
+        run: pip install --no-cache-dir -r ServerCode/requirements.txt
 
       - name: Set executable permissions for BubbleScan.sh
         run: chmod +x BubbleScan.sh
