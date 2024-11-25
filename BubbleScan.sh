@@ -49,7 +49,7 @@ echo "Detected platform: $OS"
 if [[ "$OS" == "Darwin" ]]; then
     # macOS build
     echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz --hidden-import=flask_cors application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=werkzeug --hidden-import=fitz --hidden-import=flask_cors application/AppServer.py
 elif [[ "$OS" == "Linux" ]]; then
     # Cross-compilation for both macOS and Windows (requires Wine for Windows build)
     echo "Building macOS binary..."
