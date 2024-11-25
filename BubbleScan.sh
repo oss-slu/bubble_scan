@@ -33,6 +33,7 @@ pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not found, skipping."
 # Install dependencies from requirements.txt while ensuring pathlib is not reinstalled
 pip install --no-cache-dir -r requirements.txt
 pip install pyinstaller
+pip install werkzeug fitz flask_cors
 
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
@@ -49,11 +50,12 @@ echo "Detected platform: $OS"
 if [[ "$OS" == "Darwin" ]]; then
     # macOS build
     echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=werkzeug --hidden-import=fitz --hidden-import=flask_cors application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz --hidden-import=flask_cors --hidden-import=werkzeug application/AppServer.py
+
 elif [[ "$OS" == "Linux" ]]; then
     # Cross-compilation for both macOS and Windows (requires Wine for Windows build)
     echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz --hidden-import=flask_cors --hidden-import=werkzeug application/AppServer.py
 
     echo "Building Windows binary..."
     pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --hidden-import=fitz application/AppServer.py
