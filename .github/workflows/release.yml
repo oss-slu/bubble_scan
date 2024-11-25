@@ -49,7 +49,6 @@ jobs:
         run: |
           $TAG = "v$(Get-Date -Format 'yyyyMMddHHmmss')-Windows"
           echo "TAG=$TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "::set-output name=TAG::$TAG"
           git tag $TAG
           git push origin $TAG
         env:
@@ -85,6 +84,9 @@ jobs:
         shell: bash
         run: ./BubbleScan.sh
 
+      - name: List installed Python packages
+        run: pip list
+
       - name: List files in ServerCode/dist after running BubbleScan.sh
         run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
 
@@ -109,7 +111,6 @@ jobs:
         run: |
           TAG="v$(date +'%Y%m%d%H%M%S')-macOS"
           echo "TAG=$TAG" >> $GITHUB_ENV
-          echo "::set-output name=TAG::$TAG"
           git tag $TAG
           git push origin $TAG
         env:
