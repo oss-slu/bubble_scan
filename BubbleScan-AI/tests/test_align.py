@@ -1,12 +1,12 @@
 """Testing the alignment"""
 # Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 import sys
 import os
 import cv2
 import numpy as np
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 
 class TestAlignImage:
     """Testing the alignment"""
@@ -20,7 +20,7 @@ class TestAlignImage:
         cv2.circle(template, (500, 500), 50, (255, 255, 255), -1)  # Circle in the template
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Align the image with the template
         aligned = scantron.align_image(image, template)
@@ -36,7 +36,7 @@ class TestAlignImage:
         template = np.zeros((1000, 1000, 3), dtype=np.uint8)
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Attempt to align the image with the template
         aligned = scantron.align_image(image, template)

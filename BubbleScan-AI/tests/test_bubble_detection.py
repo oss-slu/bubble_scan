@@ -1,13 +1,13 @@
 """Tesing the bubble detection"""
 # Adding the parent directory to the system path to import Scantron95945
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
-from TestScantron import Scantron95945TestHelper
+
 import sys
 import os
 import cv2
 import numpy as np
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
+from TestScantron import Scantron95945TestHelper
 
 
 class TestBubbleDetection:
@@ -22,7 +22,7 @@ class TestBubbleDetection:
         cv2.circle(image, (x_center, 50), 30, (0, 0, 0), -1)  # Black filled circle
 
         # Instantiate the TestScantron95945 class
-        scantron = Scantron95945TestHelper('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945TestHelper('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Get the response from the image
         response = scantron.get_responses_bubble_row(image)
@@ -43,7 +43,7 @@ class TestBubbleDetection:
         cv2.circle(image, (x_center_B, 50), 30, (0, 0, 0), -1)  # Black filled circle for 'B'
 
         # Instantiate the TestScantron95945 class
-        scantron = Scantron95945TestHelper('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945TestHelper('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Get the response from the image
         response = scantron.get_responses_bubble_row(image)
@@ -60,7 +60,7 @@ class TestBubbleDetection:
         cv2.rectangle(column, (0, 400), (100, 500), 255, -1)  # Filling bubble at index 4
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Get the index of the filled bubble
         index = scantron.bubble_column(column)
@@ -75,7 +75,7 @@ class TestBubbleDetection:
         column = np.zeros((1000, 100, 1), dtype=np.uint8)
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
 
         # Get the index of the filled bubble
         index = scantron.bubble_column(column)

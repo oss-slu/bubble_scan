@@ -58,12 +58,13 @@ elif [[ "$OS" == "Linux" ]]; then
     pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --hidden-import=fitz --hidden-import=flask_cors --hidden-import=werkzeug application/AppServer.py
 
     echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
 else
     # Windows build
     echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
 fi
+
 
 # Deactivate the virtual environment
 deactivate

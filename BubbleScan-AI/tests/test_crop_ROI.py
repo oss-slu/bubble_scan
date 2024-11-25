@@ -1,12 +1,12 @@
 """Testing the ROI after Croping"""
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Scantron import Scantron95945
+
 import sys
 import os
 import cv2
 import numpy as np
 from unittest.mock import patch
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Scantron import Scantron95945
 
 
 class TestCropROI:
@@ -40,7 +40,7 @@ class TestCropROI:
         mock_align_image.return_value = image
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan-AI/PDF/Scans-4-2-24.pdf')
         image_path = 'aligned_images/Image_1.jpg'
 
         # Mock os.path.exists to return True
