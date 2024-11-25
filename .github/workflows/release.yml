@@ -3,7 +3,7 @@ name: BubbleScan Release
 on:
   push:
     branches:
-      - main
+      - issue124MacOS
 
 jobs:
   build-windows:
@@ -77,9 +77,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: '3.x'
-
-      - name: Set executable permissions for BubbleScan.sh
-        run: chmod +x BubbleScan.sh
 
       - name: Run BubbleScan script
         shell: bash
