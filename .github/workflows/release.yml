@@ -79,11 +79,11 @@ jobs:
           python-version: '3.12'
 
       - name: Set executable permissions for BubbleScan.sh
-        run: chmod +x BubbleScan.sh
+        run: chmod +x BubbleScanMac.sh
 
       - name: Run BubbleScan script
         shell: bash
-        run: ./BubbleScan.sh
+        run: ./BubbleScanMac.sh
 
       - name: List files in ServerCode/dist after running BubbleScan.sh
         run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
