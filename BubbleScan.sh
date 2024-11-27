@@ -51,18 +51,18 @@ echo "Detected platform: $OS"
 if [[ "$OS" == "Darwin" ]]; then
     # macOS build
     echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-macOS --paths=./ --add-data "application:application" --add-data "BubbleScan_AI:BubbleScan_AI" --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import flask_cors --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
 elif [[ "$OS" == "Linux" ]]; then
     # Cross-compilation for both macOS and Windows (requires Wine for Windows build)
     echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-macOS --paths=./ --add-data "application:application" --add-data "BubbleScan_AI:BubbleScan_AI" --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import flask_cors --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
 
     echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-Windows.exe --paths=./ --add-data "application:application" --add-data "BubbleScan_AI:BubbleScan_AI" --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import flask_cors --hidden-import=fitz application/AppServer.py
 else
     # Windows build
     echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
+    pyinstaller --onefile --name BubbleScan-Windows.exe --paths=./ --add-data "application:application" --add-data "BubbleScan_AI:BubbleScan_AI" --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import flask_cors --hidden-import=fitz application/AppServer.py
 fi
 
 

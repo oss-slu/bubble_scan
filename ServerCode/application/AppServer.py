@@ -14,8 +14,8 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 # Local application imports
-from config import CORS_ORIGINS
-from Scantron import Scantron95945
+from application.config import CORS_ORIGINS
+from application.Scantron import Scantron95945
 
 # Load logging configuration
 def get_base_path():
