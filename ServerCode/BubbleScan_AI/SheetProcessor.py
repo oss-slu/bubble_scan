@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 import os
 import cv2
 
-
 class SheetProcessor(ABC):
     """This is parent class for all types of sheet processing"""
     def __init__(self, pdf_path, template_path, output_folder="data"):

@@ -1,8 +1,12 @@
 """Test the Data Extraction function"""
-import sys
 import os
+import sys
+
+# Add the parent directory to sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 from unittest.mock import patch, MagicMock
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Scantron import Scantron95945
 
 class TestExtractImagesFromPdf:

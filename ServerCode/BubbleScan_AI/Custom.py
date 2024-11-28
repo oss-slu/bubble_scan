@@ -5,7 +5,6 @@ import fitz  # PyMuPDF for PDF processing
 import shutil
 import numpy as np
 from BubbleScan_AI.SheetProcessor import SheetProcessor
-import matplotlib.pyplot as plt
 
 class CustomProcessor(SheetProcessor):
     """Class for processing custom answer sheets with dynamic ROI detection."""

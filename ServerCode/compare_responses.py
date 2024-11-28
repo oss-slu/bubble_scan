@@ -102,10 +102,10 @@ def compare_csv_files(student_responses_path, correct_answers_path, output_dir):
         return None
 
 if __name__ == "__main__":
-    student_responses_path = "inputData/student_responses.csv"
-    correct_answers_path = "inputData/bubblescan_answers_50.csv"
-    output_dir = "inputData/"
-    result_csv_path = compare_csv_files(student_responses_path, correct_answers_path, output_dir)
+    student_responses_file = "inputData/student_responses.csv"
+    correct_answers_file = "inputData/bubblescan_answers_50.csv"
+    output_directory = "inputData/"
+    result_csv_path = compare_csv_files(student_responses_file, correct_answers_file, output_directory)
     if result_csv_path:
         print(f"Comparison results saved to: {result_csv_path}")
     else:

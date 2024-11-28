@@ -8,9 +8,13 @@ import webbrowser
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
 from flask_cors import CORS
-from application.config import CORS_ORIGINS
-from application.Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 from BubbleScan_AI.Custom import CustomProcessor
+
+# Define CORS origins
+CORS_ORIGINS = [
+    'http://localhost:5173'
+]
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
