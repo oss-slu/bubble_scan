@@ -1,6 +1,4 @@
 """Module for testing the workflow of the application."""
-import os
-import sys
 from unittest.mock import patch
 from ..Scantron import Scantron95945
 

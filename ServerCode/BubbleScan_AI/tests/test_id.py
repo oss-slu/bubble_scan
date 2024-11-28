@@ -1,6 +1,4 @@
 """Module for testing ID extraction functionality."""
-import os
-import sys
 import cv2
 import numpy as np
 from ..Scantron import Scantron95945

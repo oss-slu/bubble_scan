@@ -271,7 +271,7 @@ class CustomProcessor(SheetProcessor):
 
         if len(filled_bubbles) == 0:
             return None
-        elif len(filled_bubbles) == 1:
+        if len(filled_bubbles) == 1:
             return chr(ord('A') + filled_bubbles[0])
 
         return [chr(ord('A') + index) for index in filled_bubbles]

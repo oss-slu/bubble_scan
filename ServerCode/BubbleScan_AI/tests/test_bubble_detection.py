@@ -1,6 +1,4 @@
 """Tesing the bubble detection"""
-import os
-import sys
 import cv2
 import numpy as np
 from ..Scantron import Scantron95945

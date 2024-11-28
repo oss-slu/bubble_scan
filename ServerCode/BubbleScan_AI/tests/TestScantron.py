@@ -1,6 +1,4 @@
 """Testing Scantron Sheet Processing"""
-import os
-import sys
 import cv2
 from ..Scantron import Scantron95945
 

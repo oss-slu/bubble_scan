@@ -1,8 +1,7 @@
 """
 This module calls the class Scantron95945 and takes a PDF file as input for processing
 """
-from Scantron import Scantron95945
-
+from .Scantron import Scantron95945
 
 def main():
     """

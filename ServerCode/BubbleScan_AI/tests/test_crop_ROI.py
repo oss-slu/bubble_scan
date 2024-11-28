@@ -1,7 +1,4 @@
 """Testing the ROI after Croping"""
-import os
-import sys
-
 import cv2
 import numpy as np
 from unittest.mock import patch

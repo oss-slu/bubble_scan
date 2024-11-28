@@ -1,6 +1,5 @@
 """Test the Data Extraction function"""
 import os
-import sys
 from unittest.mock import patch, MagicMock
 from ..Scantron import Scantron95945
 

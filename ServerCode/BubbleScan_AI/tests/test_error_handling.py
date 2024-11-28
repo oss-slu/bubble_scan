@@ -1,6 +1,4 @@
 """Test the Error Handling."""
-import os
-import sys
 import pytest
 from unittest.mock import patch
 from ..Scantron import Scantron95945
