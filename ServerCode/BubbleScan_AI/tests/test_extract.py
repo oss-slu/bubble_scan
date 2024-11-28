@@ -1,5 +1,4 @@
 """Test the Data Extraction function"""
-
 import sys
 import os
 from unittest.mock import patch, MagicMock
@@ -34,7 +33,7 @@ class TestExtractImagesFromPdf:
         mock_listdir.return_value = ['Image_1.jpg']
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('ServerCode/BubbleScan_AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
 
         # Check that the images are saved in the correct directory
         pdf_folder = os.path.join(scantron.output_folder, scantron.pdf_name)
