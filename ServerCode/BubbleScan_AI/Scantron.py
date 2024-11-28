@@ -8,7 +8,7 @@ import shutil
 import fitz  # PyMuPDF
 import cv2
 import numpy as np
-from BubbleScan_AI.SheetProcessor import SheetProcessor
+from .SheetProcessor import SheetProcessor
 
 
 class Scantron95945(SheetProcessor):

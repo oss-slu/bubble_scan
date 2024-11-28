@@ -1,10 +1,11 @@
+"""This module processes Custom Sheets."""
 import os
 import csv
 import cv2
 import fitz  # PyMuPDF for PDF processing
 import shutil
 import numpy as np
-from BubbleScan_AI.SheetProcessor import SheetProcessor
+from .SheetProcessor import SheetProcessor
 
 class CustomProcessor(SheetProcessor):
     """Class for processing custom answer sheets with dynamic ROI detection."""

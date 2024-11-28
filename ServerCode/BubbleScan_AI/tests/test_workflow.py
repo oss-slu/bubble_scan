@@ -1,13 +1,8 @@
 """Module for testing the workflow of the application."""
 import os
 import sys
-
-# Add the parent directory to sys.path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
 from unittest.mock import patch
-from Scantron import Scantron95945
+from ..Scantron import Scantron95945
 
 class TestIntegration:
     """Tests for the overall application workflow."""
