@@ -4,7 +4,7 @@ from unittest.mock import patch
 from BubbleScan_AI.Scantron import Scantron95945
 
 class TestErrorHandling:
-    """Test how the system handles a corrupted PDF file."""
+    """Test how the system handles a corrupted `PDF file."""
     @patch('fitz.open')
     def test_corrupted_pdf_handling(self, mock_fitz_open):
         """Test how the system handles a corrupted PDF file."""
@@ -20,7 +20,7 @@ class TestErrorHandling:
         """Test how the system handles missing image files during template matching."""
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('BubbleScan_AI/PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
 
         # Mock os.listdir to return an empty list (no image files)
         with patch('os.listdir', return_value=[]):
