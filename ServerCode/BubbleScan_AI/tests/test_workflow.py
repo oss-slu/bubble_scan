@@ -1,6 +1,6 @@
 """Module for testing the workflow of the application."""
 from unittest.mock import patch
-from ..Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 
 class TestIntegration:
     """Tests for the overall application workflow."""

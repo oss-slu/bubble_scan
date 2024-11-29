@@ -1,7 +1,7 @@
 """Test the Data Extraction function"""
 import os
 from unittest.mock import patch, MagicMock
-from ..Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 
 class TestExtractImagesFromPdf:
     """Test the Data Extraction function"""

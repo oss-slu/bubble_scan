@@ -1,7 +1,7 @@
 """Module for testing ID extraction functionality."""
 import cv2
 import numpy as np
-from ..Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 
 class TestStudentID:
     """Tests for the ID extraction functionality."""
@@ -28,7 +28,7 @@ class TestStudentID:
         roi_color = cv2.cvtColor(roi, cv2.COLOR_GRAY2BGR)
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan_AI/PDF/Scans-4-2-24.pdf')
 
         # Extract the student ID
         student_id = scantron.student_id(roi_color)
@@ -59,7 +59,7 @@ class TestStudentID:
         roi_color = cv2.cvtColor(roi, cv2.COLOR_GRAY2BGR)
 
         # Instantiate the Scantron95945 class
-        scantron = Scantron95945('PDF/Scans-4-2-24.pdf')
+        scantron = Scantron95945('BubbleScan_AI/PDF/Scans-4-2-24.pdf')
 
         # Extract the student ID
         student_id = scantron.student_id(roi_color)

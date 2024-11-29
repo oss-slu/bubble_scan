@@ -1,6 +1,6 @@
 """Testing Scantron Sheet Processing"""
 import cv2
-from ..Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 
 class Scantron95945TestHelper(Scantron95945):
     """Testing Scantron Sheet Processing"""

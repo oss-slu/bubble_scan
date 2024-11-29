@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 from unittest.mock import patch
-from ..Scantron import Scantron95945
+from BubbleScan_AI.Scantron import Scantron95945
 
 
 class TestCropROI:
