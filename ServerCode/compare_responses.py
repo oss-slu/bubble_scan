@@ -105,8 +105,8 @@ if __name__ == "__main__":
     student_responses_file = "inputData/student_responses.csv"
     correct_answers_file = "inputData/bubblescan_answers_50.csv"
     output_directory = "inputData/"
-    output_csv_path = compare_csv_files(student_responses_file, correct_answers_file, output_directory)
-    if output_csv_path:
-        print(f"Comparison results saved to: {output_csv_path}")
+    csv_path = compare_csv_files(student_responses_file, correct_answers_file, output_directory)
+    if csv_path:
+        print(f"Comparison results saved to: {csv_path}")
     else:
         print("Error comparing CSV files")
