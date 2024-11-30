@@ -1,4 +1,4 @@
-# compare_responses.py
+"""Module to compare student responses with correct answers and generate result CSV files."""
 import csv
 import os
 import logging
@@ -46,10 +46,10 @@ def compare_csv_files(student_responses_path, correct_answers_path, output_dir):
             total_questions = len(correct_answers_headers)
 
             # Compare answers question by question
-            for question_idx in range(len(correct_row)):
+            for i, (correct_row, student_row) in enumerate(zip(correct_answers_rows, student_responses_rows), start=2):
                 # Normalize and handle multiple answers
-                correct_answer = correct_row[question_idx].strip().upper()
-                student_answer = student_row[question_idx].strip().upper()
+                correct_answer = correct_row[i].strip().upper()
+                student_answer = student_row[i].strip().upper()
 
                 # Split answers for multi-answer questions
                 correct_answers_set = set(correct_answer.split('|'))
@@ -78,9 +78,9 @@ def compare_csv_files(student_responses_path, correct_answers_path, output_dir):
         overall_accuracy = round((total_correct_answers / total_questions_all) * 100, 2)
 
         # Save results to CSV, including overall accuracy
-        result_csv_path = os.path.join(output_dir, 'comparison_results.csv')
+        output_csv_path = os.path.join(output_dir, 'comparison_results.csv')
         os.makedirs(output_dir, exist_ok=True)
-        with open(result_csv_path, mode='w', newline='', encoding='utf-8') as file:
+        with open(output_csv_path, mode='w', newline='', encoding='utf-8') as file:
             fieldnames = ['row', 'correct_answers', 'total_questions', 'accuracy']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
@@ -94,8 +94,8 @@ def compare_csv_files(student_responses_path, correct_answers_path, output_dir):
                 'accuracy': overall_accuracy
             })
 
-        logging.info(f"Comparison results saved to {result_csv_path}")
-        return result_csv_path
+        logging.error("Error comparing CSV files: %s", e)
+        return output_csv_path
 
     except Exception as e:
         logging.error("Error comparing CSV files: %s", e)
@@ -105,8 +105,8 @@ if __name__ == "__main__":
     student_responses_file = "inputData/student_responses.csv"
     correct_answers_file = "inputData/bubblescan_answers_50.csv"
     output_directory = "inputData/"
-    result_csv_path = compare_csv_files(student_responses_file, correct_answers_file, output_directory)
-    if result_csv_path:
-        print(f"Comparison results saved to: {result_csv_path}")
+    output_csv_path = compare_csv_files(student_responses_file, correct_answers_file, output_directory)
+    if output_csv_path:
+        print(f"Comparison results saved to: {output_csv_path}")
     else:
         print("Error comparing CSV files")

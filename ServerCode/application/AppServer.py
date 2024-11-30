@@ -229,9 +229,7 @@ class AppServer:
         if not students:
             print("No student data found")
             return csv_data
-
-        # Get question headers from the first student's answers
-        first_student = students[0]
+        
         keys = [f"Q{i}" for i in range(1, 51)]
         csv_data += ','.join(['studentID'] + keys) + '\n'
 
@@ -309,4 +307,3 @@ if __name__ == '__main__':
 
     # Start the server
     app_server.app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
-

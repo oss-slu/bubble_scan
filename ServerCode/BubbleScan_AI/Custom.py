@@ -344,7 +344,7 @@ class CustomProcessor(SheetProcessor):
             print("Warning: Unexpected keys detected in responses. Adjusting headers dynamically.")
             expected_headers = sorted(all_keys)  # consistent order
 
-        with open(csv_path, mode='w', newline='') as csv_file:
+        with open(csv_path, mode='w', newline='', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=expected_headers)
             writer.writeheader()
             for student_data in students_results:
