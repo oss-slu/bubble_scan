@@ -39,3 +39,237 @@
 2024-11-12 15:23:53,894 - appServerLogger - INFO - PDF processed successfully for file_id: dc923b9a802ed06f0815c7fd0d673cff
 2024-11-12 15:23:53,894 - appServerLogger - INFO - PDF processed successfully for file_id: dc923b9a802ed06f0815c7fd0d673cff
 2024-11-12 15:23:53,895 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 15:23:53] "POST /api/upload HTTP/1.1" 200 -
+2024-12-01 14:58:52,996 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 14:58:52,997 - appServerLogger - INFO - PDF processed successfully for file_id: 02d6f6607204df7c3e1678b275065504
+2024-12-01 14:58:52,997 - appServerLogger - INFO - PDF processed successfully for file_id: 02d6f6607204df7c3e1678b275065504
+2024-12-01 14:58:52,999 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 14:58:52,999 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 14:58:53,000 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 14:58:53,000 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:00:38,965 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:00:38,967 - appServerLogger - INFO - PDF processed successfully for file_id: 825ebf64dfa59cf0693123bf956268ee
+2024-12-01 15:00:38,967 - appServerLogger - INFO - PDF processed successfully for file_id: 825ebf64dfa59cf0693123bf956268ee
+2024-12-01 15:00:38,973 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:00:38,973 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:00:38,975 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:00:38,975 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:01:40,748 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:01:40,748 - appServerLogger - INFO - PDF processed successfully for file_id: 6a35b93a046ca0ba8df8ab7094ab8004
+2024-12-01 15:01:40,748 - appServerLogger - INFO - PDF processed successfully for file_id: 6a35b93a046ca0ba8df8ab7094ab8004
+2024-12-01 15:01:40,754 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:01:40,754 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:01:40,758 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:01:40,758 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:02:13,453 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:02:13,454 - appServerLogger - INFO - PDF processed successfully for file_id: 96c75213a1c340ec7db5612ac03360c5
+2024-12-01 15:02:13,454 - appServerLogger - INFO - PDF processed successfully for file_id: 96c75213a1c340ec7db5612ac03360c5
+2024-12-01 15:02:13,455 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:02:13,455 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:02:13,456 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:02:13,456 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:02:46,245 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:02:46,245 - appServerLogger - INFO - PDF processed successfully for file_id: 65b6b0fbc1add52d0746d1a3dd29265b
+2024-12-01 15:02:46,245 - appServerLogger - INFO - PDF processed successfully for file_id: 65b6b0fbc1add52d0746d1a3dd29265b
+2024-12-01 15:02:46,249 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:02:46,249 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:02:46,251 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:02:46,251 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:03:05,350 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:03:05,350 - appServerLogger - INFO - PDF processed successfully for file_id: 6705fc23bfef594b7a822d35da4d52a5
+2024-12-01 15:03:05,350 - appServerLogger - INFO - PDF processed successfully for file_id: 6705fc23bfef594b7a822d35da4d52a5
+2024-12-01 15:03:05,351 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:03:05,351 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:03:05,352 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:03:05,352 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:04:26,567 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:04:26,567 - appServerLogger - INFO - PDF processed successfully for file_id: f7cef6d87c1b2b61f9e4586fea92bc5e
+2024-12-01 15:04:26,567 - appServerLogger - INFO - PDF processed successfully for file_id: f7cef6d87c1b2b61f9e4586fea92bc5e
+2024-12-01 15:04:26,570 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:04:26,570 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:04:26,574 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:04:26,574 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:05:46,822 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:05:46,823 - appServerLogger - INFO - PDF processed successfully for file_id: c59b72e00b80e9e6c4a918bf295785d3
+2024-12-01 15:05:46,823 - appServerLogger - INFO - PDF processed successfully for file_id: c59b72e00b80e9e6c4a918bf295785d3
+2024-12-01 15:05:46,824 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:05:46,824 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:05:46,825 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:05:46,825 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:05:46,826 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:05:46,826 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:05:46,827 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:05:46,827 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:03,611 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:03,611 - appServerLogger - INFO - PDF processed successfully for file_id: a24d8fae6024b525882c0c06264da4c2
+2024-12-01 15:06:03,611 - appServerLogger - INFO - PDF processed successfully for file_id: a24d8fae6024b525882c0c06264da4c2
+2024-12-01 15:06:03,615 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:03,615 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:03,616 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:03,616 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:03,617 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:03,617 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:03,618 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:03,618 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:03,620 - root - ERROR - Error processing PDF: Cannot open empty file: filename='/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/empty.pdf'.
+2024-12-01 15:06:03,620 - appServerLogger - INFO - PDF processed successfully for file_id: e28c8690761badfcb10a2eb394d807df
+2024-12-01 15:06:03,620 - appServerLogger - INFO - PDF processed successfully for file_id: e28c8690761badfcb10a2eb394d807df
+2024-12-01 15:06:14,554 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:14,555 - appServerLogger - INFO - PDF processed successfully for file_id: 748a4f0c4685c3552aa97a8e42c0ce2c
+2024-12-01 15:06:14,555 - appServerLogger - INFO - PDF processed successfully for file_id: 748a4f0c4685c3552aa97a8e42c0ce2c
+2024-12-01 15:06:14,557 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:14,557 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:14,560 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:14,560 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:14,563 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:14,563 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:14,565 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:14,565 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:14,644 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:06:14,644 - appServerLogger - INFO - PDF processed successfully for file_id: 02f3c911fd147d1c194e56a11f62ec2a
+2024-12-01 15:06:14,644 - appServerLogger - INFO - PDF processed successfully for file_id: 02f3c911fd147d1c194e56a11f62ec2a
+2024-12-01 15:06:26,928 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:26,929 - appServerLogger - INFO - PDF processed successfully for file_id: 12d3dfd20fcd01848017c282a2cfb83e
+2024-12-01 15:06:26,929 - appServerLogger - INFO - PDF processed successfully for file_id: 12d3dfd20fcd01848017c282a2cfb83e
+2024-12-01 15:06:26,931 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:26,931 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:26,932 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:26,932 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:26,933 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:26,933 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:26,934 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:26,934 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:27,012 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:06:27,013 - appServerLogger - INFO - PDF processed successfully for file_id: 6114271e12587b701e96f05561874ccf
+2024-12-01 15:06:27,013 - appServerLogger - INFO - PDF processed successfully for file_id: 6114271e12587b701e96f05561874ccf
+2024-12-01 15:06:27,015 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:27,015 - appServerLogger - INFO - PDF processed successfully for file_id: 0e09d3e1e59987167e50cd4a8a47dd72
+2024-12-01 15:06:27,015 - appServerLogger - INFO - PDF processed successfully for file_id: 0e09d3e1e59987167e50cd4a8a47dd72
+2024-12-01 15:06:38,123 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:38,124 - appServerLogger - INFO - PDF processed successfully for file_id: fc914cd9d22c7bf94539a455014ae0c7
+2024-12-01 15:06:38,124 - appServerLogger - INFO - PDF processed successfully for file_id: fc914cd9d22c7bf94539a455014ae0c7
+2024-12-01 15:06:38,130 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:38,130 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:38,133 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:38,133 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:38,136 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:38,136 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:38,139 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:38,139 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:38,204 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:06:38,205 - appServerLogger - INFO - PDF processed successfully for file_id: 54b31e77fec27640dadc1d95aeb30597
+2024-12-01 15:06:38,205 - appServerLogger - INFO - PDF processed successfully for file_id: 54b31e77fec27640dadc1d95aeb30597
+2024-12-01 15:06:38,207 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_duplicate.pdf'.
+2024-12-01 15:06:38,207 - appServerLogger - INFO - PDF processed successfully for file_id: 2139ab1a3e5ae59774d87a956761e8b6
+2024-12-01 15:06:38,207 - appServerLogger - INFO - PDF processed successfully for file_id: 2139ab1a3e5ae59774d87a956761e8b6
+2024-12-01 15:06:50,468 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:06:50,469 - appServerLogger - INFO - PDF processed successfully for file_id: 5826525cdee22b0033e3cc7d72f8b1f8
+2024-12-01 15:06:50,469 - appServerLogger - INFO - PDF processed successfully for file_id: 5826525cdee22b0033e3cc7d72f8b1f8
+2024-12-01 15:06:50,471 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:50,471 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:06:50,472 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:50,472 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:50,473 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:50,473 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:06:50,474 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:50,474 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:06:50,551 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:06:50,552 - appServerLogger - INFO - PDF processed successfully for file_id: 2b8cab60ffae4a62e75c5624c24f8e57
+2024-12-01 15:06:50,552 - appServerLogger - INFO - PDF processed successfully for file_id: 2b8cab60ffae4a62e75c5624c24f8e57
+2024-12-01 15:06:50,554 - root - ERROR - Error processing PDF: Cannot open empty file: filename='/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/empty.pdf'.
+2024-12-01 15:06:50,554 - appServerLogger - INFO - PDF processed successfully for file_id: 6b56e0ed29dbe8022d34952ae4411cb0
+2024-12-01 15:06:50,554 - appServerLogger - INFO - PDF processed successfully for file_id: 6b56e0ed29dbe8022d34952ae4411cb0
+2024-12-01 15:08:05,316 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:05,316 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:05,360 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:05,360 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:34,581 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:34,581 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:34,626 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:08:34,626 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:08,990 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:10:08,990 - appServerLogger - INFO - PDF processed successfully for file_id: fdcfe3702f4af4626576a161df7e4246
+2024-12-01 15:10:08,990 - appServerLogger - INFO - PDF processed successfully for file_id: fdcfe3702f4af4626576a161df7e4246
+2024-12-01 15:10:08,994 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:10:08,994 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:10:08,995 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:08,995 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:08,996 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:10:08,996 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:10:08,997 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:08,997 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:09,105 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:10:09,106 - appServerLogger - INFO - PDF processed successfully for file_id: 1cfa5bf2436fe1589a19fc14b1e5cfbe
+2024-12-01 15:10:09,106 - appServerLogger - INFO - PDF processed successfully for file_id: 1cfa5bf2436fe1589a19fc14b1e5cfbe
+2024-12-01 15:10:09,108 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:10:09,108 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:10:47,217 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:10:47,217 - appServerLogger - INFO - PDF processed successfully for file_id: c8ca216496bebf439c909cfe881f36c8
+2024-12-01 15:10:47,217 - appServerLogger - INFO - PDF processed successfully for file_id: c8ca216496bebf439c909cfe881f36c8
+2024-12-01 15:10:47,218 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:10:47,218 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:10:47,219 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:47,219 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:47,220 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:10:47,220 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:10:47,221 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:47,221 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:10:47,320 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:10:47,320 - appServerLogger - INFO - PDF processed successfully for file_id: 217dca253a8f28dd84199e2be84eaabb
+2024-12-01 15:10:47,320 - appServerLogger - INFO - PDF processed successfully for file_id: 217dca253a8f28dd84199e2be84eaabb
+2024-12-01 15:10:47,323 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:10:47,323 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:12:47,925 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:12:47,926 - appServerLogger - INFO - PDF processed successfully for file_id: 8352b6e268267333cdfab3ef5c73b6df
+2024-12-01 15:12:47,926 - appServerLogger - INFO - PDF processed successfully for file_id: 8352b6e268267333cdfab3ef5c73b6df
+2024-12-01 15:12:47,929 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:12:47,929 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:12:47,931 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:12:47,931 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:12:47,932 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:12:47,932 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:12:47,933 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:12:47,933 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:12:48,005 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:12:48,005 - appServerLogger - INFO - PDF processed successfully for file_id: f5662b33d408f8d3e4f58660e99f377e
+2024-12-01 15:12:48,005 - appServerLogger - INFO - PDF processed successfully for file_id: f5662b33d408f8d3e4f58660e99f377e
+2024-12-01 15:12:48,007 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:12:48,007 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:12:48,009 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:12:48,009 - appServerLogger - INFO - PDF processed successfully for file_id: 540dae79d69e9c063dd690809e1eddbe
+2024-12-01 15:12:48,009 - appServerLogger - INFO - PDF processed successfully for file_id: 540dae79d69e9c063dd690809e1eddbe
+2024-12-01 15:13:57,832 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:13:57,833 - appServerLogger - INFO - PDF processed successfully for file_id: 21a7665db8d7206f456c9bc1c9367b2a
+2024-12-01 15:13:57,833 - appServerLogger - INFO - PDF processed successfully for file_id: 21a7665db8d7206f456c9bc1c9367b2a
+2024-12-01 15:13:57,834 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:13:57,834 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:13:57,835 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:13:57,835 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:13:57,853 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:13:57,853 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:13:57,854 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:13:57,854 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:13:57,935 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:13:57,936 - appServerLogger - INFO - PDF processed successfully for file_id: f86f33c4e385d8f902318103d878cfcd
+2024-12-01 15:13:57,936 - appServerLogger - INFO - PDF processed successfully for file_id: f86f33c4e385d8f902318103d878cfcd
+2024-12-01 15:13:57,938 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:13:57,938 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:13:57,939 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-01 15:13:57,939 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-01 15:16:57,998 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-01 15:16:57,999 - appServerLogger - INFO - PDF processed successfully for file_id: e798fc657b12df66eb3024bc1aea2632
+2024-12-01 15:16:57,999 - appServerLogger - INFO - PDF processed successfully for file_id: e798fc657b12df66eb3024bc1aea2632
+2024-12-01 15:16:58,001 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:16:58,001 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-01 15:16:58,003 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:16:58,003 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:16:58,004 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:16:58,004 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-01 15:16:58,005 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:16:58,005 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-01 15:16:58,081 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-01 15:16:58,082 - appServerLogger - INFO - PDF processed successfully for file_id: 3fc75df6c8ed3df3c8fffc8fc974f83b
+2024-12-01 15:16:58,082 - appServerLogger - INFO - PDF processed successfully for file_id: 3fc75df6c8ed3df3c8fffc8fc974f83b
+2024-12-01 15:16:58,085 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:16:58,085 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-01 15:16:58,086 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-01 15:16:58,086 - appServerLogger - ERROR - Invalid sheet type: invalid_type

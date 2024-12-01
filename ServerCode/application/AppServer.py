@@ -147,14 +147,26 @@ class AppServer:
         """
         if 'file' not in request.files or 'sheetType' not in request.form:
             logger.error("No file or sheet type in the request")
-            return jsonify({"status": "error", "message": "No file or sheet type in the request"})
+            return jsonify({"status": "error", "message": "No file or sheet type in the request"}), 400
 
         file = request.files['file']
         sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
             logger.warning("No selected file")
-            return jsonify({"status": "error", "message": "No selected file"})
+            return jsonify({"status": "error", "message": "No selected file"}), 400
+        
+        # Check if the file is empty
+        file.stream.seek(0, 2)  # Move the cursor to the end of the file
+        if file.stream.tell() == 0:  # Check if the file size is 0
+            logger.warning("Uploaded file is empty")
+            return jsonify({"status": "error", "message": "Uploaded file is empty"}), 400
+        file.stream.seek(0)  # Reset the cursor to the beginning
+
+        # Validate sheet type
+        if sheet_type not in ["scantron", "custom"]:
+            logger.error("Invalid sheet type: %s", sheet_type)
+            return jsonify({"status": "error", "message": "Invalid sheet type"}), 400
 
         if file and file.filename.lower().endswith('.pdf'):
             if sheet_type == "custom":
@@ -185,11 +197,11 @@ class AppServer:
 
             except Exception as e:
                 logger.error("Error processing PDF: %s", e, exc_info=True)
-                return jsonify({"status": "error", "message": f"Error processing PDF: {e}"})
+                return jsonify({"status": "error", "message": f"Error processing PDF: {e}"}), 500
 
         else:
             logger.warning("Only PDF files are allowed")
-            return jsonify({"status": "error", "message": "Only PDF files are allowed"})
+            return jsonify({"status": "error", "message": "Only PDF files are allowed"}), 400
 
     def process_pdf(self, pdf_file, file_id):
         """
