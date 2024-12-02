@@ -32,7 +32,7 @@ pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 # Platform-specific builds
 
 echo "Building Windows binary..."
-pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
+pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=BubbleScan_AI --hidden-import=fitz application/AppServer.py
 
 
 

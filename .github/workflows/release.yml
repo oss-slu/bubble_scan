@@ -3,7 +3,7 @@ name: BubbleScan Release
 on:
   push:
     branches:
-      - main
+      - fixingAIError
 
 jobs:
   build-windows:
