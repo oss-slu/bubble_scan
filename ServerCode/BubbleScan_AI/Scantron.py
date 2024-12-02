@@ -24,13 +24,13 @@ class Scantron95945(SheetProcessor):
         Returns:
             None
         """
-        template_path = "template.jpg"
-        super().__init__(pdf_path=pdf_path, template_path=template_path)
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.template_path = os.path.join(script_dir, "template.jpg")
+        super().__init__(pdf_path=pdf_path, template_path=self.template_path)
         self.pdf_name = None
         self.pdf_path = pdf_path
         self.source_folder = "data"
         self.output_folder = "data"
-        self.template_path = "template.jpg"
         self.extractImagesFromPdf()
         self.template_matching()
         self.extractROIs()
@@ -154,6 +154,9 @@ class Scantron95945(SheetProcessor):
         """
         print("------Template Matching------")
         template = cv2.imread(self.template_path)
+        if template is None:
+            print(f"Failed to load template image from {self.template_path}")
+            return
         folder = os.path.join(self.source_folder, self.pdf_name)
 
         # List of image files

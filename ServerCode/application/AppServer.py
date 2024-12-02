@@ -218,10 +218,12 @@ class AppServer:
         print("The JSON data received is:", json_data)
 
         # Check if json_data is a list (for custom sheets) or a dict with a 'students' key (for standard sheets)
-        if isinstance(json_data, list):  # If it's a list, assume it's the custom sheet data
+        if isinstance(json_data, list):  # Custom sheets
             students = json_data
-        elif isinstance(json_data, dict) and 'students' in json_data:
+            is_custom_sheet = True
+        elif isinstance(json_data, dict) and 'students' in json_data:  # Standard scantron sheets
             students = json_data['students']
+            is_custom_sheet = False
         else:
             print("Invalid JSON data format")
             return csv_data
@@ -229,30 +231,54 @@ class AppServer:
         if not students:
             print("No student data found")
             return csv_data
-        
-        keys = [f"Q{i}" for i in range(1, 51)]
-        csv_data += ','.join(['studentID'] + keys) + '\n'
+
+        # Determine the keys based on whether it's a custom sheet or scantron sheet
+        first_student = students[0]
+        if is_custom_sheet:
+            # For custom sheets, exclude 'studentID' from the keys
+            answers_keys = [key for key in first_student.keys() if key != 'studentID']
+        else:
+            # For scantron sheets, get keys from 'answers' dictionary
+            answers_keys = list(first_student.get('answers', {}).keys())
+
+        # If no answers are found, return an empty CSV
+        if not answers_keys:
+            print("No answers found in student data")
+            return csv_data
+
+        # Create the CSV header
+        csv_data += ','.join(['studentID'] + answers_keys) + '\n'
 
         # Process each student's data
         for student in students:
             student_id = student.get('studentID', '')
             answers = []
-            
-            # Gather answers for each question, handling None and multiple answers
-            for key in keys:
-                answer = student.get(key, '')
-                if isinstance(answer, list):
-                    answer = '|'.join(answer)  # Join multiple answers with '|'
-                elif answer is None:
-                    answer = ''  # Convert None to empty string
-                answers.append(answer)
-            
+
+            if is_custom_sheet:
+                # For custom sheets, answers are at the top level
+                for key in answers_keys:
+                    answer = student.get(key, '')
+                    if isinstance(answer, list):
+                        answer = '|'.join(answer)
+                    elif answer is None:
+                        answer = ''
+                    answers.append(answer)
+            else:
+                # For scantron sheets, answers are within the 'answers' dictionary
+                answers_dict = student.get('answers', {})
+                for key in answers_keys:
+                    answer = answers_dict.get(key, '')
+                    if isinstance(answer, list):
+                        answer = '|'.join(answer)
+                    elif answer is None:
+                        answer = ''
+                    answers.append(answer)
+
             # Add the student data as a new row in CSV
             csv_data += ','.join([student_id] + answers) + '\n'
 
         print("Final CSV data:\n", csv_data)
         return csv_data
-
 
     def download_csv(self, file_id):
         """
