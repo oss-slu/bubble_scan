@@ -3,7 +3,7 @@ name: BubbleScan Release
 on:
   push:
     branches:
-      - issue124MacOSExe
+      - main
 
 jobs:
   build-windows:
