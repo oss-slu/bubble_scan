@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,600;0,800;1,400&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -6,91 +7,248 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-image: url('./assets/img2.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: whitesmoke;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
 
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom right, #FF7A00, #FF511C, #FF1C4A);
-    opacity: 0.4;
-    z-index: -1;
-    backdrop-filter: blur(5px);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(222, 217, 217, 0.5);
+  z-index: -1;
+  backdrop-filter: blur(8px);
 }
-  
-  .welcome {
-    display: flex;
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito', sans-serif;
+  gap: 15px;
+  max-width: 600px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 2rem;
+  color: #000;
+  /* Changed to black */
+}
+
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #000;
+  /* Changed to black */
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #000;
+  /* Changed to black */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  /* Changed to black */
+}
+
+input[type="submit"],
+button {
+  background-color: #000;
+  /* Changed to black */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #333;
+  /* Darker black shade for hover effect */
+  transform: translateY(-2px);
+}
+
+.FileUploadComponent {
+  margin-bottom: 20px;
+}
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #000;
+  /* Changed to black */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navigation Styles */
+nav {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  /* Space between hamburger and links */
+  align-items: center;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  /* Aligns the links to the right */
+  align-items: center;
+  flex-grow: 1;
+}
+
+.navbar-links li {
+  margin-left: 1.5rem;
+  /* Add spacing between items */
+  font-family: 'Nunito', sans-serif;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #000;
+  /* Changed to black */
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 8px;
+}
+
+.navbar-links a:hover {
+  color: white;
+  background-color: #000;
+  /* Changed to black */
+}
+
+.navbar-links a.active {
+  background-color: #333;
+  /* Changed to darker black shade */
+  color: white;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+.footer-text {
+  margin: 0;
+
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #000;
+  /* Changed to black */
+  margin: 4px 0;
+  transition: 0.4s ease-in-out;
+  border-radius: 2px;
+}
+
+.bar.change:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.bar.change:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.change:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 100%;
+    right: -100%;
     flex-direction: column;
-    font-family: 'Nunito', sans-serif;
-    gap: 10px;
-    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.95);
     width: 100%;
-    background: white;
-    padding: 2rem;
-    opacity: 0.8;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    transition: right 0.3s ease-in;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  h1 {
-    font-weight: 1200;
+  .navbar-links.active {
+    right: 0;
   }
 
-  input[type="text"], input[type="file"] {
+  .navbar-links li {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box; 
-  }
-  
-  input[type="submit"], button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin: 10px 0;
-  }
-  
-  input[type="submit"]:hover, button:hover {
-    background-color: #45a049;
-  }
-  
-  .FileUploadComponent {
-    margin-bottom: 20px;
+    text-align: center;
+    padding: 0.8rem 0;
   }
 
-  .spinner {
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-top: 3px solid #000;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 0.6s linear infinite;
+  .navbar-links a {
+    font-size: 1rem;
+    padding: 0.5rem;
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* General Styles */
-  
+}
