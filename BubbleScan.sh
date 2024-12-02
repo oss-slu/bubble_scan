@@ -14,17 +14,7 @@ cd ..
 cd ServerCode
 python -m venv venv  # Use python3 for virtual environment creation in bash
 
-# Check if running on Windows or Linux/macOS and activate environment accordingly
-if [[ -f "venv/bin/activate" ]]; then
-    # Linux/macOS
-    source venv/bin/activate
-elif [[ -f "venv/Scripts/activate" ]]; then
-    # Windows
-    source venv/Scripts/activate
-else
-    echo "Failed to find the activate script for the virtual environment."
-    exit 1
-fi
+source venv/Scripts/activate
 
 # Uninstall pathlib if it exists in the virtual environment
 echo "Checking for and uninstalling pathlib package..."
@@ -39,32 +29,9 @@ pip install pyinstaller
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
-echo "Current working directory: $PWD"
-echo "Environment details:"
-env
-
-# Detect platform
-OS=$(uname)
-echo "Detected platform: $OS"
-
 # Platform-specific builds
-if [[ "$OS" == "Darwin" ]]; then
-    # macOS build
-    echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
-elif [[ "$OS" == "Linux" ]]; then
-    # Cross-compilation for both macOS and Windows (requires Wine for Windows build)
-    echo "Building macOS binary..."
-    pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
-
-    echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
-else
-    # Windows build
-    echo "Building Windows binary..."
-    pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
-fi
-
+echo "Building Windows binary..."
+pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
 
 # Deactivate the virtual environment
 deactivate
