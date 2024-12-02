@@ -1,10 +1,15 @@
 import React from "react";
-import '../styles/App.css';
+import "../styles/content.css";
+import FileUploadComponent from '../components/FileUploadComponent'
 
 const Scan: React.FC = () => {
     return (
-        <div className="home">
-            <h1>Scan</h1>
+        <div className="Container">
+            <h1 className="title">Scan</h1>
+            <div className="description">
+                <FileUploadComponent />
+            </div>
+
         </div>
     );
 };

@@ -5,7 +5,7 @@ import "../styles/Header.css";
 const Header: React.FC = () => {
     return (
         <header className="header">
-            <div>BS</div>
+            <div>Bubble Scan</div>
             <nav className="nav-links">
                 <NavLink to="/" className="nav-link" >Home</NavLink>
                 <NavLink to="/Scan" className="nav-link" >Scan</NavLink>

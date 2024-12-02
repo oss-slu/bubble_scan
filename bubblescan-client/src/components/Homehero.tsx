@@ -8,8 +8,8 @@ const Homehero: React.FC = () => {
             <h1 className="hero-title">Bubble Scan</h1>
             <p className="hero-subtitle">Grading Made Easy</p>
             <div className="hero-buttons">
-                <Button text="Scan" />
-                <Button text="Custom Sheets" dark />
+                <Button text="Scan" to="/scan" />
+                <Button text="Custom Sheets" dark to="/customsheets" />
             </div>
             <div className="hero-description">
                 <h2>Bubble Scan</h2>

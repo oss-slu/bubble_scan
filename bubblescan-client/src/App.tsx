@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import FileUploadComponent from "./components/FileUploadComponent";
-import CustomExamSheetComponent from "./components/CustomExamSheetComponent";
 import config from "./utils/config";
 
 import "./styles/App.css";
@@ -53,21 +51,27 @@ function App() {
     }
   };
 
-
   return (
     <Router>
-      <Header />
-      <div className="app-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Scan" element={<Scan />} />
-          <Route path="/customsheets" element={<Customsheets />} />
-          <Route path="/AboutUs" element={<Aboutus />} />
-        </Routes>
+      <div className="main-container">
+        <Header />
+        <div className="main-content">
+          <div className="appContent">
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Scan" element={<Scan />} />
+                <Route path="/customsheets" element={<Customsheets />} />
+                <Route path="/AboutUs" element={<Aboutus />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </Router>
   );
+
 };
 
 export default App;

@@ -13,8 +13,8 @@ body {
   padding: 1rem;
   background-image: url('./assets/img2.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
+  background-size: contain;
+
 }
 
 body::before {
@@ -30,19 +30,6 @@ body::before {
   backdrop-filter: blur(5px);
 }
 
-.welcome {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Nunito', sans-serif;
-  gap: 10px;
-  max-width: 600px;
-  width: 100%;
-  background: white;
-  padding: 2rem;
-  opacity: 0.8;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 h1 {
   font-weight: 1200;
@@ -102,13 +89,35 @@ button:hover {
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: 100%;
+
+}
+
+.fileUpload {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  text-align: center;
+}
+
+.customsheet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5rem;
+  text-align: center;
 }
 
 .main-content {
-  flex: 1;
+  max-width: 95vh;
+  background-color: white;
 }
 
-.app-content {
-  max-width: 100vh;
+.main-container {
+  flex-grow: 1;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: max-content;
 }
