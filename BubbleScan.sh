@@ -25,6 +25,7 @@ pip install --no-cache-dir -r requirements.txt
 pip install werkzeug
 pip install flask
 pip install pyinstaller
+pip install opencv-python
 
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
@@ -32,7 +33,7 @@ pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 # Platform-specific builds
 
 echo "Building Windows binary..."
-pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
+pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=fitz application/AppServer.py
 
 
 
