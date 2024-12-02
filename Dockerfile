@@ -20,6 +20,7 @@ RUN pip install gunicorn
 COPY bubblescan-client /app
 RUN npm install
 RUN npm install cors
+RUN npm install react-router-dom
 
 RUN npm run build
 RUN cp -r dist/ flask/static/
