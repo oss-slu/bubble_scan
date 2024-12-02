@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import UploadPage from "./components/UploadPage";
 import About from "./components/About";
 import CustomExamSheetPage from "./components/CustomExamSheetPage";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
         <Route path="/create" element={<CustomExamSheetPage />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };

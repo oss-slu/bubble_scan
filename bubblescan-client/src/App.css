@@ -169,6 +169,24 @@ nav {
   color: white;
 }
 
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+.footer-text {
+  margin: 0;
+
+}
+
 .hamburger {
   display: none;
   cursor: pointer;
@@ -232,4 +250,5 @@ nav {
     font-size: 1rem;
     padding: 0.5rem;
   }
+
 }
