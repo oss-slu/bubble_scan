@@ -1,7 +1,7 @@
 """Tests for the Flask application."""
 from io import BytesIO
+from .AppServer import app
 import pytest
-from AppServer import app
 
 # Fixture to initialize the Flask test client
 @pytest.fixture(name="test_client")

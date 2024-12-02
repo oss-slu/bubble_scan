@@ -12,7 +12,7 @@ cp -r dist/* ../ServerCode/application/static/
 # Go back to main directory, activate Python environment, and install dependencies
 cd ..
 cd ServerCode
-python -m venv venv  # Use python3 for virtual environment creation in bash
+python3 -m venv venv  # Use python3 for virtual environment creation in bash
 
 source venv/Scripts/activate
 
@@ -30,8 +30,11 @@ pip install pyinstaller
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 # Platform-specific builds
+
 echo "Building Windows binary..."
 pyinstaller --onefile --name BubbleScan-Windows.exe --add-data "application/static;static" --add-data "application/logging.conf:." --hidden-import=fitz application/AppServer.py
+
+
 
 # Deactivate the virtual environment
 deactivate
