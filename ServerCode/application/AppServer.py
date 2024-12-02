@@ -2,38 +2,21 @@
 This module provides functionalities to upload files.
 Convert JSON to CSV and allow dowloading the CSV.
 """
-import logging
-import logging.config
-import os
-import webbrowser
 import sys
-
-# Third-party imports
-from flask import Flask, jsonify, redirect, request, send_from_directory, url_for
-from flask_cors import CORS
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import logging
+import webbrowser
 from werkzeug.utils import secure_filename
+from flask import Flask, request, jsonify, send_from_directory, redirect, url_for
+from flask_cors import CORS
+from BubbleScan_AI.Scantron import Scantron95945
+from BubbleScan_AI.Custom import CustomProcessor
 
-# Local application imports
-from config import CORS_ORIGINS
-from Scantron import Scantron95945
-
-# Load logging configuration
-def get_base_path():
-    """
-    Returns the base path depending on whether the script is running
-    in a frozen PyInstaller bundle or as a standalone script.
-    """
-    if getattr(sys, 'frozen', False):
-        # If running as a PyInstaller bundle
-        # pylint: disable=W0212
-        return sys._MEIPASS
-    return os.path.dirname(__file__)
-
-# Load logging configuration
-base_path = get_base_path()
-logging_conf_path = os.path.join(base_path, 'logging.conf')
-logging.config.fileConfig(logging_conf_path)
-logger = logging.getLogger("appServerLogger")
+# Define CORS origins
+CORS_ORIGINS = [
+    'http://localhost:5173'
+]
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}})
@@ -137,7 +120,7 @@ class AppServer:
         """
         message_data = request.json
         message = message_data.get('message', '')
-        logger.info("Received message: %s", message)
+        print(f"Received message: {message}")
         return jsonify({"status": "success", "message": "Message received successfully!"})
 
     def file_upload(self):
@@ -146,25 +129,15 @@ class AppServer:
         Allows the user to specify whether the sheet is a standard Scantron or a custom sheet.
         """
         if 'file' not in request.files or 'sheetType' not in request.form:
-            logger.error("No file or sheet type in the request")
             return jsonify({"status": "error", "message": "No file or sheet type in the request"})
 
         file = request.files['file']
         sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
-            logger.warning("No selected file")
             return jsonify({"status": "error", "message": "No selected file"})
 
         if file and file.filename.lower().endswith('.pdf'):
-            if sheet_type == "custom":
-                # If it's a custom sheet, return "Not yet supported"
-                logger.info("Custom sheets are not yet supported")
-                return jsonify({
-                    "status": "custom_sheet",
-                    "message": "Custom sheets are not yet supported"
-                })
-
             try:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(self.uploads_dir, filename)
@@ -177,45 +150,52 @@ class AppServer:
                     'processed': False
                 }
 
-                response_data = self.process_pdf(file_path, file_id)
+                response_data = self.process_pdf(file_path, file_id, sheet_type)
                 os.remove(file_path)
 
-                logger.info("PDF processed successfully for file_id: %s", file_id)
                 return jsonify({"status": "success", "message": "PDF processed successfully", "file_id": file_id, "data": response_data})
 
             except Exception as e:
-                logger.error("Error processing PDF: %s", e, exc_info=True)
                 return jsonify({"status": "error", "message": f"Error processing PDF: {e}"})
 
         else:
-            logger.warning("Only PDF files are allowed")
             return jsonify({"status": "error", "message": "Only PDF files are allowed"})
 
-    def process_pdf(self, pdf_file, file_id):
+
+    def process_pdf(self, pdf_file, file_id, sheet_type):
         """
         Processes a PDF file to extract responses and convert them to CSV.
 
         Parameters:
             pdf_file (str): Path to the PDF file.
             file_id (str): Unique identifier for the file.
+            sheet_type (str): Type of sheet (e.g., 'standard' or 'custom').
 
         Returns:
             str: Name of the generated CSV file.
         """
         try:
-            scantron = Scantron95945(pdf_file)
-            data = scantron.extract_responses()
-            #print("Received the JSON data as: ", data)
+            # Choose the correct processor based on sheet type
+            if sheet_type == "custom":
+                processor = CustomProcessor(pdf_file)
+            else:
+                processor = Scantron95945(pdf_file)
 
+            # Extract data in JSON format
+            data = processor.extract_responses()
+
+            # Transform JSON data to CSV format
             csv_data = self.transform_json_to_csv(data)
             csv_filename = f'output_{file_id}.csv'
             csv_file_path = os.path.join(self.uploads_dir, csv_filename)
 
+            # Write CSV data to file
             with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 csv_file.write(csv_data)
+                print(f"CSV Data written successfully to {csv_file_path}")
 
+            # Save CSV file path for download
             self.csv_files[file_id] = {'filename': csv_filename, 'path': csv_file_path}
-
             self.file_info[file_id]['processed'] = True
 
             return csv_filename
@@ -229,48 +209,100 @@ class AppServer:
         Transforms JSON data to CSV format.
 
         Parameters:
-            json_data (dict): JSON data to be converted to CSV.
+            json_data (list or dict): JSON data to be converted to CSV.
 
         Returns:
             str: CSV data as a string.
         """
-
-        logger.debug("Starting transformation of JSON data to CSV")
         csv_data = ''
+        print("The JSON data received is:", json_data)
 
-        if not isinstance(json_data, dict) or 'students' not in json_data:
-            logger.warning("Invalid JSON data format: %s", json_data)
+        students, is_custom_sheet = self.parse_json_data(json_data)
+        if students is None:
             return csv_data
 
-        students = json_data['students']
-        if not students:
-            logger.warning("No student data found in JSON")
+        answers_keys = self.get_answer_keys(students, is_custom_sheet)
+        if not answers_keys:
+            print("No answers found in student data")
             return csv_data
 
-        student_data = students[0]
-        if 'answers' not in student_data:
-            logger.warning("No 'answers' key found in student data")
-            return csv_data
+        # Create the CSV header
+        csv_data += ','.join(['studentID'] + answers_keys) + '\n'
 
-        keys = student_data['answers'].keys()
-        logger.debug("Keys found for CSV: %s", keys)
-        csv_data += ','.join(['studentID'] + list(keys)) + '\n'
-
+        # Process each student's data
         for student in students:
-            student_id = student.get('studentID', '')
-            answers = []
-            for key in keys:
-                answer = student['answers'].get(key, '')
-                if isinstance(answer, list):
-                    answer = '|'.join(answer)
-                elif answer is None:
-                    answer = ''
-                answers.append(answer)
-            logger.debug("Processed student ID: %s with answers: %s", student_id, answers)
-            csv_data += ','.join([student_id] + answers) + '\n'
+            csv_row = self.process_student_data(student, answers_keys, is_custom_sheet)
+            csv_data += csv_row + '\n'
 
-        logger.info("Completed transformation of JSON to CSV")
+        print("Final CSV data:\n", csv_data)
         return csv_data
+
+    def parse_json_data(self, json_data):
+        """
+        Parses the input JSON data and determines the sheet type.
+
+        Returns:
+            Tuple[List[Dict], bool]: A tuple containing the list of students and
+            a boolean indicating if it's a custom sheet.
+        """
+        if isinstance(json_data, list):  # Custom sheets
+            students = json_data
+            is_custom_sheet = True
+        elif isinstance(json_data, dict) and 'students' in json_data:  # Standard scantron sheets
+            students = json_data['students']
+            is_custom_sheet = False
+        else:
+            print("Invalid JSON data format")
+            return None, None
+
+        if not students:
+            print("No student data found")
+            return None, None
+
+        return students, is_custom_sheet
+
+    def get_answer_keys(self, students, is_custom_sheet):
+        """
+        Determines the keys for answers based on sheet type.
+
+        Returns:
+            List[str]: A list of answer keys.
+        """
+        first_student = students[0]
+        if is_custom_sheet:
+            # For custom sheets, exclude 'studentID' from the keys
+            answers_keys = [key for key in first_student.keys() if key != 'studentID']
+        else:
+            # For scantron sheets, get keys from 'answers' dictionary
+            answers_keys = list(first_student.get('answers', {}).keys())
+        return answers_keys
+
+    def process_student_data(self, student, answers_keys, is_custom_sheet):
+        """
+        Processes individual student data to create a CSV row.
+
+        Returns:
+            str: A CSV formatted string for the student.
+        """
+        student_id = student.get('studentID', '')
+        answers = []
+
+        if is_custom_sheet:
+            # For custom sheets, answers are at the top level
+            answers_dict = student
+        else:
+            # For scantron sheets, answers are within the 'answers' dictionary
+            answers_dict = student.get('answers', {})
+
+        for key in answers_keys:
+            answer = answers_dict.get(key, '')
+            if isinstance(answer, list):
+                answer = '|'.join(answer)
+            elif answer is None:
+                answer = ''
+            answers.append(answer)
+
+        return ','.join([student_id] + answers)
 
     def download_csv(self, file_id):
         """
@@ -282,27 +314,22 @@ class AppServer:
         Returns:
             Response: Flask response object containing the CSV file.
         """
-        logger.info("Download request received for CSV file_id: %s", file_id)
         try:
             if file_id not in self.csv_files:
-                logger.warning("CSV file_id %s not found in records", file_id)
                 return jsonify({"status": "error", "message": "CSV file not found"})
 
             csv_file_data = self.csv_files[file_id]
             file_path = csv_file_data['path']
             
             if os.path.exists(file_path):
-                logger.info("Serving CSV file for download: %s", file_path)
                 with open(file_path, 'r', encoding='utf-8') as csv_file:
                     csv_data = csv_file.read()
                     print("CSV Data:\n", csv_data)
                 return send_from_directory(self.uploads_dir, os.path.basename(file_path), as_attachment=True)
             
-            logger.warning("CSV file path does not exist for file_id: %s", file_id)
             return jsonify({"status": "error", "message": "CSV file not found"})
 
         except Exception as e:
-            logger.error("Error downloading CSV for file_id %s: %s", file_id, e, exc_info=True)
             return jsonify({"status": "error", "message": f"Error downloading CSV: {e}"}), 500
 
     def csv_acknowledgment(self, file_id):
@@ -317,10 +344,8 @@ class AppServer:
         """
         if file_id in self.file_info:
             self.file_info[file_id]['csv_sent'] = True
-            logger.info("CSV acknowledgment received for file_id: %s", file_id)
             return jsonify({"status": "success", "message": "CSV is sent to the React successfully"})
         
-        logger.warning("CSV acknowledgment failed: file_id %s not found", file_id)
         return jsonify({"status": "error", "message": "File ID not found"})
 
 app_server = AppServer(app)
@@ -332,4 +357,3 @@ if __name__ == '__main__':
 
     # Start the server
     app_server.app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
-    
