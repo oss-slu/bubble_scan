@@ -23,11 +23,12 @@ pip install --no-cache-dir -r requirements.txt
 pip install werkzeug
 pip install flask
 pip install pyinstaller
+pip install opencv-python
 
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 echo "Building macOS binary..."
-pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
+pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
 
 # Deactivate the virtual environment
 deactivate
