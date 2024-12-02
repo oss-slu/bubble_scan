@@ -220,14 +220,14 @@ function CustomExamSheetComponent() {
               <div class="key-id-header">KEY ID</div>
               <div class="key-id-options">
                 ${["A", "B", "C", "D"]
-                  .map(
-                    (option) => `
+        .map(
+          (option) => `
                     <div>
                       <div class="bubble">${option}</div>
                     </div>
                   `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
             </div>
             <!-- Title -->
@@ -237,21 +237,21 @@ function CustomExamSheetComponent() {
           <!-- Questions section -->
           <div class="questions-container">
             ${Array.from(
-              { length: numQuestions },
-              (_, i) => `
+          { length: numQuestions },
+          (_, i) => `
                 <div class="question">
                   <span class="question-label">${i + 1}.</span>
                   <div class="options">
                     ${Array.from(
-                      { length: numOptions },
-                      (__, j) => `
+            { length: numOptions },
+            (__, j) => `
                         <div class="bubble">${String.fromCharCode(65 + j)}</div>
                       `
-                    ).join("")}
+          ).join("")}
                   </div>
                 </div>
               `
-            ).join("")}
+        ).join("")}
           </div>
 
           <!-- Student Info section -->
@@ -261,27 +261,27 @@ function CustomExamSheetComponent() {
               <div class="id-header">STUDENT ID NUMBER</div>
               <div class="id-inputs">
                 ${Array.from({ length: 10 })
-                  .map(
-                    () => `
+        .map(
+          () => `
                     <input type="text" class="id-input" maxlength="1" />
                   `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
               <div class="id-row">
                 ${Array.from(
-                  { length: 10 },
-                  (_, i) => `
+          { length: 10 },
+          (_, i) => `
                     <div class="id-column">
                       ${Array.from(
-                        { length: 10 },
-                        (_, j) => `
+            { length: 10 },
+            (_, j) => `
                           <div class="id-bubble">${j}</div>
                         `
-                      ).join("")}
+          ).join("")}
                     </div>
                   `
-                ).join("")}
+        ).join("")}
               </div>
             </div>
 
