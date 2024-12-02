@@ -146,29 +146,37 @@ class AppServer:
         Allows the user to specify whether the sheet is a standard Scantron or a custom sheet.
         """
         if 'file' not in request.files or 'sheetType' not in request.form:
-            logging.error("No file or sheet type in the request")
+            logger.error("No file or sheet type in the request")
             return jsonify({"status": "error", "message": "No file or sheet type in the request"}), 400
 
         file = request.files['file']
         sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
-            logging.warning("No selected file")
+            logger.warning("No selected file")
             return jsonify({"status": "error", "message": "No selected file"}), 400
 
         # Check if the file is empty
         file.stream.seek(0, 2)  # Move the cursor to the end of the file
         if file.stream.tell() == 0:  # Check if the file size is 0
-            logging.warning("Uploaded file is empty")
+            logger.warning("Uploaded file is empty")
             return jsonify({"status": "error", "message": "Uploaded file is empty"}), 400
         file.stream.seek(0)  # Reset the cursor to the beginning
 
         # Validate sheet type
         if sheet_type not in ["scantron", "custom"]:
-            logging.error("Invalid sheet type: %s", sheet_type)
+            logger.error("Invalid sheet type: %s", sheet_type)
             return jsonify({"status": "error", "message": "Invalid sheet type"}), 400
 
         if file and file.filename.lower().endswith('.pdf'):
+            if sheet_type == "custom":
+                # Return specific status for custom sheet processing
+                logger.info("Custom sheets are not yet supported")
+                return jsonify({
+                    "status": "custom_sheet",
+                    "message": "Custom sheets are not yet supported"
+                }), 200
+
             try:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(self.uploads_dir, filename)
@@ -184,31 +192,38 @@ class AppServer:
                 response_data = self.process_pdf(file_path, file_id, sheet_type)
                 os.remove(file_path)
 
+                logger.info("PDF processed successfully for file_id: %s", file_id)
                 return jsonify({"status": "success", "message": "PDF processed successfully", "file_id": file_id, "data": response_data})
 
             except Exception as e:
-                logging.error("Error processing PDF: %s", e, exc_info=True)
+                logger.error("Error processing PDF: %s", e, exc_info=True)
                 return jsonify({"status": "error", "message": f"Error processing PDF: {e}"}), 500
 
         else:
-            logging.warning("Only PDF files are allowed")
+            logger.warning("Only PDF files are allowed")
             return jsonify({"status": "error", "message": "Only PDF files are allowed"}), 400
 
-    def process_pdf(self, pdf_file, file_id):
+
+    def process_pdf(self, pdf_file, file_id, sheet_type):
         """
         Processes a PDF file to extract responses and convert them to CSV.
 
         Parameters:
             pdf_file (str): Path to the PDF file.
             file_id (str): Unique identifier for the file.
+            sheet_type (str): The type of the sheet (e.g., 'scantron' or 'custom').
 
         Returns:
             str: Name of the generated CSV file.
         """
         try:
-            scantron = Scantron95945(pdf_file)
-            data = scantron.extract_responses()
-            #print("Received the JSON data as: ", data)
+            # Use the correct logic for processing based on sheet type
+            if sheet_type == 'scantron':
+                scantron = Scantron95945(pdf_file)
+                data = scantron.extract_responses()
+            elif sheet_type == 'custom':
+                # Logic for processing custom sheets can go here
+                data = {"message": "Custom sheet processing logic"}
 
             csv_data = self.transform_json_to_csv(data)
             csv_filename = f'output_{file_id}.csv'
@@ -218,14 +233,14 @@ class AppServer:
                 csv_file.write(csv_data)
 
             self.csv_files[file_id] = {'filename': csv_filename, 'path': csv_file_path}
-
             self.file_info[file_id]['processed'] = True
 
             return csv_filename
 
         except Exception as e:
-            logging.error("Error processing PDF: %s", e)
+            logging.error("Error processing PDF: %s", e, exc_info=True)
             return ''
+
 
     def transform_json_to_csv(self, json_data):
         """

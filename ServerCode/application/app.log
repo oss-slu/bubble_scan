@@ -525,3 +525,306 @@
 2024-12-02 11:26:27,415 - appServerLogger - WARNING - Uploaded file is empty
 2024-12-02 11:26:27,419 - appServerLogger - ERROR - Invalid sheet type: invalid_type
 2024-12-02 11:26:27,419 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 13:24:35,898 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:24:35,916 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:24:35,918 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:24:35,919 - root - WARNING - Only PDF files are allowed
+2024-12-02 13:24:35,920 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:24:35,969 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:24:35,974 - root - WARNING - Uploaded file is empty
+2024-12-02 13:24:35,975 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 13:25:47,368 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:25:47,393 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:25:47,395 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:25:47,396 - root - ERROR - Only PDF files are allowed
+2024-12-02 13:25:47,397 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:25:47,461 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:25:47,465 - root - ERROR - Uploaded file is empty
+2024-12-02 13:25:47,466 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 13:27:32,243 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:27:32,268 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:27:32,271 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:27:32,272 - root - WARNING - Only PDF files are allowed
+2024-12-02 13:27:32,273 - root - ERROR - No file or sheet type in the request
+2024-12-02 13:27:32,324 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 13:27:32,329 - root - WARNING - Uploaded file is empty
+2024-12-02 13:27:32,330 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 14:42:30,159 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 14:42:30,193 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 14:42:30,196 - root - ERROR - No file or sheet type in the request
+2024-12-02 14:42:30,198 - root - WARNING - Only PDF files are allowed
+2024-12-02 14:42:30,201 - root - ERROR - No file or sheet type in the request
+2024-12-02 14:42:30,247 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 14:42:30,252 - root - WARNING - Uploaded file is empty
+2024-12-02 14:42:30,253 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 14:42:36,376 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-02 14:42:36,376 - appServerLogger - INFO - PDF processed successfully for file_id: 2fdb9af3f8e6932362ca518eb6e035f8
+2024-12-02 14:42:36,376 - appServerLogger - INFO - PDF processed successfully for file_id: 2fdb9af3f8e6932362ca518eb6e035f8
+2024-12-02 14:42:36,378 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 14:42:36,378 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 14:42:36,379 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 14:42:36,379 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 14:42:36,382 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 14:42:36,382 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 14:42:36,385 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 14:42:36,385 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 14:42:36,461 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-02 14:42:36,461 - appServerLogger - INFO - PDF processed successfully for file_id: 15b8c8a1579bebe214e147c4a571dea8
+2024-12-02 14:42:36,461 - appServerLogger - INFO - PDF processed successfully for file_id: 15b8c8a1579bebe214e147c4a571dea8
+2024-12-02 14:42:36,464 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 14:42:36,464 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 14:42:36,465 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 14:42:36,465 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:44:46,562 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 16:44:46,585 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 16:44:46,588 - root - ERROR - No file or sheet type in the request
+2024-12-02 16:44:46,589 - root - WARNING - Only PDF files are allowed
+2024-12-02 16:44:46,590 - root - ERROR - No file or sheet type in the request
+2024-12-02 16:44:46,643 - root - ERROR - Error processing PDF: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 184, in file_upload
+    response_data = self.process_pdf(file_path, file_id, sheet_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AppServer.process_pdf() takes 3 positional arguments but 4 were given
+2024-12-02 16:44:46,647 - root - WARNING - Uploaded file is empty
+2024-12-02 16:44:46,649 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:46:29,846 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 212, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-02 16:46:29,867 - appServerLogger - DEBUG - Starting transformation of JSON data to CSV
+2024-12-02 16:46:29,867 - appServerLogger - DEBUG - Starting transformation of JSON data to CSV
+2024-12-02 16:46:29,867 - appServerLogger - WARNING - Invalid JSON data format: {'message': 'Custom sheet processing logic'}
+2024-12-02 16:46:29,867 - appServerLogger - WARNING - Invalid JSON data format: {'message': 'Custom sheet processing logic'}
+2024-12-02 16:46:29,885 - root - ERROR - No file or sheet type in the request
+2024-12-02 16:46:29,887 - root - WARNING - Only PDF files are allowed
+2024-12-02 16:46:29,887 - root - ERROR - No file or sheet type in the request
+2024-12-02 16:46:29,956 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 212, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-02 16:46:29,959 - root - WARNING - Uploaded file is empty
+2024-12-02 16:46:29,960 - root - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:47:34,521 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 222, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-02 16:47:34,533 - appServerLogger - INFO - PDF processed successfully for file_id: a1e75fc7fc2fbe66835070ccdfc53330
+2024-12-02 16:47:34,533 - appServerLogger - INFO - PDF processed successfully for file_id: a1e75fc7fc2fbe66835070ccdfc53330
+2024-12-02 16:47:34,535 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 16:47:34,535 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 16:47:34,537 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:34,537 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:34,542 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 16:47:34,542 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 16:47:34,545 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:34,545 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:34,631 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 222, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-02 16:47:34,632 - appServerLogger - INFO - PDF processed successfully for file_id: 932288b1d8096ea11cf011d6b1955397
+2024-12-02 16:47:34,632 - appServerLogger - INFO - PDF processed successfully for file_id: 932288b1d8096ea11cf011d6b1955397
+2024-12-02 16:47:34,635 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 16:47:34,635 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 16:47:34,636 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:47:34,636 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:47:43,237 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 222, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/test_scantron.pdf'.
+2024-12-02 16:47:43,247 - appServerLogger - INFO - PDF processed successfully for file_id: 87d3bb1e5a4f0d8b65c59fb9bfb3663c
+2024-12-02 16:47:43,247 - appServerLogger - INFO - PDF processed successfully for file_id: 87d3bb1e5a4f0d8b65c59fb9bfb3663c
+2024-12-02 16:47:43,252 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 16:47:43,252 - appServerLogger - INFO - Custom sheets are not yet supported
+2024-12-02 16:47:43,254 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:43,254 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:43,258 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 16:47:43,258 - appServerLogger - WARNING - Only PDF files are allowed
+2024-12-02 16:47:43,263 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:43,263 - appServerLogger - ERROR - No file or sheet type in the request
+2024-12-02 16:47:43,368 - root - ERROR - Error processing PDF: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2743, in __init__
+    doc = mupdf.fz_open_document(filename)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/mupdf.py", line 44033, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fitz.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/AppServer.py", line 222, in process_pdf
+    scantron = Scantron95945(pdf_file)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 31, in __init__
+    self.extractImagesFromPdf()
+  File "/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/Scantron.py", line 46, in extractImagesFromPdf
+    pdf_document = fitz.open(self.pdf_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/fitz/__init__.py", line 2746, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+fitz.FileDataError: Failed to open file '/Users/ahmetaliyildiz/Desktop/bubble_scan/ServerCode/application/instance/uploads/large_file.pdf'.
+2024-12-02 16:47:43,369 - appServerLogger - INFO - PDF processed successfully for file_id: 098d8caf4cacdc09e97036170b2dbdb4
+2024-12-02 16:47:43,369 - appServerLogger - INFO - PDF processed successfully for file_id: 098d8caf4cacdc09e97036170b2dbdb4
+2024-12-02 16:47:43,371 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 16:47:43,371 - appServerLogger - WARNING - Uploaded file is empty
+2024-12-02 16:47:43,373 - appServerLogger - ERROR - Invalid sheet type: invalid_type
+2024-12-02 16:47:43,373 - appServerLogger - ERROR - Invalid sheet type: invalid_type
