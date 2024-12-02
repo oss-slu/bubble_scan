@@ -25,6 +25,7 @@ pip install --no-cache-dir -r requirements.txt
 pip install werkzeug
 pip install flask
 pip install pyinstaller
+pip install opencv-python
 
 # Check again to ensure pathlib is uninstalled
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
