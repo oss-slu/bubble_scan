@@ -22,6 +22,7 @@ jobs:
         pip install pylint
         pip install -r ServerCode/requirements.txt
         pip install pytest
+        echo "PYTHONPATH=PYTHONPATH:$(pwd)/ServerCode" >> $GITHUB_ENV
     - name: Analysing the code with pylint
       run: |
         # Exclude specific files and suppress warning for method from pylint analysis
