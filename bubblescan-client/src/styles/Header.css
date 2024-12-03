@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    gap: 20vh;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 800;
+    padding: 2rem 4rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3.5rem;
+}
+
+.nav-link {
+    color: #0a0a0a;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: blue;
+
+}

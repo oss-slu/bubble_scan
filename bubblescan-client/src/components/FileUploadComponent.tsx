@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import config from "../utils/config";
+import "../styles/App.css";
 
 function FileUploadComponent() {
   const [file, setFile] = useState<File | null>(null);
@@ -75,9 +76,9 @@ function FileUploadComponent() {
 
 
   return (
-    <div>
+    <div className="fileUpload">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div >
           <label htmlFor="sheetType">Select Sheet Type:</label>
           <select id="sheetType" value={sheetType} onChange={(e) => setSheetType(e.target.value)}>
             <option value="">-----</option> {/* Placeholder option */}
@@ -91,6 +92,7 @@ function FileUploadComponent() {
           id="file-input"
           accept=".pdf, image/*" // Accept both PDFs and images
           onChange={handleFileChange}
+          style={{ display: "flex", justifyContent: "center" }}
         />
         <button type="submit">Upload</button>
         <button
