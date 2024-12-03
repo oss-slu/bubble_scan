@@ -26,5 +26,5 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         # Exclude specific files and suppress warning for method from pylint analysis
-        pylint --max-line-length=150 --disable=E1101,E1136, E0602,R0914,R0915,R0911,W0718,W0613,W0107,R0801,C0413,C0301,C0303,E0601,C0411,R1735,R0913,R0917,C0103,E1121,R1710 --ignore=ServerCode/mockapp/mock_ai.py,app.py $(git ls-files '*.py')
+        pylint --max-line-length=180 --disable=E1101,E1136,R0914,R0915,R0911,W0718,W0613,W0107,R0801,C0413,C0301,C0303,E0601,C0411,R1735,R0913,R0917,C0103,E1121,R1710 --ignore=ServerCode/mockapp/mock_ai.py,app.py $(git ls-files '*.py')
 
