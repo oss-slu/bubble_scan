@@ -129,15 +129,33 @@ class AppServer:
         Allows the user to specify whether the sheet is a standard Scantron or a custom sheet.
         """
         if 'file' not in request.files or 'sheetType' not in request.form:
-            return jsonify({"status": "error", "message": "No file or sheet type in the request"})
+
+            logger.error("No file or sheet type in the request")
+            return jsonify({"status": "error", "message": "No file or sheet type in the request"}), 400
+
 
         file = request.files['file']
         sheet_type = request.form['sheetType']  # Get the sheet type from the form
 
         if file.filename == '':
-            return jsonify({"status": "error", "message": "No selected file"})
+
+            logger.warning("No selected file")
+            return jsonify({"status": "error", "message": "No selected file"}), 400
+
+        # Check if the file is empty
+        file.stream.seek(0, 2)  # Move the cursor to the end of the file
+        if file.stream.tell() == 0:  # Check if the file size is 0
+            logger.warning("Uploaded file is empty")
+            return jsonify({"status": "error", "message": "Uploaded file is empty"}), 400
+        file.stream.seek(0)  # Reset the cursor to the beginning
+
+        # Validate sheet type
+        if sheet_type not in ["scantron", "custom"]:
+            logger.error("Invalid sheet type: %s", sheet_type)
+            return jsonify({"status": "error", "message": "Invalid sheet type"}), 400
 
         if file and file.filename.lower().endswith('.pdf'):
+
             try:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(self.uploads_dir, filename)
@@ -156,10 +174,13 @@ class AppServer:
                 return jsonify({"status": "success", "message": "PDF processed successfully", "file_id": file_id, "data": response_data})
 
             except Exception as e:
-                return jsonify({"status": "error", "message": f"Error processing PDF: {e}"})
+
+                logger.error("Error processing PDF: %s", e, exc_info=True)
+                return jsonify({"status": "error", "message": f"Error processing PDF: {e}"}), 500
 
         else:
-            return jsonify({"status": "error", "message": "Only PDF files are allowed"})
+            logger.warning("Only PDF files are allowed")
+            return jsonify({"status": "error", "message": "Only PDF files are allowed"}), 400
 
 
     def process_pdf(self, pdf_file, file_id, sheet_type):
@@ -169,12 +190,15 @@ class AppServer:
         Parameters:
             pdf_file (str): Path to the PDF file.
             file_id (str): Unique identifier for the file.
-            sheet_type (str): Type of sheet (e.g., 'standard' or 'custom').
+
+            sheet_type (str): The type of the sheet (e.g., 'scantron' or 'custom').
+
 
         Returns:
             str: Name of the generated CSV file.
         """
         try:
+
             # Choose the correct processor based on sheet type
             if sheet_type == "custom":
                 processor = CustomProcessor(pdf_file)
@@ -183,6 +207,7 @@ class AppServer:
 
             # Extract data in JSON format
             data = processor.extract_responses()
+
 
             # Transform JSON data to CSV format
             csv_data = self.transform_json_to_csv(data)
@@ -201,8 +226,9 @@ class AppServer:
             return csv_filename
 
         except Exception as e:
-            logging.error("Error processing PDF: %s", e)
+            logging.error("Error processing PDF: %s", e, exc_info=True)
             return ''
+
 
     def transform_json_to_csv(self, json_data):
         """
