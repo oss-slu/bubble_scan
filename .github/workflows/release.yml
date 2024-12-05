@@ -102,7 +102,7 @@ jobs:
         env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-	  IDENTITY_ID: ${{ secrets.IDENTITY_ID }}
+          IDENTITY_ID: ${{ secrets.IDENTITY_ID }}
         run: |
           echo $MACOS_CERTIFICATE | base64 —decode > certificate.p12
           security create-keychain -p keychain-password build.keychain
