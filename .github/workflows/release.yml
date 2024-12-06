@@ -91,7 +91,7 @@ jobs:
       - name: Verify BubbleScan exists
         shell: bash
         run: |
-          if [ -f "ServerCode/dist/BubbleScan-macOS" ]; then
+          if [ -d "ServerCode/dist/BubbleScan-macOS.app" ]; then
               echo "BubbleScan found in ServerCode/dist."
           else
               echo "BubbleScan not found in ServerCode/dist."
@@ -102,7 +102,6 @@ jobs:
         env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-          IDENTITY_ID: ${{ secrets.IDENTITY_ID }}
         run: |
           security create-keychain -p actions build.keychain
           security default-keychain -s build.keychain
