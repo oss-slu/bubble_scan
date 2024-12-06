@@ -84,12 +84,12 @@ jobs:
         run: chmod +x BubbleScanMac.sh
 
       - name: Run BubbleScan script
-	env:
+        env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
         shell: bash
         run: ./BubbleScanMac.sh
-
+	
       - name: List files in ServerCode/dist after running BubbleScan.sh
         run: ls -l ServerCode/dist || echo "ServerCode/dist not found"
 
