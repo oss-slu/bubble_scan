@@ -28,16 +28,16 @@ pip install opencv-python
 pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 echo "Building macOS binary..."
-pyinstaller --onefile --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
+pyinstaller --windowed --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
 
 # Deactivate the virtual environment
 deactivate
 
 # Go back to main directory and copy static files to dist directory
-cd ..
-mkdir -p ServerCode/dist  # Ensure dist directory exists
-cp -r ServerCode/application/static ServerCode/dist
+#cd ..
+#mkdir -p ServerCode/dist  # Ensure dist directory exists
+#cp -r ServerCode/application/static ServerCode/dist
 
 # Verify build outputs
-echo "Build outputs:"
-ls -l ServerCode/dist
+#echo "Build outputs:"
+#ls -l ServerCode/dist

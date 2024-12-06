@@ -2,8 +2,14 @@
 This module provides functionalities to upload files.
 Convert JSON to CSV and allow dowloading the CSV.
 """
+
 import sys
 import os
+
+# if running from pyinstaller bundle
+if getattr(sys, 'frozen', False):
+    os.chdir(os.path.dirname(sys.executable))
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import logging
 import webbrowser
