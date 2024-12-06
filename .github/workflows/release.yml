@@ -113,7 +113,7 @@ jobs:
           codesign --force --deep \
                --sign "Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)" \
                --options=runtime --timestamp \
-               ServerCode/dist/BubbleScan-MacOS.app/Contents/MacOS/BubbleScan-macOS
+               ServerCode/dist/BubbleScan-MacOS.app
  
       - name: notarize the app
         env:
