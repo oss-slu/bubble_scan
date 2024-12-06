@@ -103,6 +103,28 @@ jobs:
               exit 1
           fi
 
+      - name: Codesign executable (again)
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        run: |
+          security create-keychain -p actions build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p actions build.keychain
+          security set-keychain-settings -lut 3600 build.keychain
+          echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+          security import certificate.p12 \
+               -k build.keychain \
+               -P "$MACOS_CERTIFICATE_PWD" \
+               -T /usr/bin/codesign
+          security set-key-partition-list \
+               -S apple-tool:,apple: \
+               -s -k actions build.keychain
+          codesign --force --deep \
+               --sign "Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)" \
+               --options=runtime --timestamp \
+               ServerCode/dist/BubbleScan-MacOS.app/Contents/MacOS/BubbleScan-macOS
+ 
       - name: notarize the app
         env:
            PASSWORD: ${{ secrets.BUBBLE_SCAN_APPLE_PASSWORD }}
