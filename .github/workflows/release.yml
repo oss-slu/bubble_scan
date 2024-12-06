@@ -87,7 +87,6 @@ jobs:
 	env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-
         shell: bash
         run: ./BubbleScanMac.sh
 
