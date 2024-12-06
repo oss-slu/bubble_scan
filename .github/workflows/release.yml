@@ -127,7 +127,7 @@ jobs:
         env:
            PASSWORD: ${{ secrets.BUBBLE_SCAN_APPLE_PASSWORD }}
            APPLE_ID: ${{ secrets.APPLE_ID }}
-           TEAM_ID: ${{secrets.TEAM_ID }}
+           TEAM_ID: ${{ secrets.TEAM_ID }}
         run: |
           ditto -c -k --keepParent ServerCode/dist/BubbleScan-macOS.app ServerCode/dist/BubbleScan-macOS.app.zip
           xcrun notarytool submit ServerCode/dist/BubbleScan-macOS.app.zip --apple-id "$APPLE_ID" --team-id "$TEAM_ID" --password "$PASSWORD" --wait
