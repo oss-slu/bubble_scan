@@ -29,9 +29,9 @@ pip uninstall -y pathlib 2>/dev/null || echo "pathlib was not reinstalled."
 
 echo "Building macOS binary..."
 
-CODESIGN = ''
+CODESIGN=''
 # Check if running in GitHub workflow
-if [[ -n "$GITHUB_ACTIONS" ]]; then
+#if [[ -n "$GITHUB_ACTIONS" ]]; then
     # Running in GitHub workflow
     security create-keychain -p actions build.keychain
     security default-keychain -s build.keychain
@@ -45,7 +45,7 @@ if [[ -n "$GITHUB_ACTIONS" ]]; then
           -T /usr/bin/codesign
 
     CODESIGN=--codesign-identity "Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)"
-fi
+#fi
 
 pyinstaller --onefile $(CODESIGN) --windowed --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
 
