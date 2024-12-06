@@ -105,6 +105,11 @@ jobs:
 
       - name: Codesign executable (again)
         run: |
+          security unlock-keychain -p actions build.keychain
+          security set-keychain-settings -lut 3600 build.keychain
+          security set-key-partition-list \
+               -S apple-tool:,apple: \
+               -s -k actions build.keychain
           codesign --force --deep \
                --sign "Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)" \
                --options=runtime --timestamp \
