@@ -44,7 +44,7 @@ if [[ -n "$GITHUB_ACTIONS" ]]; then
           -P "$MACOS_CERTIFICATE_PWD" \
           -T /usr/bin/codesign
 
-    CODESIGN="--codesign-identity 'Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)'"
+    CODESIGN="--codesign-identity 'Developer ID Application: Ekaterina Holdener (V4Q7X7HV6L)' --bundle-id com.oss-slu.bubblescan"
 fi
 
 pyinstaller $(CODESIGN) --windowed --name BubbleScan-macOS --add-data "application/static:static" --add-data "application/logging.conf:." --add-data "BubbleScan_AI:BubbleScan_AI" --hidden-import=cv2 --hidden-import=flask --hidden-import=werkzeug --hidden-import=fitz application/AppServer.py
