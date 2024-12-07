@@ -37,6 +37,9 @@ if [[ -n "$GITHUB_ACTIONS" ]]; then
     security default-keychain -s build.keychain
     security unlock-keychain -p actions build.keychain
     security set-keychain-settings -lut 3600 build.keychain
+    security set-key-partition-list \
+        -S apple-tool:,apple:,codesign:,pyinstaller: \
+        -s -k actions build.keychain
 
     echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
     security import certificate.p12 \
