@@ -220,14 +220,14 @@ function CustomExamSheetComponent() {
               <div class="key-id-header">KEY ID</div>
               <div class="key-id-options">
                 ${["A", "B", "C", "D"]
-                  .map(
-                    (option) => `
+        .map(
+          (option) => `
                     <div>
                       <div class="bubble">${option}</div>
                     </div>
                   `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
             </div>
             <!-- Title -->
@@ -237,21 +237,21 @@ function CustomExamSheetComponent() {
           <!-- Questions section -->
           <div class="questions-container">
             ${Array.from(
-              { length: numQuestions },
-              (_, i) => `
+          { length: numQuestions },
+          (_, i) => `
                 <div class="question">
                   <span class="question-label">${i + 1}.</span>
                   <div class="options">
                     ${Array.from(
-                      { length: numOptions },
-                      (__, j) => `
+            { length: numOptions },
+            (__, j) => `
                         <div class="bubble">${String.fromCharCode(65 + j)}</div>
                       `
-                    ).join("")}
+          ).join("")}
                   </div>
                 </div>
               `
-            ).join("")}
+        ).join("")}
           </div>
 
           <!-- Student Info section -->
@@ -261,27 +261,27 @@ function CustomExamSheetComponent() {
               <div class="id-header">STUDENT ID NUMBER</div>
               <div class="id-inputs">
                 ${Array.from({ length: 10 })
-                  .map(
-                    () => `
+        .map(
+          () => `
                     <input type="text" class="id-input" maxlength="1" />
                   `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
               <div class="id-row">
                 ${Array.from(
-                  { length: 10 },
-                  (_, i) => `
+          { length: 10 },
+          (_, i) => `
                     <div class="id-column">
                       ${Array.from(
-                        { length: 10 },
-                        (_, j) => `
+            { length: 10 },
+            (_, j) => `
                           <div class="id-bubble">${j}</div>
                         `
-                      ).join("")}
+          ).join("")}
                     </div>
                   `
-                ).join("")}
+        ).join("")}
               </div>
             </div>
 
@@ -316,16 +316,17 @@ function CustomExamSheetComponent() {
   };
 
   return (
-    <div>
-      <h1>You can create Custom Sheets here</h1>
+    <div className="customsheet">
+      <h2>You can create Custom Sheets here</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           generateExam();
         }}
+        style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
-        <label>
-          Exam Title:
+        <label style={{ display: "flex", gap: "10rem", width: "100%", alignItems: "center" }}>
+          ExamTitle:
           <input
             type="text"
             value={examTitle}
@@ -334,7 +335,7 @@ function CustomExamSheetComponent() {
             required
           />
         </label>
-        <label>
+        <label style={{ display: "flex", gap: "10rem", width: "100%", alignItems: "center" }}>
           Number of Questions:
           <input
             type="number"
@@ -344,7 +345,7 @@ function CustomExamSheetComponent() {
             required
           />
         </label>
-        <label>
+        <label style={{ display: "flex", gap: "10rem", width: "100%", alignItems: "center" }}>
           Number of Answer Options:
           <input
             type="number"
@@ -355,9 +356,13 @@ function CustomExamSheetComponent() {
             required
           />
         </label>
-        <button type="submit">Generate Exam Sheet</button>
+
       </form>
-      <button onClick={printStoredExam}>Print Stored Exam</button>
+      <div style={{ display: "flex ", justifyContent: "space-around" }}>
+        <button type="submit">Generate Exam Sheet</button>
+        <button onClick={printStoredExam}>Print Stored Exam</button>
+
+      </div>
     </div>
   );
 }
